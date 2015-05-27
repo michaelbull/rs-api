@@ -97,11 +97,10 @@ public final class Example {
 						break;
 
 					case "area names":
-						System.out.println(bestiary.areaNames());
-//						System.out.println("Area names:");
-//						for (String areaName : bestiary.areaNames()) {
-//							System.out.println("\t" + areaName);
-//						}
+						System.out.println("Area names:");
+						for (String areaName : bestiary.areaNames()) {
+							System.out.println("\t" + areaName);
+						}
 						break;
 
 					case "beasts in area":
