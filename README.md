@@ -14,7 +14,7 @@ The implementation offers functionality to interact with the following three pub
 
 [Comma-separated values][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
 
-To start using `rs-api`, simply instantiate the **API** class as follows:
+To start using `rs-api`, simply instantiate the [API][api] class as follows:
 
 ```java
 API api = new API();
@@ -103,6 +103,7 @@ The following Java libraries are used by the API:
 [hiscores]: http://services.runescape.com/m=rswiki/en/Hiscores_APIs
 [csv]: http://en.wikipedia.org/wiki/Comma-separated_values
 [json]: http://en.wikipedia.org/wiki/JSON
+[api]: /api/src/main/java/com/runescape/api/API.java
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java
