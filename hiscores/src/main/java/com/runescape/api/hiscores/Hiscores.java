@@ -121,9 +121,9 @@ public final class Hiscores {
 	 * The oldschool RuneScape activity names.
 	 */
 	public static final ImmutableList<String> OLDSCHOOL_ACTIVITY_NAMES = ImmutableList.of(
-		"Unknown 1",
-		"Unknown 2",
-		"Unknown 3"
+		"Clues",
+		"Bounty Hunter",
+		"B.H. Rogues"
 	);
 
 	/**
