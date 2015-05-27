@@ -35,13 +35,13 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 Calling the `beastsInLevelGroup` method with 250 and 300 as parameters in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between 250 and 300 inclusive.
 
 ```java
-	API api = new API();
-	ImmutableMap<Integer, String> beasts = api.getBestiary().beastsInLevelGroup(250, 300);
-	
-	System.out.println("Results:");
-	for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
-		System.out.println("\t[" + String.format("%05d", entry.getKey()) + "] " + entry.getValue());
-	}
+API api = new API();
+ImmutableMap<Integer, String> beasts = api.getBestiary().beastsInLevelGroup(250, 300);
+
+System.out.println("Results:");
+for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
+	System.out.println("\t[" + String.format("%05d", entry.getKey()) + "] " + entry.getValue());
+}
 ```
 
 Returns:
@@ -57,11 +57,11 @@ Results:
 Calling the `clanInformation` method with a clan's name (e.g. Sapphite Knights) as the parameter in the [Hiscores API][hiscores-api] will return an [ImmutableList][immutablelist] of [ClanMate][clanmate]s.
 
 ```java
-	API api = new API();
-	ImmutableList<ClanMate> clanMates = api.getHiscores().clanInformation("Sapphite Knights");
-	
-	System.out.println("Clan Mates:");
-	clanMates.forEach(System.out::println);
+API api = new API();
+ImmutableList<ClanMate> clanMates = api.getHiscores().clanInformation("Sapphite Knights");
+
+System.out.println("Clan Mates:");
+clanMates.forEach(System.out::println);
 ```
 
 Returns:
