@@ -105,7 +105,7 @@ public final class Client {
 	 */
 	public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
 		Preconditions.checkNotNull(url);
-		try (CSVParser parser = new CSVParser(new InputStreamReader(streamFrom(url), StandardCharsets.UTF_8), CSV_FORMAT)) {
+		try (CSVParser parser = new CSVParser(new InputStreamReader(streamFrom(url), StandardCharsets.ISO_8859_1), CSV_FORMAT)) {
 			return ImmutableList.copyOf(parser.getRecords());
 		}
 	}

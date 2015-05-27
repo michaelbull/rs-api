@@ -199,7 +199,7 @@ public final class Hiscores {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Clans">Clans</a>
 	 */
 	public ImmutableList<ClanMate> clanInformation(String clanName) throws IOException {
-		ImmutableList<CSVRecord> records = client.fromCSV(CLAN_HISCORES_URL + "?clanName=" + clanName);
+		ImmutableList<CSVRecord> records = client.fromCSV(CLAN_HISCORES_URL + "?clanName=" + clanName.replaceAll(" ", "+"));
 
 		ImmutableList.Builder<ClanMate> builder = ImmutableList.builder();
 		for (int i = 1; i < records.size(); i++) {

@@ -163,7 +163,7 @@ public final class Bestiary {
 	 */
 	public ImmutableList<String> areaNames() throws IOException {
 		Optional<String[]> optional = client.fromJson(AREA_NAMES_URL, String[].class);
-		return optional.isPresent() ? ImmutableList.copyOf(optional.get()) : ImmutableList.of();
+		return optional.map(ImmutableList::copyOf).orElse(ImmutableList.of());
 	}
 
 	/**
@@ -186,7 +186,7 @@ public final class Bestiary {
 	 */
 	public ImmutableMap<String, Integer> slayerCategories() throws IOException {
 		Optional<Map<String, Integer>> optional = client.fromJson(SLAYER_CATEGORY_NAMES_URL, TYPE_TOKEN);
-		return optional.isPresent() ? ImmutableMap.copyOf(optional.get()) : ImmutableMap.of();
+		return optional.map(ImmutableMap::copyOf).orElse(ImmutableMap.of());
 	}
 
 	/**
@@ -222,7 +222,7 @@ public final class Bestiary {
 	 */
 	public ImmutableMap<String, Integer> weaknesses() throws IOException {
 		Optional<Map<String, Integer>> optional = client.fromJson(WEAKNESS_NAMES_URL, TYPE_TOKEN);
-		return optional.isPresent() ? ImmutableMap.copyOf(optional.get()) : ImmutableMap.of();
+		return optional.map(ImmutableMap::copyOf).orElse(ImmutableMap.of());
 	}
 
 	/**

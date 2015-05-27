@@ -14,12 +14,67 @@ The implementation offers functionality to interact with the following three pub
 
 [Comma-separated values][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
 
-For example, calling the `beastsInLevelGroup` method with 250 and 300 as parameters in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between 250 and 300 inclusive:
+To start using `rs-api`, simply instantiate the **API** class as follows:
 
-| Beast ID |        Beast Name       |
-|:--------:|:-----------------------:|
-| 50       | King Black Dragon (276) |
-| 15206    | TokHaar-Yt-MejKot (300) |
+```java
+API api = new API();
+```
+
+At which point you may now access and query the Bestiary, Grand Exchange, and Hiscores APIs:
+
+```java
+	Bestiary bestiary = api.getBestiary();
+	GrandExchange grandExchange = api.getGrandExchange();
+	Hiscores hiscores = api.getHiscores();
+```
+
+## Examples
+
+### Beasts by Level
+
+Calling the `beastsInLevelGroup` method with 250 and 300 as parameters in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between 250 and 300 inclusive.
+
+```java
+	API api = new API();
+	ImmutableMap<Integer, String> beasts = api.getBestiary().beastsInLevelGroup(250, 300);
+	
+	System.out.println("Results:");
+	for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
+		System.out.println("\t[" + String.format("%05d", entry.getKey()) + "] " + entry.getValue());
+	}
+```
+
+Returns:
+
+```
+Results:
+	[00050] King Black Dragon (276)
+	[15206] TokHaar-Yt-MejKot (300)
+```
+
+### Clan Information
+
+Calling the `clanInformation` method with a clan's name (e.g. Sapphite Knights) as the parameter in the [Hiscores API][hiscores-api] will return an [ImmutableList][immutablelist] of [ClanMate][clanmate]s.
+
+```java
+	API api = new API();
+	ImmutableList<ClanMate> clanMates = api.getHiscores().clanInformation("Sapphite Knights");
+	
+	System.out.println("Clan Mates:");
+	clanMates.forEach(System.out::println);
+```
+
+Returns:
+
+```
+Clan Mates:
+ClanMate{name=Rosaline, rank=Owner, experience=463143387, kills=0}
+ClanMate{name=Corp Sloter, rank=Deputy Owner, experience=678318180, kills=54}
+ClanMate{name=GorgeousBrat, rank=Deputy Owner, experience=166603367, kills=0}
+ClanMate{name=Chris Return, rank=Overseer, experience=306089480, kills=0}
+ClanMate{name=Sauf, rank=Overseer, experience=346299506, kills=3}
+...
+```
 
 ## Building
 
@@ -50,6 +105,9 @@ The following Java libraries are used by the API:
 [json]: http://en.wikipedia.org/wiki/JSON
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
+[hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java
+[immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
+[clanmate]: /hiscores/src/main/java/com/runescape/api/hiscores/model/ClanMate.java
 [gradle]: http://www.gradle.org/
 [oracle]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 [openjdk]: http://openjdk.java.net/
