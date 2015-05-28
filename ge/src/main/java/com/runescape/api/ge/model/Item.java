@@ -94,14 +94,14 @@ public final class Item {
 	public Item(String icon, String icon_large, int id, String type, String typeIcon, String name, String description, Price current, Price today, boolean members, PriceChange day30, PriceChange day90, PriceChange day180) {
 		this.icon = Preconditions.checkNotNull(icon);
 		this.icon_large = Preconditions.checkNotNull(icon_large);
-		this.id = Preconditions.checkNotNull(id);
+		this.id = id;
 		this.type = Preconditions.checkNotNull(type);
 		this.typeIcon = Preconditions.checkNotNull(typeIcon);
 		this.name = Preconditions.checkNotNull(name);
 		this.description = Preconditions.checkNotNull(description);
 		this.current = Preconditions.checkNotNull(current);
 		this.today = Preconditions.checkNotNull(today);
-		this.members = Preconditions.checkNotNull(members);
+		this.members = members;
 		this.day30 = Preconditions.checkNotNull(day30);
 		this.day90 = Preconditions.checkNotNull(day90);
 		this.day180 = Preconditions.checkNotNull(day180);

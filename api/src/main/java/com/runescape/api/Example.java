@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * An example program that interacts with the various RuneScape {@link API}s.
+ * An example program that interacts with the various RuneScape {@link RuneScapeAPI}s.
  */
 public final class Example {
 	/**
@@ -39,10 +39,10 @@ public final class Example {
 	 */
 	public static void main(String[] args) {
 		try {
-			API api = new API();
-			Bestiary bestiary = api.getBestiary();
-			GrandExchange ge = api.getGrandExchange();
-			Hiscores hiscores = api.getHiscores();
+			RuneScapeAPI RuneScapeAPI = new RuneScapeAPI();
+			Bestiary bestiary = RuneScapeAPI.getBestiary();
+			GrandExchange ge = RuneScapeAPI.getGrandExchange();
+			Hiscores hiscores = RuneScapeAPI.getHiscores();
 			Scanner in = new Scanner(System.in, "UTF-8");
 
 			String command;

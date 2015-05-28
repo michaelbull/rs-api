@@ -108,7 +108,6 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
 	 */
 	public Optional<Category> category(int categoryId) throws IOException {
-		Preconditions.checkNotNull(categoryId);
 		return client.fromJson(CATEGORY_URL + "?category=" + categoryId, Category.class);
 	}
 
@@ -134,9 +133,7 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
 	 */
 	public Optional<CategoryPrices> categoryPrices(int categoryId, String prefix, int page) throws IOException {
-		Preconditions.checkNotNull(categoryId);
 		Preconditions.checkNotNull(prefix);
-		Preconditions.checkNotNull(page);
 
 		try {
 			int intValue = Integer.parseInt(prefix);
@@ -160,7 +157,6 @@ public final class GrandExchange {
 	public Optional<CategoryPrices> categoryPrices(String categoryName, String prefix, int page) throws IOException {
 		Preconditions.checkNotNull(categoryName);
 		Preconditions.checkNotNull(prefix);
-		Preconditions.checkNotNull(page);
 		return categoryPrices(CATEGORIES.indexOf(categoryName), prefix, page);
 	}
 
@@ -172,7 +168,6 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
 	 */
 	public Optional<GraphingData> graphingData(int itemId) throws IOException {
-		Preconditions.checkNotNull(itemId);
 		return client.fromJson(GRAPH_URL + "/" + itemId + ".json", GraphingData.class);
 	}
 
@@ -184,7 +179,6 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
 	 */
 	public Optional<ItemPriceInformation> itemPriceInformation(int itemId) throws IOException {
-		Preconditions.checkNotNull(itemId);
 		return client.fromJson(DETAILS_URL + "?item=" + itemId, ItemPriceInformation.class);
 	}
 }

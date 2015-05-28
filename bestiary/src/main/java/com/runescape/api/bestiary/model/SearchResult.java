@@ -26,7 +26,7 @@ public final class SearchResult {
 	 * @param label The label of the result.
 	 */
 	public SearchResult(int value, String label) {
-		this.value = Preconditions.checkNotNull(value);
+		this.value = value;
 		this.label = Preconditions.checkNotNull(label);
 	}
 

@@ -142,22 +142,22 @@ public final class Beast {
 	 */
 	public Beast(String name, int id, String description, String weakness, boolean attackable, boolean aggressive, boolean poisonous, String xp, int lifepoints, int level, int defence, int attack, int magic, int ranged, int slayerlevel, int size, boolean members, String slayercat, String[] areas, Map<String, Integer> animations) {
 		this.name = Preconditions.checkNotNull(name);
-		this.id = Preconditions.checkNotNull(id);
+		this.id = id;
 		this.description = Preconditions.checkNotNull(description);
 		this.weakness = Preconditions.checkNotNull(weakness);
-		this.attackable = Preconditions.checkNotNull(attackable);
-		this.aggressive = Preconditions.checkNotNull(aggressive);
-		this.poisonous = Preconditions.checkNotNull(poisonous);
+		this.attackable = attackable;
+		this.aggressive = aggressive;
+		this.poisonous = poisonous;
 		this.xp = Preconditions.checkNotNull(xp);
-		this.lifepoints = Preconditions.checkNotNull(lifepoints);
-		this.level = Preconditions.checkNotNull(level);
-		this.defence = Preconditions.checkNotNull(defence);
-		this.attack = Preconditions.checkNotNull(attack);
-		this.magic = Preconditions.checkNotNull(magic);
-		this.ranged = Preconditions.checkNotNull(ranged);
-		this.slayerlevel = Preconditions.checkNotNull(slayerlevel);
-		this.size = Preconditions.checkNotNull(size);
-		this.members = Preconditions.checkNotNull(members);
+		this.lifepoints = lifepoints;
+		this.level = level;
+		this.defence = defence;
+		this.attack = attack;
+		this.magic = magic;
+		this.ranged = ranged;
+		this.slayerlevel = slayerlevel;
+		this.size = size;
+		this.members = members;
 		this.slayercat = Preconditions.checkNotNull(slayercat);
 		this.areas = Preconditions.checkNotNull(areas);
 		this.animations = Preconditions.checkNotNull(animations);

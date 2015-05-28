@@ -101,7 +101,6 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
 	 */
 	public Optional<Beast> beastData(int beastId) throws IOException {
-		Preconditions.checkNotNull(beastId);
 		return client.fromJson(BEAST_DATA_URL + "?beastid=" + beastId, Beast.class);
 	}
 
@@ -151,7 +150,6 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beasts_A_to_Z">Beasts A to Z</a>
 	 */
 	public ImmutableMap<Integer, String> searchByFirstLetter(char letter) throws IOException {
-		Preconditions.checkNotNull(letter);
 		return resultsToImmutableMap(client.fromJson(BESTIARY_NAMES_URL + "?letter=" + letter, SearchResult[].class).orElse(null));
 	}
 
@@ -197,7 +195,6 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInSlayerCategory(int categoryId) throws IOException {
-		Preconditions.checkNotNull(categoryId);
 		return resultsToImmutableMap(client.fromJson(SLAYER_BEASTS_URL + "?identifier=" + categoryId, SearchResult[].class).orElse(null));
 	}
 
@@ -233,7 +230,6 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsWeakTo(int weaknessId) throws IOException {
-		Preconditions.checkNotNull(weaknessId);
 		return resultsToImmutableMap(client.fromJson(WEAKNESS_BEASTS_URL + "?identifier=" + weaknessId, SearchResult[].class).orElse(null));
 	}
 
@@ -259,8 +255,6 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beasts_by_Level">Beasts by Level</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInLevelGroup(int lowerBound, int upperBound) throws IOException {
-		Preconditions.checkNotNull(lowerBound);
-		Preconditions.checkNotNull(upperBound);
 		Preconditions.checkArgument(upperBound > lowerBound);
 		return resultsToImmutableMap(client.fromJson(LEVEL_GROUP_URL + "?identifier=" + lowerBound + "-" + upperBound, SearchResult[].class).orElse(null));
 	}

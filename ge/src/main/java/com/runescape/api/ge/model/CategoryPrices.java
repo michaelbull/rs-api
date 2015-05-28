@@ -28,7 +28,7 @@ public final class CategoryPrices {
 	 * @param items The items on this page.
 	 */
 	public CategoryPrices(int total, Item[] items) {
-		this.total = Preconditions.checkNotNull(total);
+		this.total = total;
 		this.items = Preconditions.checkNotNull(items).clone();
 	}
 

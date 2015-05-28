@@ -14,10 +14,10 @@ The implementation offers functionality to interact with the following three pub
 
 [CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
 
-To start using `rs-api`, simply instantiate the [API][api] class as follows:
+To start using `rs-api`, simply instantiate the [RuneScapeAPI][rsapi] class as follows:
 
 ```java
-API api = new API();
+RuneScapeAPI api = new RuneScapeAPI();
 ```
 
 At which point you may now access and query the Bestiary, Grand Exchange, and Hiscores APIs:
@@ -35,7 +35,7 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 Calling the `beastsInLevelGroup` method with the lower and upper combat level bounds as parameters (e.g. 250 and 300) in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between the lower and upper bounds inclusively.
 
 ```java
-API api = new API();
+RuneScapeAPI api = new RuneScapeAPI();
 ImmutableMap<Integer, String> beasts = api.getBestiary().beastsInLevelGroup(250, 300);
 
 System.out.println("Results:");
@@ -57,7 +57,7 @@ Results:
 Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including skill levels and activity ranks.
 
 ```java
-API api = new API();
+RuneScapeAPI api = new RuneScapeAPI();
 Optional<Player> optional = hiscores.playerInformation("Drumgun", Table.DEFAULT);
 
 optional.ifPresent(player -> System.out.println("Overall rank: " + player.getSkills().get("Overall")));
@@ -74,7 +74,7 @@ Overall rank: Skill{rank=1, level=2595, experience=5200000000}
 Calling the `clanInformation` method with a clan's name (e.g. Sapphite Knights) as the parameter in the [Hiscores API][hiscores-api] will return an [ImmutableList][immutablelist] of [ClanMate][clanmate]s.
 
 ```java
-API api = new API();
+RuneScapeAPI api = new RuneScapeAPI();
 ImmutableList<ClanMate> clanMates = api.getHiscores().clanInformation("Sapphite Knights");
 
 System.out.println("Clan Mates:");
@@ -120,7 +120,7 @@ The following Java libraries are used by the API:
 [hiscores]: http://services.runescape.com/m=rswiki/en/Hiscores_APIs
 [csv]: http://en.wikipedia.org/wiki/Comma-separated_values
 [json]: http://en.wikipedia.org/wiki/JSON
-[api]: /api/src/main/java/com/runescape/api/API.java
+[rsapi]: /api/src/main/java/com/runescape/api/RuneScapeAPI.java
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java

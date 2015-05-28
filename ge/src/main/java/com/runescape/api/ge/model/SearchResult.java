@@ -24,7 +24,7 @@ public final class SearchResult {
 	 */
 	public SearchResult(String letter, int items) {
 		this.letter = Preconditions.checkNotNull(letter);
-		this.items = Preconditions.checkNotNull(items);
+		this.items = items;
 	}
 
 	/**
