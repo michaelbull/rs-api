@@ -53,6 +53,20 @@ public final class Example {
 				int itemId;
 
 				switch (command) {
+					case "test":
+						ImmutableMap<Integer, String> beasts = bestiary.search()
+							.filterByNameTerms("dragon")
+							.filterByArea("Taverley Dungeon")
+							.filterByLevel(100, 140)
+							.results();
+
+						System.out.println("Results:");
+						for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
+							System.out.println("\t[" + String.format("%04d", entry.getKey()) + "] " + entry.getValue());
+						}
+						break;
+
+
 					case "beast data":
 						System.out.print("Enter beasts id: ");
 						int beastId = in.nextInt();

@@ -30,17 +30,21 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 
 ## Examples
 
-### Beasts by Level
+### Search in Bestiary
 
-Calling the `beastsInLevelGroup` method with the lower and upper combat level bounds as parameters (e.g. 250 and 300) in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between the lower and upper bounds inclusively.
+The [Bestiary API][bestiary-api] facilitates searching for a beast given a number of search filters (e.g. name, weakness, Slayer category). Numerous filters can be applied to the search by chaining them together, however the retrieval of the filters' results is not executed until the list of filters is constructed and the search is executed - at which point all of the filters will be applied sequentially.
 
 ```java
 RuneScapeAPI api = new RuneScapeAPI();
-ImmutableMap<Integer, String> beasts = api.getBestiary().beastsInLevelGroup(250, 300);
+ImmutableMap<Integer, String> beasts = api.getBestiary().search()
+	.filterByNameTerms("dragon")
+	.filterByArea("Taverley Dungeon")
+	.filterByLevel(100, 140)
+	.results();
 
 System.out.println("Results:");
 for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
-	System.out.println("\t[" + String.format("%05d", entry.getKey()) + "] " + entry.getValue());
+	System.out.println("\t[" + String.format("%04d", entry.getKey()) + "] " + entry.getValue());
 }
 ```
 
@@ -48,8 +52,8 @@ Outputs:
 
 ```
 Results:
-	[00050] King Black Dragon (276)
-	[15206] TokHaar-Yt-MejKot (300)
+	[0054] Black dragon (100)
+	[4673] Black dragon (100)
 ```
 
 ### Item Price on Day

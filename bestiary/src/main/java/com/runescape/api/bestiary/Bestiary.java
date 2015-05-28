@@ -93,6 +93,10 @@ public final class Bestiary {
 		this.client = Preconditions.checkNotNull(client);
 	}
 
+	public Search search() {
+		return new Search(this);
+	}
+
 	/**
 	 * Gets the a {@link Beast} by its id.
 	 * @param beastId The id of the {@link Beast}.
@@ -247,7 +251,7 @@ public final class Bestiary {
 	}
 
 	/**
-	 * Searches for the {@link Beast}s that are in a specific bracket of combat level.
+	 * Searches for the {@link Beast}s that have a combat level between the lower and upper bound inclusively.
 	 * @param lowerBound The lowest combat level.
 	 * @param upperBound The highest combat level.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
