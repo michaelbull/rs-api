@@ -94,8 +94,8 @@ public final class Bestiary {
 	}
 
 	/**
-	 * Generates a new {@link Search} that will use results from this {@link Bestiary}.
-	 * @return The generated {@link Search}.
+	 * Creates a new {@link Search} that will use results from this {@link Bestiary}.
+	 * @return The {@link Search}.
 	 */
 	public Search search() {
 		return new Search(this);
