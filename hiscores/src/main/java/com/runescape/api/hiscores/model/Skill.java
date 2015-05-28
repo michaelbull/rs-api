@@ -24,7 +24,7 @@ public final class Skill {
 	/**
 	 * The amount of experience the player has earned in this skill.
 	 */
-	private final int experience;
+	private final long experience;
 
 	/**
 	 * Creates a new {@link Skill}.
@@ -32,7 +32,7 @@ public final class Skill {
 	 * @param level The level the player has in this skill.
 	 * @param experience The amount of experience the player has earned in this skill.
 	 */
-	public Skill(int rank, int level, int experience) {
+	public Skill(int rank, int level, long experience) {
 		this.rank = rank;
 		this.level = level;
 		this.experience = experience;
@@ -46,7 +46,7 @@ public final class Skill {
 		Preconditions.checkNotNull(record);
 		this.rank = Integer.parseInt(record.get(0));
 		this.level = Integer.parseInt(record.get(1));
-		this.experience = Integer.parseInt(record.get(2));
+		this.experience = Long.parseLong(record.get(2));
 	}
 
 	/**
@@ -69,7 +69,7 @@ public final class Skill {
 	 * Gets the amount of experience the player has earned in this skill.
 	 * @return The amount of experience the player has earned in this skill.
 	 */
-	public Optional<Integer> getExperience() {
+	public Optional<Long> getExperience() {
 		return experience == -1 ? Optional.empty() : Optional.of(experience);
 	}
 
@@ -78,7 +78,7 @@ public final class Skill {
 		return MoreObjects.toStringHelper(this)
 			.add("rank", getRank().orElse(-1))
 			.add("level", level)
-			.add("experience", getExperience().orElse(-1))
+			.add("experience", getExperience().orElse((long) -1))
 			.toString();
 	}
 }

@@ -32,7 +32,7 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 
 ### Beasts by Level
 
-Calling the `beastsInLevelGroup` method with 250 and 300 as parameters in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between 250 and 300 inclusive.
+Calling the `beastsInLevelGroup` method with the lower and upper combat level bounds as parameters (e.g. 250 and 300) in the [Bestiary API][bestiary-api] will return an [ImmutableMap][immutablemap] of beast IDs to beast names, containing only beasts that have a combat level between the lower and upper bounds inclusively.
 
 ```java
 API api = new API();
@@ -44,12 +44,29 @@ for (Map.Entry<Integer, String> entry : beasts.entrySet()) {
 }
 ```
 
-Returns:
+Outputs:
 
 ```
 Results:
 	[00050] King Black Dragon (276)
 	[15206] TokHaar-Yt-MejKot (300)
+```
+
+### Player Hiscore Rank
+
+Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including skill levels and activity ranks.
+
+```java
+API api = new API();
+Optional<Player> optional = hiscores.playerInformation("Drumgun", Table.DEFAULT);
+
+optional.ifPresent(player -> System.out.println("Overall rank: " + player.getSkills().get("Overall")));
+```
+
+Outputs:
+
+```
+Overall rank: Skill{rank=1, level=2595, experience=5200000000}
 ```
 
 ### Clan Information
@@ -64,7 +81,7 @@ System.out.println("Clan Mates:");
 clanMates.forEach(System.out::println);
 ```
 
-Returns:
+Outputs:
 
 ```
 Clan Mates:
@@ -107,6 +124,8 @@ The following Java libraries are used by the API:
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java
+[table]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Table.java
+[player]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Player.java
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
 [clanmate]: /hiscores/src/main/java/com/runescape/api/hiscores/model/ClanMate.java
 [gradle]: http://www.gradle.org/
