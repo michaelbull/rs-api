@@ -12,7 +12,7 @@ The implementation offers functionality to interact with the following three pub
 * [Grand Exchange][ge]
 * [Hiscores][hiscores]
 
-[Comma-separated values][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
+[CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
 
 To start using `rs-api`, simply instantiate the [API][api] class as follows:
 
