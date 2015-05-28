@@ -39,10 +39,10 @@ public final class Example {
 	 */
 	public static void main(String[] args) {
 		try {
-			RuneScapeAPI RuneScapeAPI = new RuneScapeAPI();
-			Bestiary bestiary = RuneScapeAPI.getBestiary();
-			GrandExchange ge = RuneScapeAPI.getGrandExchange();
-			Hiscores hiscores = RuneScapeAPI.getHiscores();
+			RuneScapeAPI api = new RuneScapeAPI();
+			Bestiary bestiary = api.getBestiary();
+			GrandExchange ge = api.getGrandExchange();
+			Hiscores hiscores = api.getHiscores();
 			Scanner in = new Scanner(System.in, "UTF-8");
 
 			String command;
