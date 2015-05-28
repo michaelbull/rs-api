@@ -93,6 +93,10 @@ public final class Bestiary {
 		this.client = Preconditions.checkNotNull(client);
 	}
 
+	/**
+	 * Generates a new {@link Search} that will use results from this {@link Bestiary}.
+	 * @return The generated {@link Search}.
+	 */
 	public Search search() {
 		return new Search(this);
 	}
