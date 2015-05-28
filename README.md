@@ -52,6 +52,30 @@ Results:
 	[15206] TokHaar-Yt-MejKot (300)
 ```
 
+### Item Price on Day
+
+Calling the `graphingData` method with an item's ID as the parameter (e.g. 4151 for an Abyssal whip) will return the price information that may be used for graphical repersentation of an item's price history.
+
+```java
+RuneScapeAPI api = new RuneScapeAPI();
+Optional<GraphingData> optional = api.getGrandExchange().graphingData(4151);
+
+optional.ifPresent(graphingData -> {
+	Calendar calendar = Calendar.getInstance();
+	calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+	calendar.set(Calendar.MILLISECOND, 0);
+	calendar.set(2014, Calendar.DECEMBER, 25, 0, 0, 0);
+	
+	System.out.println("Daily price on Christmas 2014: " + graphingData.getDailyValue(calendar.getTime()).get());
+});
+```
+
+Outputs:
+
+```
+Daily price on Christmas 2014: 117549
+```
+
 ### Player Hiscore Rank
 
 Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including skill levels and activity ranks.
