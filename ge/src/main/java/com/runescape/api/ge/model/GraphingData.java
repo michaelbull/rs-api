@@ -5,10 +5,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.ge.GrandExchange;
 
-import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Optional;
@@ -18,8 +16,6 @@ import java.util.Optional;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
  */
 public final class GraphingData {
-	private static final Clock CLOCK = Clock.system(ZoneId.of("GMT"));
-
 	/**
 	 * A {@link Map} of datecodes to daily price values.
 	 */
@@ -40,6 +36,11 @@ public final class GraphingData {
 		this.average = Preconditions.checkNotNull(average);
 	}
 
+	/**
+	 * Converts a {@link LocalDateTime} to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
+	 * @param localDateTime The {@link LocalDateTime}.
+	 * @return The number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
+	 */
 	private long localDateTimeToEpochMilli(LocalDateTime localDateTime) {
 		return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli();
 	}
