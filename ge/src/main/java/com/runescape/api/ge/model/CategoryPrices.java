@@ -28,6 +28,7 @@ public final class CategoryPrices {
 	 * @param items The items on this page.
 	 */
 	public CategoryPrices(int total, Item[] items) {
+		Preconditions.checkArgument(total >= 0, "Total amount of items must be more than or equal to 0.");
 		this.total = total;
 		this.items = Preconditions.checkNotNull(items).clone();
 	}

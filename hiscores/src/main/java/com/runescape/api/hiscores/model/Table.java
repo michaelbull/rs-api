@@ -1,6 +1,7 @@
 package com.runescape.api.hiscores.model;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.runescape.api.hiscores.Hiscores;
 
@@ -79,9 +80,9 @@ public enum Table {
 	 * @param activityNames The activity names.
 	 */
 	Table(String name, ImmutableList<String> skillNames, ImmutableList<String> activityNames) {
-		this.name = name;
-		this.skillNames = skillNames;
-		this.activityNames = activityNames;
+		this.name = Preconditions.checkNotNull(name);
+		this.skillNames = Preconditions.checkNotNull(skillNames);
+		this.activityNames = Preconditions.checkNotNull(activityNames);
 	}
 
 	/**

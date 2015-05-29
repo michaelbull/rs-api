@@ -191,8 +191,11 @@ public final class Beast {
 	 * Gets the beast's weakness.
 	 * @return The beast's weakness.
 	 */
-	public String getWeakness() {
-		return weakness;
+	public Optional<String> getWeakness() {
+		if (weakness != null && weakness.equals("None")) {
+			return Optional.empty();
+		}
+		return Optional.ofNullable(weakness);
 	}
 
 	/**
@@ -338,7 +341,7 @@ public final class Beast {
 			.add("name", name)
 			.add("id", id)
 			.add("description", description)
-			.add("weakness", weakness)
+			.add("weakness", getWeakness().orElse("n/a"))
 			.add("attackable", attackable)
 			.add("aggressive", aggressive)
 			.add("poisonous", poisonous)
@@ -352,7 +355,7 @@ public final class Beast {
 			.add("slayerLevelRequirement", slayerlevel)
 			.add("size", size)
 			.add("membersOnly", members)
-			.add("slayerCategory", getSlayerCategory().orElse("none"))
+			.add("slayerCategory", getSlayerCategory().orElse("n/a"))
 			.add("areas", Arrays.toString(areas))
 			.add("animations", animations)
 			.toString();

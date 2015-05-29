@@ -135,6 +135,7 @@ The following Java libraries are used by the API:
 * [Apache HttpComponents][httpcomponents]
 * [Google Gson][gson]
 * [Google Guava][guava]
+* [JUnit][junit]
 * [SLF4J][slf4j]
 
 ## License
@@ -163,5 +164,6 @@ The following Java libraries are used by the API:
 [httpcomponents]: https://hc.apache.org/
 [gson]: https://code.google.com/p/google-gson/
 [guava]: https://code.google.com/p/guava-libraries/
+[junit]: http://junit.org/
 [slf4j]: http://www.slf4j.org/
 [isc]: https://www.isc.org/downloads/software-support-policy/isc-license/

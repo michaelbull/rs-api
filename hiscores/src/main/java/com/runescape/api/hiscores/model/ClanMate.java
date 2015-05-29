@@ -36,6 +36,8 @@ public final class ClanMate {
 	 * @param kills The amount of earned kills by the clan mate.
 	 */
 	public ClanMate(String name, String rank, int experience, int kills) {
+		Preconditions.checkArgument(experience >= 0, "Experience must be more than or equal to 0");
+		Preconditions.checkArgument(kills >= 0, "Kills must be more than or equal to 0");
 		this.name = Preconditions.checkNotNull(name);
 		this.rank = Preconditions.checkNotNull(rank);
 		this.experience = experience;

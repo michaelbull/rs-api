@@ -33,6 +33,9 @@ public final class Skill {
 	 * @param experience The amount of experience the player has earned in this skill.
 	 */
 	public Skill(int rank, int level, long experience) {
+		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or a positive integer.");
+		Preconditions.checkArgument(level > 0, "Level must be a positive integer.");
+		Preconditions.checkArgument(experience == -1 || experience > 0, "Experience must be either -1 (unranked) or a positive long.");
 		this.rank = rank;
 		this.level = level;
 		this.experience = experience;

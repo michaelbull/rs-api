@@ -27,6 +27,8 @@ public final class Activity {
 	 * @param score The score the player has in the activity.
 	 */
 	public Activity(int rank, int score) {
+		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or a positive integer.");
+		Preconditions.checkArgument(score >= -1, "Score must be either -1 (unranked) or more than or equal to 0.");
 		this.rank = rank;
 		this.score = score;
 	}
@@ -54,7 +56,7 @@ public final class Activity {
 	 * @return An {@link Optional} of the player's score, or {@code Optional.empty()} if the player is unranked for this activity.
 	 */
 	public Optional<Integer> getScore() {
-		return rank == -1 ? Optional.empty() : Optional.of(score);
+		return score == -1 ? Optional.empty() : Optional.of(score);
 	}
 
 	@Override

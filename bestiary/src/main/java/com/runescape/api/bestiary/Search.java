@@ -2,7 +2,6 @@ package com.runescape.api.bestiary;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.runescape.api.bestiary.model.Beast;
 

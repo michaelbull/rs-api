@@ -94,6 +94,7 @@ public final class Item {
 	public Item(String icon, String icon_large, int id, String type, String typeIcon, String name, String description, Price current, Price today, boolean members, PriceChange day30, PriceChange day90, PriceChange day180) {
 		this.icon = Preconditions.checkNotNull(icon);
 		this.icon_large = Preconditions.checkNotNull(icon_large);
+		Preconditions.checkArgument(id >= 0, "ID must be more than or equal to 0.");
 		this.id = id;
 		this.type = Preconditions.checkNotNull(type);
 		this.typeIcon = Preconditions.checkNotNull(typeIcon);

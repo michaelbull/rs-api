@@ -108,6 +108,7 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
 	 */
 	public Optional<Category> category(int categoryId) throws IOException {
+		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
 		return client.fromJson(CATEGORY_URL + "?category=" + categoryId, Category.class);
 	}
 
@@ -133,7 +134,8 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
 	 */
 	public Optional<CategoryPrices> categoryPrices(int categoryId, String prefix, int page) throws IOException {
-		Preconditions.checkNotNull(prefix);
+		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
+		Preconditions.checkArgument(prefix.length() > 0, "Prefix must be at least 1 character long.");
 
 		try {
 			int intValue = Integer.parseInt(prefix);
@@ -156,7 +158,7 @@ public final class GrandExchange {
 	 */
 	public Optional<CategoryPrices> categoryPrices(String categoryName, String prefix, int page) throws IOException {
 		Preconditions.checkNotNull(categoryName);
-		Preconditions.checkNotNull(prefix);
+		Preconditions.checkArgument(prefix.length() > 0, "Prefix must be at least 1 character long.");
 		return categoryPrices(CATEGORIES.indexOf(categoryName), prefix, page);
 	}
 
