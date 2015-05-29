@@ -35,8 +35,7 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 The [Bestiary API][bestiary-api] facilitates searching for a beast given a number of search filters (e.g. name, weakness, Slayer category). Numerous filters can be applied to the search by chaining them together, however the retrieval of the filters' results is not executed until the list of filters is constructed and the search is executed - at which point all of the filters will be applied sequentially.
 
 ```java
-RuneScapeAPI api = new RuneScapeAPI();
-ImmutableMap<Integer, String> beasts = api.getBestiary().search()
+ImmutableMap<Integer, String> beasts = bestiary.search()
 	.filterByNameTerms("dragon")
 	.filterByArea("Taverley Dungeon")
 	.filterByLevel(100, 140)
@@ -61,8 +60,7 @@ Results:
 Calling the `graphingData` method with an item's ID as the parameter (e.g. 4151 for an Abyssal whip) will return the price information that may be used for graphical repersentation of an item's price history.
 
 ```java
-RuneScapeAPI api = new RuneScapeAPI();
-Optional<GraphingData> optional = api.getGrandExchange().graphingData(4151);
+Optional<GraphingData> optional = grandExchange.graphingData(4151);
 
 optional.ifPresent(graphingData -> {
 	Calendar calendar = Calendar.getInstance();
@@ -85,7 +83,6 @@ Daily price on Christmas 2014: 117549
 Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including skill levels and activity ranks.
 
 ```java
-RuneScapeAPI api = new RuneScapeAPI();
 Optional<Player> optional = hiscores.playerInformation("Drumgun", Table.DEFAULT);
 
 optional.ifPresent(player -> System.out.println("Overall rank: " + player.getSkills().get("Overall")));
@@ -102,8 +99,7 @@ Overall rank: Skill{rank=1, level=2595, experience=5200000000}
 Calling the `clanInformation` method with a clan's name (e.g. Sapphite Knights) as the parameter in the [Hiscores API][hiscores-api] will return an [ImmutableList][immutablelist] of [ClanMate][clanmate]s.
 
 ```java
-RuneScapeAPI api = new RuneScapeAPI();
-ImmutableList<ClanMate> clanMates = api.getHiscores().clanInformation("Sapphite Knights");
+ImmutableList<ClanMate> clanMates = hiscores.clanInformation("Sapphite Knights");
 
 System.out.println("Clan Mates:");
 clanMates.forEach(System.out::println);
