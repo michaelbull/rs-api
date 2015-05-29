@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import com.runescape.api.bestiary.model.Beast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public final class Search {
 	/**
 	 * The {@link Filter}s to apply to the search.
 	 */
-	private final List<Filter> filters = Lists.newArrayList();
+	private final List<Filter> filters = new ArrayList<>();
 
 	/**
 	 * Creates a new {@link Search}.
