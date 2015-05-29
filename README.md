@@ -57,18 +57,14 @@ Results:
 
 ### Item Price on Day
 
-Calling the `graphingData` method with an item's ID as the parameter (e.g. 4151 for an Abyssal whip) will return the price information that may be used for graphical repersentation of an item's price history.
+Calling the `graphingData` method with an item's ID as the parameter (e.g. 4151 for an Abyssal whip) will return the price information that may be used for graphical representation of an item's price history.
 
 ```java
 Optional<GraphingData> optional = grandExchange.graphingData(4151);
 
 optional.ifPresent(graphingData -> {
-	Calendar calendar = Calendar.getInstance();
-	calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
-	calendar.set(Calendar.MILLISECOND, 0);
-	calendar.set(2014, Calendar.DECEMBER, 25, 0, 0, 0);
-	
-	System.out.println("Daily price on Christmas 2014: " + graphingData.getDailyValue(calendar.getTime()).get());
+	LocalDateTime christmas = LocalDateTime.of(2014, Month.DECEMBER, 25, 0, 0);
+	System.out.println("Daily price on Christmas 2014: " + graphingData.getDailyValue(christmas).get());
 });
 ```
 

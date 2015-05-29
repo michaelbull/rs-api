@@ -5,8 +5,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.ge.GrandExchange;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,6 +18,8 @@ import java.util.Optional;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
  */
 public final class GraphingData {
+	private static final Clock CLOCK = Clock.system(ZoneId.of("GMT"));
+
 	/**
 	 * A {@link Map} of datecodes to daily price values.
 	 */
@@ -35,54 +40,59 @@ public final class GraphingData {
 		this.average = Preconditions.checkNotNull(average);
 	}
 
+	private long localDateTimeToEpochMilli(LocalDateTime localDateTime) {
+		return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli();
+	}
+
 	/**
-	 * Gets an {@link ImmutableMap} of {@link Date}s to prices.
+	 * Gets an {@link ImmutableMap} of {@link LocalDateTime}s to prices.
 	 * @param prices A {@link Map} of datecodes to prices.
-	 * @return An {@link ImmutableMap} of {@link Date} to prices.
+	 * @return An {@link ImmutableMap} of {@link LocalDateTime} to prices.
 	 */
-	private ImmutableMap<Date, Integer> getPrices(Map<String, Integer> prices) {
-		ImmutableMap.Builder<Date, Integer> builder = ImmutableMap.builder();
+	private ImmutableMap<LocalDateTime, Integer> getPrices(Map<String, Integer> prices) {
+		ImmutableMap.Builder<LocalDateTime, Integer> builder = ImmutableMap.builder();
 
 		for (Map.Entry<String, Integer> entry : prices.entrySet()) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTimeInMillis(Long.parseLong(entry.getKey()));
-			builder.put(calendar.getTime(), entry.getValue());
+			long epochMilli = Long.parseLong(entry.getKey());
+			LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), ZoneOffset.UTC);
+
+			builder.put(dateTime, entry.getValue());
 		}
 		return builder.build();
 	}
 
 	/**
-	 * Gets an {@link ImmutableMap} of {@link Date}s to daily prices.
-	 * @return An {@link ImmutableMap} of {@link Date} to daily prices.
+	 * Gets an {@link ImmutableMap} of {@link LocalDateTime}s to daily prices.
+	 * @return An {@link ImmutableMap} of {@link LocalDateTime}s to daily prices.
 	 */
-	public ImmutableMap<Date, Integer> getDailyPrices() {
+	public ImmutableMap<LocalDateTime, Integer> getDailyPrices() {
 		return getPrices(daily);
 	}
 
 	/**
-	 * Gets the daily price of an {@link Item} on a given a {@link Date}.
-	 * @param date The {@link Date}.
+	 * Gets the daily price of an {@link Item} on a given a {@link LocalDateTime} on the UTC time-zone.
+	 * @param dateTime The {@link LocalDateTime}.
 	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no daily value was recorded on this date.
 	 */
-	public Optional<Integer> getDailyValue(Date date) {
-		return Optional.ofNullable(daily.get(String.valueOf(date.getTime())));
+	public Optional<Integer> getDailyValue(LocalDateTime dateTime) {
+		return Optional.ofNullable(daily.get(String.valueOf(localDateTimeToEpochMilli(dateTime))));
 	}
 
 	/**
-	 * Gets an {@link ImmutableMap} of {@link Date}s to average prices.
-	 * @return An {@link ImmutableMap} of {@link Date} to average prices.
+	 * Gets an {@link ImmutableMap} of {@link LocalDateTime}s to average prices.
+	 * @return An {@link ImmutableMap} of {@link LocalDateTime}s to average prices.
 	 */
-	public ImmutableMap<Date, Integer> getAveragePrices() {
+	public ImmutableMap<LocalDateTime, Integer> getAveragePrices() {
 		return getPrices(average);
 	}
 
 	/**
-	 * Gets the average price of an {@link Item} given on a given {@link Date}.
-	 * @param date The {@link Date}.
+	 * Gets the average price of an {@link Item} given on a given {@link LocalDateTime}.
+	 * @param dateTime The {@link LocalDateTime}.
 	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no average value was recorded on this date.
 	 */
-	public Optional<Integer> getAverageValue(Date date) {
-		return Optional.ofNullable(average.get(String.valueOf(date.getTime())));
+	public Optional<Integer> getAverageValue(LocalDateTime dateTime) {
+		return Optional.ofNullable(average.get(String.valueOf(localDateTimeToEpochMilli(dateTime))));
 	}
 
 	@Override
