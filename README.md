@@ -63,7 +63,7 @@ Calling the `graphingData` method with an item's ID as the parameter (e.g. 4151 
 Optional<GraphingData> optional = grandExchange.graphingData(4151);
 
 optional.ifPresent(graphingData -> {
-	LocalDateTime christmas = LocalDateTime.of(2014, Month.DECEMBER, 25, 0, 0);
+	LocalDate christmas = LocalDate.of(2014, Month.DECEMBER, 25);
 	System.out.println("Daily price on Christmas 2014: " + graphingData.getDailyValue(christmas).get());
 });
 ```

@@ -19,7 +19,7 @@ import com.runescape.api.hiscores.model.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
@@ -223,12 +223,12 @@ public final class Example {
 
 						graphingDataOptional.ifPresent(graphingData -> {
 							System.out.println("Daily:");
-							for (Map.Entry<LocalDateTime, Integer> entry : graphingData.getDailyPrices().entrySet()) {
+							for (Map.Entry<LocalDate, Integer> entry : graphingData.getDailyPrices().entrySet()) {
 								System.out.println("\t[" + entry.getKey() + "] " + entry.getValue());
 							}
 							System.out.println();
 							System.out.println("Average:");
-							for (Map.Entry<LocalDateTime, Integer> entry : graphingData.getAveragePrices().entrySet()) {
+							for (Map.Entry<LocalDate, Integer> entry : graphingData.getAveragePrices().entrySet()) {
 								System.out.println("\t[" + entry.getKey() + "] " + entry.getValue());
 							}
 						});
