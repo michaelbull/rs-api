@@ -11,7 +11,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class TestHiscores {
+public final class TestHiscores {
 	private final Hiscores hiscores = new Hiscores(new Client());
 
 	@Test

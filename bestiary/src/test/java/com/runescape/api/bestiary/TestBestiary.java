@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class TestBestiary {
+public final class TestBestiary {
 	private static final int HELLHOUND = 49;
 	private static final int KING_BLACK_DRAGON = 50;
 	private static final int BLUE_DRAGON = 55;

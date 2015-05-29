@@ -12,7 +12,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestGrandExchange {
+public final class TestGrandExchange {
 	private static final int ABYSSAL_WHIP = 4151;
 
 	private final GrandExchange ge = new GrandExchange(new Client());
