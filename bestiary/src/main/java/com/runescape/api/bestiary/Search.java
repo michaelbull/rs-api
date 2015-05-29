@@ -128,7 +128,7 @@ public final class Search {
 	 * @return The {@link Search}, for chaining.
 	 */
 	public Search filterByLevel(int lowerBound, int upperBound) {
-		Preconditions.checkArgument(upperBound > lowerBound);
+		Preconditions.checkArgument(upperBound > lowerBound, "The upper combat level bound must be higher than the lower combat level bound.");
 		filters.add(() -> bestiary.beastsInLevelGroup(lowerBound, upperBound));
 		return this;
 	}
