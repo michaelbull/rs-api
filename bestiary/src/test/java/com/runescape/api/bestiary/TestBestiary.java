@@ -30,21 +30,21 @@ public final class TestBestiary {
 		assertFalse(optional.isPresent());
 
 		Beast kbd = bestiary.beastData(KING_BLACK_DRAGON).get();
-		assertEquals(kbd.getName(), "King Black Dragon");
-		assertEquals(kbd.getCombatLevel(), 276);
-		assertEquals(kbd.getLifePoints(), 45000);
-		assertEquals(kbd.getSlayerCategory().get(), "Black dragons");
-		assertEquals(kbd.getAreas(), ImmutableList.of("Wilderness Dungeons"));
+		assertEquals("King Black Dragon", kbd.getName());
+		assertEquals(276, kbd.getCombatLevel());
+		assertEquals(45000, kbd.getLifePoints());
+		assertEquals("Black dragons", kbd.getSlayerCategory().get());
+		assertEquals(ImmutableList.of("Wilderness Dungeons"), kbd.getAreas());
 
 		Beast hans = bestiary.beastData(0).get();
 		assertFalse(hans.getWeakness().isPresent());
 		assertFalse(hans.getSlayerCategory().isPresent());
 
 		Beast hellhound = bestiary.beastData(HELLHOUND).get();
-		assertEquals(hellhound.getDescription(), "Hello, nice doggy...");
-		assertEquals(hellhound.getExperience(), 344.4, 0);
-		assertEquals(hellhound.getCombatLevel(), 92);
-		assertEquals(hellhound.getSlayerCategory().get(), "Hellhounds");
+		assertEquals("Hello, nice doggy...", hellhound.getDescription());
+		assertEquals(344.4, hellhound.getExperience(), 0);
+		assertEquals(92, hellhound.getCombatLevel());
+		assertEquals("Hellhounds", hellhound.getSlayerCategory().get());
 	}
 
 	@Test
@@ -54,13 +54,13 @@ public final class TestBestiary {
 
 		results = bestiary.searchByTerms("sheep");
 		assertNotNull(results.get(SHEEP));
-		assertEquals(results.get(GOLDEN_SHEEP), "Golden sheep");
+		assertEquals("Golden sheep", results.get(GOLDEN_SHEEP));
 	}
 
 	@Test
 	public void testSearchByFirstLetter() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.searchByFirstLetter('Z');
-		assertEquals(results.get(ZEKE), "Zeke");
+		assertEquals("Zeke", results.get(ZEKE));
 
 		results = bestiary.searchByFirstLetter('x');
 		assertTrue(results.isEmpty());

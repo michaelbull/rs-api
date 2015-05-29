@@ -25,7 +25,7 @@ public final class TestHiscores {
 		int rank = thieving.getRank().get();
 		long experience = thieving.getExperience().get();
 
-		assertEquals(rank, 5);
-		assertEquals(experience, 200_000_000);
+		assertEquals(5, rank);
+		assertEquals(200_000_000, experience);
 	}
 }
