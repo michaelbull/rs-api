@@ -40,6 +40,7 @@ public final class HttpClient implements Client {
 	 */
 	private InputStreamReader readerFrom(String url, Charset charset) throws IOException {
 		Preconditions.checkNotNull(url);
+		Preconditions.checkNotNull(charset);
 		return new InputStreamReader(new URL(url).openStream(), charset);
 	}
 
