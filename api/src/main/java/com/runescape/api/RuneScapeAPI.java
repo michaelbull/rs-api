@@ -1,5 +1,6 @@
 package com.runescape.api;
 
+import com.google.common.base.Preconditions;
 import com.runescape.api.bestiary.Bestiary;
 import com.runescape.api.ge.GrandExchange;
 import com.runescape.api.hiscores.Hiscores;
@@ -14,7 +15,7 @@ public final class RuneScapeAPI {
 	 * @return The {@link RuneScapeAPI}.
 	 */
 	public static RuneScapeAPI create(Client client) {
-		return new RuneScapeAPI(client);
+		return new RuneScapeAPI(Preconditions.checkNotNull(client));
 	}
 
 	/**
