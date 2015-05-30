@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.Optional;
 
 /**
- * Represents a client that can deserialize resources into objects.
+ * Represents a client that can deserialize JSON and CSV resources into Java objects.
  */
 public interface Client {
 	/**
