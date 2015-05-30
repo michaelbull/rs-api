@@ -39,7 +39,7 @@ public final class Example {
 	 */
 	public static void main(String[] args) {
 		try {
-			RuneScapeAPI api = new RuneScapeAPI();
+			RuneScapeAPI api = RuneScapeAPI.createHttp();
 			Bestiary bestiary = api.getBestiary();
 			GrandExchange ge = api.getGrandExchange();
 			Hiscores hiscores = api.getHiscores();

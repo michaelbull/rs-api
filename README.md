@@ -14,11 +14,13 @@ The implementation offers functionality to interact with the following three pub
 
 [CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
 
-To start using `rs-api`, simply instantiate the [RuneScapeAPI][rsapi] class as follows:
+To start using `rs-api`, simply instantiate a HTTP based [RuneScapeAPI][rsapi] class as follows:
 
 ```java
-RuneScapeAPI api = new RuneScapeAPI();
+RuneScapeAPI api = RuneScapeAPI.createHttp();
 ```
+
+**Note:** The API can run using a [HttpClient][httpclient] on the live RuneScape web-service, or a user supplied client (e.g. a fake client for mocked unit testing). The required structure of a client can be found [here][client].
 
 At which point you may now access and query the Bestiary, Grand Exchange, and Hiscores APIs:
 
@@ -142,6 +144,8 @@ The following Java libraries are used by the API:
 [csv]: http://en.wikipedia.org/wiki/Comma-separated_values
 [json]: http://en.wikipedia.org/wiki/JSON
 [rsapi]: /api/src/main/java/com/runescape/api/RuneScapeAPI.java
+[httpclient]: /shared/src/main/java/com/runescape/api/HttpClient.java
+[client]: /shared/src/main/java/com/runescape/api/Client.java
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java
