@@ -9,11 +9,20 @@ import com.runescape.api.hiscores.Hiscores;
  */
 public final class RuneScapeAPI {
 	/**
+	 * Creates a new {@link RuneScapeAPI} backed by specific {@link Client} implementation.
+	 * @param client The {@link Client} implementation.
+	 * @return The {@link RuneScapeAPI}.
+	 */
+	public static RuneScapeAPI create(Client client) {
+		return new RuneScapeAPI(client);
+	}
+
+	/**
 	 * Creates a new {@link RuneScapeAPI} backed by a {@link HttpClient}.
-	 * @return The {@link RuneScapeAPI}
+	 * @return The {@link RuneScapeAPI}.
 	 */
 	public static RuneScapeAPI createHttp() {
-		return new RuneScapeAPI(new HttpClient());
+		return create(new HttpClient());
 	}
 
 	/**
@@ -34,7 +43,7 @@ public final class RuneScapeAPI {
 	/**
 	 * Creates a new {@link RuneScapeAPI}.
 	 */
-	public RuneScapeAPI(Client client) {
+	private RuneScapeAPI(Client client) {
 		this.bestiary = new Bestiary(client);
 		this.grandExchange = new GrandExchange(client);
 		this.hiscores = new Hiscores(client);
