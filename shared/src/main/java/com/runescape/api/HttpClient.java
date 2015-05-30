@@ -1,5 +1,6 @@
 package com.runescape.api;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
@@ -7,18 +8,21 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A {@link Client} that facilitates interaction with the RuneScape web-services API over HTTP.
+ * A {@link Client} that wraps a {@link org.apache.http.client.HttpClient} to interact with the RuneScape web-services API.
  */
 public final class HttpClient implements Client {
 	/**
@@ -32,16 +36,21 @@ public final class HttpClient implements Client {
 	private static final Gson GSON = new Gson();
 
 	/**
-	 * Creates an {@link InputStreamReader} from a specified URL.
+	 * A client for HTTP request execution.
+	 */
+	private final org.apache.http.client.HttpClient client = HttpClientBuilder.create().build();
+
+	/**
+	 * Creates an {@link InputStream} from a specified URL.
 	 * @param url The URL to open.
-	 * @param charset The {@link Charset} to use.
-	 * @return The {@link InputStreamReader}.
+	 * @return The {@link InputStream}.
 	 * @throws IOException
 	 */
-	private InputStreamReader readerFrom(String url, Charset charset) throws IOException {
+	private InputStream streamFrom(String url) throws IOException {
 		Preconditions.checkNotNull(url);
-		Preconditions.checkNotNull(charset);
-		return new InputStreamReader(new URL(url).openStream(), charset);
+		HttpGet request = new HttpGet(url);
+		request.addHeader("accept", "application/json");
+		return client.execute(request).getEntity().getContent();
 	}
 
 	/**
@@ -56,7 +65,7 @@ public final class HttpClient implements Client {
 	public <T> Optional<T> fromJson(String url, Type typeOfT) throws IOException {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(typeOfT);
-		try (Reader reader = readerFrom(url, StandardCharsets.UTF_8)) {
+		try (Reader reader = new InputStreamReader(streamFrom(url), StandardCharsets.UTF_8)) {
 			try {
 				return Optional.ofNullable(GSON.fromJson(reader, typeOfT));
 			} catch (JsonSyntaxException | JsonIOException exception) {
@@ -77,7 +86,7 @@ public final class HttpClient implements Client {
 	public <T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(classOfT);
-		try (Reader reader = readerFrom(url, StandardCharsets.UTF_8)) {
+		try (Reader reader = new InputStreamReader(streamFrom(url), StandardCharsets.UTF_8)) {
 			try {
 				return Optional.ofNullable(GSON.fromJson(reader, classOfT));
 			} catch (JsonSyntaxException | JsonIOException exception) {
@@ -95,8 +104,41 @@ public final class HttpClient implements Client {
 	@Override
 	public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
 		Preconditions.checkNotNull(url);
-		try (CSVParser parser = CSVParser.parse(new URL(url), StandardCharsets.ISO_8859_1, CSV_FORMAT)) {
-			return ImmutableList.copyOf(parser.getRecords());
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(streamFrom(url), StandardCharsets.ISO_8859_1))) {
+			StringBuilder builder = new StringBuilder();
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+				builder.append(line).append("\n");
+			}
+
+			try (CSVParser parser = CSVParser.parse(builder.toString(), CSV_FORMAT)) {
+				return ImmutableList.copyOf(parser.getRecords());
+			}
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		HttpClient that = (HttpClient) o;
+		return Objects.equals(client, that.client);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(client);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("client", client)
+			.toString();
 	}
 }
