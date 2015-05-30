@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
- * A {@link Client} that facilitates interactaction with the RuneScape web-services API.
+ * A {@link Client} that facilitates interaction with the RuneScape web-services API.
  */
 public final class HttpClient implements Client {
 	/**
