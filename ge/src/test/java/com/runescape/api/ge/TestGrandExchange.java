@@ -138,7 +138,6 @@ public final class TestGrandExchange {
 
 		@Override
 		public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
-			System.out.println("[3] " + url);
 			return ImmutableList.of();
 		}
 	}
