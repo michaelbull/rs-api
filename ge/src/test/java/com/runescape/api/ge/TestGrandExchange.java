@@ -1,5 +1,6 @@
 package com.runescape.api.ge;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.Client;
@@ -88,12 +89,17 @@ public final class TestGrandExchange {
 	private static final class FakeClient implements Client {
 		@Override
 		public <T> Optional<T> fromJson(String url, Type typeOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(typeOfT);
 			return Optional.empty();
 		}
 
 		@Override
 		@SuppressWarnings("unchecked")
 		public <T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(classOfT);
+
 			if (url.startsWith("http://services.runescape.com/m=itemdb_rs/api/catalogue/category.json?category=")) {
 				int categoryId = Integer.parseInt(url.substring(url.indexOf("category=") + "category=".length()));
 
@@ -133,11 +139,13 @@ public final class TestGrandExchange {
 						return Optional.empty();
 				}
 			}
+
 			return Optional.empty();
 		}
 
 		@Override
 		public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
+			Preconditions.checkNotNull(url);
 			return ImmutableList.of();
 		}
 	}

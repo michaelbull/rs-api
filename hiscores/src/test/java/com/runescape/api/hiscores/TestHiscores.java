@@ -1,5 +1,6 @@
 package com.runescape.api.hiscores;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.Client;
@@ -62,16 +63,22 @@ public final class TestHiscores {
 	private static final class FakeClient implements Client {
 		@Override
 		public <T> Optional<T> fromJson(String url, Type typeOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(typeOfT);
 			return Optional.empty();
 		}
 
 		@Override
 		public <T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(classOfT);
 			return Optional.empty();
 		}
 
 		@Override
 		public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
+			Preconditions.checkNotNull(url);
+
 			if (url.startsWith("http://services.runescape.com/m=clan-hiscores/members_lite.ws?clanName=")) {
 				String clanName = url.substring(url.indexOf("clanName=") + "clanName=".length());
 
@@ -117,6 +124,7 @@ public final class TestHiscores {
 					}
 				}
 			}
+
 			return ImmutableList.of();
 		}
 	}

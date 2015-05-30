@@ -1,5 +1,6 @@
 package com.runescape.api.bestiary;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.Client;
@@ -162,17 +163,24 @@ public final class TestBestiary {
 		@Override
 		@SuppressWarnings("unchecked")
 		public <T> Optional<T> fromJson(String url, Type typeOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(typeOfT);
+
 			if (url.equals("http://services.runescape.com/m=itemdb_rs/bestiary/slayerCatNames.json")) {
 				return Optional.of((T) SLAYER_CATEGORIES);
 			} else if (url.equals("http://services.runescape.com/m=itemdb_rs/bestiary/weaknessNames.json")) {
 				return Optional.of((T) WEAKNESSES);
 			}
+
 			return Optional.empty();
 		}
 
 		@Override
 		@SuppressWarnings("unchecked")
 		public <T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException {
+			Preconditions.checkNotNull(url);
+			Preconditions.checkNotNull(classOfT);
+
 			if (url.startsWith("http://services.runescape.com/m=itemdb_rs/bestiary/beastData.json?beastid=")) {
 				int id = Integer.parseInt(url.substring(url.indexOf("beastid=") + "beastid=".length()));
 
@@ -260,6 +268,7 @@ public final class TestBestiary {
 
 				return Optional.of((T) resultsArray);
 			}
+
 			return Optional.empty();
 		}
 
