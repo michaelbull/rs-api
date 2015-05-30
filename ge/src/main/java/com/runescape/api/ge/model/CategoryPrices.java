@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.runescape.api.ge.GrandExchange;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Represents the prices of a collection of {@link Item}s within a {@link Category} on the {@link GrandExchange}.
@@ -47,6 +48,24 @@ public final class CategoryPrices {
 	 */
 	public ImmutableList<Item> getItems() {
 		return ImmutableList.copyOf(items);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CategoryPrices prices = (CategoryPrices) o;
+		return Objects.equals(total, prices.total) &&
+			Arrays.equals(items, prices.items);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(total, items);
 	}
 
 	@Override

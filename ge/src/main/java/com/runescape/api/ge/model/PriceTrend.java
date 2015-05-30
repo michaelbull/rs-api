@@ -3,10 +3,12 @@ package com.runescape.api.ge.model;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 
+import java.util.Objects;
+
 /**
  * Represents the trend and price of an {@link Item}.
  */
-public final class Price {
+public final class PriceTrend {
 	/**
 	 * The trend.
 	 */
@@ -18,13 +20,22 @@ public final class Price {
 	private final String price;
 
 	/**
-	 * Creates a new {@link Price}.
+	 * Creates a new {@link PriceTrend}.
 	 * @param trend The trend.
 	 * @param price The price.
 	 */
-	public Price(String trend, String price) {
+	public PriceTrend(String trend, String price) {
 		this.trend = Preconditions.checkNotNull(trend);
 		this.price = Preconditions.checkNotNull(price);
+	}
+
+	/**
+	 * Creates a new {@link PriceTrend}.
+	 * @param trend The trend.
+	 * @param price The price.
+	 */
+	public PriceTrend(String trend, Number price) {
+		this(Preconditions.checkNotNull(trend), String.valueOf(Preconditions.checkNotNull(price)));
 	}
 
 	/**
@@ -41,6 +52,24 @@ public final class Price {
 	 */
 	public String getPrice() {
 		return price;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		PriceTrend that = (PriceTrend) o;
+		return Objects.equals(price, that.price) &&
+			Objects.equals(trend, that.trend);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(trend, price);
 	}
 
 	@Override

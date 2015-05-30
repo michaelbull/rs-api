@@ -5,12 +5,18 @@ import com.google.common.base.Preconditions;
 import com.runescape.api.hiscores.Hiscores;
 import org.apache.commons.csv.CSVRecord;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Represents a players skill ranking on the RuneScape {@link Hiscores}.
  */
 public final class Skill {
+	/**
+	 * The maximum amount of experience achievable in a single skill.
+	 */
+	public static final long MAX_EXPERIENCE = 200_000_000;
+
 	/**
 	 * The rank the player has on the {@link Hiscores} for this type of skill.
 	 */
@@ -74,6 +80,25 @@ public final class Skill {
 	 */
 	public Optional<Long> getExperience() {
 		return experience == -1 ? Optional.empty() : Optional.of(experience);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Skill skill = (Skill) o;
+		return Objects.equals(rank, skill.rank) &&
+			Objects.equals(level, skill.level) &&
+			Objects.equals(experience, skill.experience);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(rank, level, experience);
 	}
 
 	@Override

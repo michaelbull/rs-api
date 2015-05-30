@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import com.runescape.api.hiscores.Hiscores;
 import org.apache.commons.csv.CSVRecord;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -57,6 +58,24 @@ public final class Activity {
 	 */
 	public Optional<Integer> getScore() {
 		return score == -1 ? Optional.empty() : Optional.of(score);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Activity activity = (Activity) o;
+		return Objects.equals(rank, activity.rank) &&
+			Objects.equals(score, activity.score);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(rank, score);
 	}
 
 	@Override

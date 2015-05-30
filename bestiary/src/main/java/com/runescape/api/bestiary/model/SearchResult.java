@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.runescape.api.bestiary.Bestiary;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -44,6 +45,24 @@ public final class SearchResult {
 	 */
 	public Optional<String> getLabel() {
 		return Optional.ofNullable(label);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SearchResult result = (SearchResult) o;
+		return Objects.equals(value, result.value) &&
+			Objects.equals(label, result.label);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(value, label);
 	}
 
 	@Override

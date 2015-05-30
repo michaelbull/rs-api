@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -17,6 +18,48 @@ import java.util.Optional;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
  */
 public final class GraphingData {
+	/**
+	 * Converts a {@link LocalDate} to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
+	 * @param date The {@link LocalDate}.
+	 * @return The number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
+	 */
+	private static long localDateToEpochMilli(LocalDate date) {
+		return date.atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli();
+	}
+
+	/**
+	 * Creates a set of {@link GraphingData} from a {@link Map} of datecodes (milliseconds since the epoch of 1970-01-01T00:00:00Z) to prices.
+	 * @param daily The daily price values.
+	 * @param average The average price values.
+	 * @return The {@link GraphingData}.
+	 */
+	public static GraphingData fromDatecodes(Map<String, Integer> daily, Map<String, Integer> average) {
+		return new GraphingData(Preconditions.checkNotNull(daily), Preconditions.checkNotNull(average));
+	}
+
+	/**
+	 * Creates a set of {@link GraphingData} from a {@link Map} of {@link LocalDate}s to prices.
+	 * @param daily The daily price values.
+	 * @param average The average price values.
+	 * @return The {@link GraphingData}.
+	 */
+	public static GraphingData fromLocalDates(Map<LocalDate, Integer> daily, Map<LocalDate, Integer> average) {
+		Preconditions.checkNotNull(daily);
+		Preconditions.checkNotNull(average);
+
+		ImmutableMap.Builder<String, Integer> dailyBuilder = ImmutableMap.builder();
+		for (Map.Entry<LocalDate, Integer> entry : daily.entrySet()) {
+			dailyBuilder.put(String.valueOf(localDateToEpochMilli(entry.getKey())), entry.getValue());
+		}
+
+		ImmutableMap.Builder<String, Integer> averageBuilder = ImmutableMap.builder();
+		for (Map.Entry<LocalDate, Integer> entry : average.entrySet()) {
+			averageBuilder.put(String.valueOf(localDateToEpochMilli(entry.getKey())), entry.getValue());
+		}
+
+		return new GraphingData(dailyBuilder.build(), averageBuilder.build());
+	}
+
 	/**
 	 * A {@link Map} of datecodes to daily price values.
 	 */
@@ -28,22 +71,13 @@ public final class GraphingData {
 	private final Map<String, Integer> average;
 
 	/**
-	 * Creates a new {@link GraphingData}.
+	 * Creates new {@link GraphingData}.
 	 * @param daily The daily price values.
 	 * @param average The average price values.
 	 */
-	public GraphingData(Map<String, Integer> daily, Map<String, Integer> average) {
+	private GraphingData(Map<String, Integer> daily, Map<String, Integer> average) {
 		this.daily = Preconditions.checkNotNull(daily);
 		this.average = Preconditions.checkNotNull(average);
-	}
-
-	/**
-	 * Converts a {@link LocalDate} to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
-	 * @param date The {@link LocalDate}.
-	 * @return The number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
-	 */
-	private long localDateToEpochMilli(LocalDate date) {
-		return date.atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli();
 	}
 
 	/**
@@ -76,7 +110,7 @@ public final class GraphingData {
 	 * @param dateTime The {@link LocalDate}.
 	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no daily value was recorded on this date.
 	 */
-	public Optional<Integer> getDailyValue(LocalDate dateTime) {
+	public Optional<Integer> getDailyPrice(LocalDate dateTime) {
 		return Optional.ofNullable(daily.get(String.valueOf(localDateToEpochMilli(dateTime))));
 	}
 
@@ -93,8 +127,26 @@ public final class GraphingData {
 	 * @param dateTime The {@link LocalDate}.
 	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no average value was recorded on this date.
 	 */
-	public Optional<Integer> getAverageValue(LocalDate dateTime) {
+	public Optional<Integer> getAveragePrice(LocalDate dateTime) {
 		return Optional.ofNullable(average.get(String.valueOf(localDateToEpochMilli(dateTime))));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		GraphingData that = (GraphingData) o;
+		return Objects.equals(daily, that.daily) &&
+			Objects.equals(average, that.average);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(daily, average);
 	}
 
 	@Override

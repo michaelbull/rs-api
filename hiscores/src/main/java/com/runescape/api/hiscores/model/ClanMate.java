@@ -4,6 +4,8 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import org.apache.commons.csv.CSVRecord;
 
+import java.util.Objects;
+
 /**
  * Represents a member of a clan.
  */
@@ -21,7 +23,7 @@ public final class ClanMate {
 	/**
 	 * The experience contributed to the clan by this clan mate.
 	 */
-	private final int experience;
+	private final long experience;
 
 	/**
 	 * The amount of kills earned by the clan clan mate.
@@ -35,7 +37,7 @@ public final class ClanMate {
 	 * @param experience The contributed experience of the clan mate.
 	 * @param kills The amount of earned kills by the clan mate.
 	 */
-	public ClanMate(String name, String rank, int experience, int kills) {
+	public ClanMate(String name, String rank, long experience, int kills) {
 		Preconditions.checkArgument(experience >= 0, "Experience must be more than or equal to 0");
 		Preconditions.checkArgument(kills >= 0, "Kills must be more than or equal to 0");
 		this.name = Preconditions.checkNotNull(name);
@@ -49,7 +51,7 @@ public final class ClanMate {
 	 * @param record The {@link CSVRecord}.
 	 */
 	public ClanMate(CSVRecord record) {
-		this(record.get(0), record.get(1), Integer.parseInt(record.get(2)), Integer.parseInt(record.get(3)));
+		this(record.get(0), record.get(1), Long.parseLong(record.get(2)), Integer.parseInt(record.get(3)));
 	}
 
 	/**
@@ -72,7 +74,7 @@ public final class ClanMate {
 	 * Gets the experience contributed to the clan by this clan mate.
 	 * @return The experience contributed to the clan by this clan mate.
 	 */
-	public int getExperience() {
+	public long getExperience() {
 		return experience;
 	}
 
@@ -82,6 +84,26 @@ public final class ClanMate {
 	 */
 	public int getKills() {
 		return kills;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ClanMate clanMate = (ClanMate) o;
+		return Objects.equals(experience, clanMate.experience) &&
+			Objects.equals(kills, clanMate.kills) &&
+			Objects.equals(name, clanMate.name) &&
+			Objects.equals(rank, clanMate.rank);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, rank, experience, kills);
 	}
 
 	@Override

@@ -1,9 +1,11 @@
 package com.runescape.api.hiscores;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.Client;
+import com.runescape.api.HttpClient;
 import com.runescape.api.hiscores.model.Activity;
 import com.runescape.api.hiscores.model.ClanMate;
 import com.runescape.api.hiscores.model.Player;
@@ -12,6 +14,7 @@ import com.runescape.api.hiscores.model.Table;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -22,7 +25,7 @@ public final class Hiscores {
 	/**
 	 * The URL to the clan hiscores web-service.
 	 */
-	private static final String CLAN_HISCORES_URL = Client.WEB_SERVICES_URL + "/m=clan-hiscores/members_lite.ws";
+	private static final String CLAN_HISCORES_URL = HttpClient.WEB_SERVICES_URL + "/m=clan-hiscores/members_lite.ws";
 
 	/**
 	 * The RuneScape skill names.
@@ -185,7 +188,7 @@ public final class Hiscores {
 		Preconditions.checkNotNull(displayName);
 		Preconditions.checkNotNull(table);
 
-		ImmutableList<CSVRecord> records = client.fromCSV(Client.WEB_SERVICES_URL + "/m=" + table.getName() + "/index_lite.ws?player=" + displayName.replaceAll(" ", "+"));
+		ImmutableList<CSVRecord> records = client.fromCSV(HttpClient.WEB_SERVICES_URL + "/m=" + table.getName() + "/index_lite.ws?player=" + displayName.replaceAll(" ", "+"));
 
 		try {
 			ImmutableMap<String, Skill> skills = readSkills(records, table.getSkillNames());
@@ -224,5 +227,29 @@ public final class Hiscores {
 		}
 
 		return builder.build();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Hiscores hiscores = (Hiscores) o;
+		return Objects.equals(client, hiscores.client);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(client);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("client", client)
+			.toString();
 	}
 }

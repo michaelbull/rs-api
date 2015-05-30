@@ -6,6 +6,8 @@ import com.google.common.collect.ImmutableList;
 import com.runescape.api.ge.GrandExchange;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents the information of an item category on the RuneScape {@link GrandExchange}.
@@ -51,6 +53,34 @@ public final class Category {
 	 */
 	public ImmutableList<SearchResult> getAlpha() {
 		return ImmutableList.copyOf(alpha);
+	}
+
+	/**
+	 * Gets a {@link SearchResult} from its index in the alpha array.
+	 * @param index The index.
+	 * @return An {@link Optional} of the {@link SearchResult}, or {@code Optional.empty()} if no {@link SearchResult} was found at this index.
+	 */
+	public Optional<SearchResult> getResult(int index) {
+		Preconditions.checkElementIndex(index, alpha.length);
+		return Optional.ofNullable(alpha[index]);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Category category = (Category) o;
+		return Arrays.equals(types, category.types) &&
+			Arrays.equals(alpha, category.alpha);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(types, alpha);
 	}
 
 	@Override

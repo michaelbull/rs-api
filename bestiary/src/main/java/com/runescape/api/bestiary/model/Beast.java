@@ -8,6 +8,7 @@ import com.runescape.api.bestiary.Bestiary;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -122,7 +123,7 @@ public final class Beast {
 	 * @param name The name.
 	 * @param id The id.
 	 * @param description The description.
-	 * @param weakness The weakness.
+	 * @param weaknessOptional The optional weakness.
 	 * @param attackable The attackable flag.
 	 * @param aggressive The aggressive flag.
 	 * @param poisonous The poisonous flag.
@@ -140,15 +141,15 @@ public final class Beast {
 	 * @param areas The areas.
 	 * @param animations The animations.
 	 */
-	public Beast(String name, int id, String description, String weakness, boolean attackable, boolean aggressive, boolean poisonous, String xp, int lifepoints, int level, int defence, int attack, int magic, int ranged, int slayerlevel, int size, boolean members, String slayercat, String[] areas, Map<String, Integer> animations) {
+	public Beast(String name, int id, String description, Optional<String> weaknessOptional, boolean attackable, boolean aggressive, boolean poisonous, double xp, int lifepoints, int level, int defence, int attack, int magic, int ranged, int slayerlevel, int size, boolean members, Optional<String> slayercat, String[] areas, Map<String, Integer> animations) {
 		this.name = Preconditions.checkNotNull(name);
 		this.id = id;
 		this.description = Preconditions.checkNotNull(description);
-		this.weakness = Preconditions.checkNotNull(weakness);
+		this.weakness = weaknessOptional.orElse(null);
 		this.attackable = attackable;
 		this.aggressive = aggressive;
 		this.poisonous = poisonous;
-		this.xp = Preconditions.checkNotNull(xp);
+		this.xp = String.valueOf(xp);
 		this.lifepoints = lifepoints;
 		this.level = level;
 		this.defence = defence;
@@ -158,7 +159,7 @@ public final class Beast {
 		this.slayerlevel = slayerlevel;
 		this.size = size;
 		this.members = members;
-		this.slayercat = Preconditions.checkNotNull(slayercat);
+		this.slayercat = Preconditions.checkNotNull(slayercat).orElse(null);
 		this.areas = Preconditions.checkNotNull(areas);
 		this.animations = Preconditions.checkNotNull(animations);
 	}
@@ -333,6 +334,42 @@ public final class Beast {
 	 */
 	public Optional<Integer> getAnimation(String name) {
 		return Optional.ofNullable(animations.get(name));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Beast beast = (Beast) o;
+		return Objects.equals(id, beast.id) &&
+			Objects.equals(attackable, beast.attackable) &&
+			Objects.equals(aggressive, beast.aggressive) &&
+			Objects.equals(poisonous, beast.poisonous) &&
+			Objects.equals(lifepoints, beast.lifepoints) &&
+			Objects.equals(level, beast.level) &&
+			Objects.equals(defence, beast.defence) &&
+			Objects.equals(attack, beast.attack) &&
+			Objects.equals(magic, beast.magic) &&
+			Objects.equals(ranged, beast.ranged) &&
+			Objects.equals(slayerlevel, beast.slayerlevel) &&
+			Objects.equals(size, beast.size) &&
+			Objects.equals(members, beast.members) &&
+			Objects.equals(name, beast.name) &&
+			Objects.equals(description, beast.description) &&
+			Objects.equals(weakness, beast.weakness) &&
+			Objects.equals(xp, beast.xp) &&
+			Objects.equals(slayercat, beast.slayercat) &&
+			Arrays.equals(areas, beast.areas) &&
+			Objects.equals(animations, beast.animations);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, id, description, weakness, attackable, aggressive, poisonous, xp, lifepoints, level, defence, attack, magic, ranged, slayerlevel, size, members, slayercat, areas, animations);
 	}
 
 	@Override

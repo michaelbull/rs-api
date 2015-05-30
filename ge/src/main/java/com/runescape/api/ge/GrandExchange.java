@@ -1,8 +1,10 @@
 package com.runescape.api.ge;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.runescape.api.Client;
+import com.runescape.api.HttpClient;
 import com.runescape.api.ge.model.Category;
 import com.runescape.api.ge.model.CategoryPrices;
 import com.runescape.api.ge.model.GraphingData;
@@ -10,6 +12,7 @@ import com.runescape.api.ge.model.Item;
 import com.runescape.api.ge.model.ItemPriceInformation;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -20,7 +23,7 @@ public final class GrandExchange {
 	/**
 	 * The URL to the Grand Exchange web-service.
 	 */
-	private static final String GRAND_EXCHANGE_URL = Client.WEB_SERVICES_URL + "/m=itemdb_rs/api";
+	private static final String GRAND_EXCHANGE_URL = HttpClient.WEB_SERVICES_URL + "/m=itemdb_rs/api";
 
 	/**
 	 * The URL to the results of the {@link Category} information function.
@@ -182,5 +185,29 @@ public final class GrandExchange {
 	 */
 	public Optional<ItemPriceInformation> itemPriceInformation(int itemId) throws IOException {
 		return client.fromJson(DETAILS_URL + "?item=" + itemId, ItemPriceInformation.class);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		GrandExchange that = (GrandExchange) o;
+		return Objects.equals(client, that.client);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(client);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("client", client)
+			.toString();
 	}
 }

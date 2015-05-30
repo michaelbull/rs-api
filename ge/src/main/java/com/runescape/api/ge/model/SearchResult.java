@@ -3,6 +3,8 @@ package com.runescape.api.ge.model;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 
+import java.util.Objects;
+
 /**
  * Represents a result returned by searching within the RuneScape {@link com.runescape.api.ge.GrandExchange}.
  */
@@ -42,6 +44,24 @@ public final class SearchResult {
 	 */
 	public int getItems() {
 		return items;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SearchResult that = (SearchResult) o;
+		return Objects.equals(items, that.items) &&
+			Objects.equals(letter, that.letter);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(letter, items);
 	}
 
 	@Override

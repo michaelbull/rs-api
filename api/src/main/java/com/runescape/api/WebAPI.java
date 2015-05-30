@@ -7,7 +7,7 @@ import com.runescape.api.hiscores.Hiscores;
 /**
  * Represents an instance of the RuneScape web-services API.
  */
-public final class RuneScapeAPI {
+public final class WebAPI {
 	/**
 	 * The {@link Bestiary}.
 	 */
@@ -24,10 +24,10 @@ public final class RuneScapeAPI {
 	private final Hiscores hiscores;
 
 	/**
-	 * Creates a new {@link RuneScapeAPI}.
+	 * Creates a new {@link WebAPI}.
 	 */
-	public RuneScapeAPI() {
-		Client client = new Client();
+	public WebAPI() {
+		Client client = new HttpClient();
 		this.bestiary = new Bestiary(client);
 		this.grandExchange = new GrandExchange(client);
 		this.hiscores = new Hiscores(client);

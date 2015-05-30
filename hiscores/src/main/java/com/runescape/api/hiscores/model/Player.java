@@ -5,6 +5,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.runescape.api.hiscores.Hiscores;
 
+import java.util.Objects;
+
 /**
  * Represents a player ranked on the RuneScape {@link Hiscores}.
  */
@@ -43,6 +45,24 @@ public final class Player {
 	 */
 	public ImmutableMap<String, Activity> getActivities() {
 		return activities;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Player player = (Player) o;
+		return Objects.equals(skills, player.skills) &&
+			Objects.equals(activities, player.activities);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(skills, activities);
 	}
 
 	@Override

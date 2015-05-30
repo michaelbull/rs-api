@@ -4,6 +4,8 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.runescape.api.ge.GrandExchange;
 
+import java.util.Objects;
+
 /**
  * Represents the change in price of an {@link Item} on the RuneScape {@link GrandExchange}.
  */
@@ -42,6 +44,24 @@ public final class PriceChange {
 	 */
 	public String getChange() {
 		return change;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		PriceChange that = (PriceChange) o;
+		return Objects.equals(trend, that.trend) &&
+			Objects.equals(change, that.change);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(trend, change);
 	}
 
 	@Override

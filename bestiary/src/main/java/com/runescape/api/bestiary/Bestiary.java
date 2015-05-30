@@ -1,16 +1,19 @@
 package com.runescape.api.bestiary;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 import com.runescape.api.Client;
+import com.runescape.api.HttpClient;
 import com.runescape.api.bestiary.model.Beast;
 import com.runescape.api.bestiary.model.SearchResult;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
 
@@ -28,7 +31,7 @@ public final class Bestiary {
 	/**
 	 * The URL to the Bestiary web-service.
 	 */
-	private static final String BESTIARY_URL = Client.WEB_SERVICES_URL + "/m=itemdb_rs/bestiary";
+	private static final String BESTIARY_URL = HttpClient.WEB_SERVICES_URL + "/m=itemdb_rs/bestiary";
 
 	/**
 	 * The URL to the results of the {@link Beast} data function.
@@ -265,5 +268,29 @@ public final class Bestiary {
 	public ImmutableMap<Integer, String> beastsInLevelGroup(int lowerBound, int upperBound) throws IOException {
 		Preconditions.checkArgument(upperBound > lowerBound, "The upper combat level bound must be higher than the lower combat level bound.");
 		return resultsToImmutableMap(client.fromJson(LEVEL_GROUP_URL + "?identifier=" + lowerBound + "-" + upperBound, SearchResult[].class).orElse(null));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Bestiary bestiary = (Bestiary) o;
+		return Objects.equals(client, bestiary.client);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(client);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("client", client)
+			.toString();
 	}
 }

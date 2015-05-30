@@ -3,6 +3,8 @@ package com.runescape.api.ge.model;
 import com.google.common.base.MoreObjects;
 import com.runescape.api.ge.GrandExchange;
 
+import java.util.Objects;
+
 /**
  * Represents the {@link Item} price information for an {@link Item} on the RuneScape {@link GrandExchange}.
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
@@ -27,6 +29,23 @@ public final class ItemPriceInformation {
 	 */
 	public Item getItem() {
 		return item;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ItemPriceInformation that = (ItemPriceInformation) o;
+		return Objects.equals(item, that.item);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(item);
 	}
 
 	@Override

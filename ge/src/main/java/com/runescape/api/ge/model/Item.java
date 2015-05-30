@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.runescape.api.ge.GrandExchange;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -46,14 +47,14 @@ public final class Item {
 	private final String description;
 
 	/**
-	 * The current {@link Price} of the item.
+	 * The current {@link PriceTrend} of the item.
 	 */
-	private final Price current;
+	private final PriceTrend current;
 
 	/**
-	 * The {@link Price} of the item today.
+	 * The {@link PriceTrend} of the item today.
 	 */
-	private final Price today;
+	private final PriceTrend today;
 
 	/**
 	 * A flag indicating whether this item is only accessible to members.
@@ -84,14 +85,14 @@ public final class Item {
 	 * @param typeIcon The url to the type of item.
 	 * @param name The name of the item.
 	 * @param description The description of the item.
-	 * @param current The current {@link Price} of the item.
-	 * @param today The {@link Price} of the item today.
+	 * @param current The current {@link PriceTrend} of the item.
+	 * @param today The {@link PriceTrend} of the item today.
 	 * @param members The members only flag.
 	 * @param day30 The {@link PriceChange}s over the last 30 days.
 	 * @param day90 The {@link PriceChange}s over the last 90 days.
 	 * @param day180 The {@link PriceChange}s over the last 180 days
 	 */
-	public Item(String icon, String icon_large, int id, String type, String typeIcon, String name, String description, Price current, Price today, boolean members, PriceChange day30, PriceChange day90, PriceChange day180) {
+	public Item(String icon, String icon_large, int id, String type, String typeIcon, String name, String description, PriceTrend current, PriceTrend today, boolean members, PriceChange day30, PriceChange day90, PriceChange day180) {
 		this.icon = Preconditions.checkNotNull(icon);
 		this.icon_large = Preconditions.checkNotNull(icon_large);
 		Preconditions.checkArgument(id >= 0, "ID must be more than or equal to 0.");
@@ -103,9 +104,45 @@ public final class Item {
 		this.current = Preconditions.checkNotNull(current);
 		this.today = Preconditions.checkNotNull(today);
 		this.members = members;
-		this.day30 = Preconditions.checkNotNull(day30);
-		this.day90 = Preconditions.checkNotNull(day90);
-		this.day180 = Preconditions.checkNotNull(day180);
+		this.day30 = day30;
+		this.day90 = day90;
+		this.day180 = day180;
+	}
+
+	/**
+	 * Creates a new {@link Item} without any {@link PriceChange} history.
+	 * @param icon The url to the item's inventory sprite.
+	 * @param icon_large The url to the item's large sprite.
+	 * @param id The id of the item.
+	 * @param type The type of item.
+	 * @param typeIcon The url to the type of item.
+	 * @param name The name of the item.
+	 * @param description The description of the item.
+	 * @param current The current {@link PriceTrend} of the item.
+	 * @param today The {@link PriceTrend} of the item today.
+	 * @param members The members only flag.
+	 */
+	public Item(String icon, String icon_large, int id, String type, String typeIcon, String name, String description, PriceTrend current, PriceTrend today, boolean members) {
+		this(icon, icon_large, id, type, typeIcon, name, description, current, today, members, null, null, null);
+	}
+
+	/**
+	 * Creates a copy of an {@link Item}.
+	 * @param item The {@link Item} to copy from.
+	 */
+	public Item(Item item) {
+		this(item.icon, item.icon_large, item.id, item.type, item.typeIcon, item.name, item.description, item.current, item.today, item.members, item.day30, item.day90, item.day180);
+	}
+
+	/**
+	 * Creates a copy of an {@link Item}.
+	 * @param item The {@link Item} to copy from.
+	 * @param day30 The {@link PriceChange}s over the last 30 days.
+	 * @param day90 The {@link PriceChange}s over the last 90 days.
+	 * @param day180 The {@link PriceChange}s over the last 180 days
+	 */
+	public Item(Item item, PriceChange day30, PriceChange day90, PriceChange day180) {
+		this(item.icon, item.icon_large, item.id, item.type, item.typeIcon, item.name, item.description, item.current, item.today, item.members, day30, day90, day180);
 	}
 
 	/**
@@ -165,18 +202,18 @@ public final class Item {
 	}
 
 	/**
-	 * Gets the current {@link Price} of the item.
-	 * @return The current {@link Price} of the item.
+	 * Gets the current {@link PriceTrend} of the item.
+	 * @return The current {@link PriceTrend} of the item.
 	 */
-	public Price getCurrentPrice() {
+	public PriceTrend getCurrentPrice() {
 		return current;
 	}
 
 	/**
-	 * Gets the {@link Price} of the item today.
-	 * @return The {@link Price} of the item today.
+	 * Gets the {@link PriceTrend} of the item today.
+	 * @return The {@link PriceTrend} of the item today.
 	 */
-	public Price getTodaysPrice() {
+	public PriceTrend getTodaysPrice() {
 		return today;
 	}
 
@@ -211,6 +248,35 @@ public final class Item {
 	 */
 	public Optional<PriceChange> getDay180() {
 		return Optional.ofNullable(day180);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Item item = (Item) o;
+		return Objects.equals(id, item.id) &&
+			Objects.equals(members, item.members) &&
+			Objects.equals(icon, item.icon) &&
+			Objects.equals(icon_large, item.icon_large) &&
+			Objects.equals(type, item.type) &&
+			Objects.equals(typeIcon, item.typeIcon) &&
+			Objects.equals(name, item.name) &&
+			Objects.equals(description, item.description) &&
+			Objects.equals(current, item.current) &&
+			Objects.equals(today, item.today) &&
+			Objects.equals(day30, item.day30) &&
+			Objects.equals(day90, item.day90) &&
+			Objects.equals(day180, item.day180);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(icon, icon_large, id, type, typeIcon, name, description, current, today, members, day30, day90, day180);
 	}
 
 	@Override
