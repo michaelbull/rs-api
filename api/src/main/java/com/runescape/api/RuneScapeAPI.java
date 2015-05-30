@@ -45,6 +45,7 @@ public final class RuneScapeAPI {
 	 * Creates a new {@link RuneScapeAPI}.
 	 */
 	private RuneScapeAPI(Client client) {
+		Preconditions.checkNotNull(client);
 		this.bestiary = new Bestiary(client);
 		this.grandExchange = new GrandExchange(client);
 		this.hiscores = new Hiscores(client);
