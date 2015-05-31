@@ -262,7 +262,7 @@ public final class Example {
 						Optional<Player> playerOptional = hiscores.playerInformation(displayName, table);
 
 						if (!playerOptional.isPresent()) {
-							System.out.println("No player named \"" + displayName + "\" found on " + table + ".");
+							System.out.println("No player named \"" + displayName + "\" found on Table " + table.name() + ".");
 							break;
 						}
 

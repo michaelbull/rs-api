@@ -149,8 +149,7 @@ public final class Hiscores {
 	 * @return An {@link ImmutableMap} of {@link Skill} names to {@link Skill}s.
 	 */
 	private ImmutableMap<String, Skill> readSkills(ImmutableList<CSVRecord> records, ImmutableList<String> skillNames) {
-		Preconditions.checkNotNull(records);
-		Preconditions.checkNotNull(skillNames);
+		Preconditions.checkArgument(records.size() >= skillNames.size());
 		ImmutableMap.Builder<String, Skill> builder = ImmutableMap.builder();
 		for (int i = 0; i < skillNames.size(); i++) {
 			builder.put(skillNames.get(i), new Skill(records.get(i)));
@@ -166,9 +165,7 @@ public final class Hiscores {
 	 * @return An {@link ImmutableMap} of {@link Activity} names to {@link Activity}s.
 	 */
 	private ImmutableMap<String, Activity> readActivities(ImmutableList<CSVRecord> records, ImmutableList<String> skillNames, ImmutableList<String> activityNames) {
-		Preconditions.checkNotNull(records);
-		Preconditions.checkNotNull(skillNames);
-		Preconditions.checkNotNull(activityNames);
+		Preconditions.checkArgument(records.size() >= (skillNames.size() + activityNames.size()));
 		ImmutableMap.Builder<String, Activity> builder = ImmutableMap.builder();
 		for (int i = 0; i < activityNames.size(); i++) {
 			builder.put(activityNames.get(i), new Activity(records.get(skillNames.size() + i)));
@@ -190,12 +187,19 @@ public final class Hiscores {
 
 		ImmutableList<CSVRecord> records = client.fromCSV(HttpClient.WEB_SERVICES_URL + "/m=" + table.getName() + "/index_lite.ws?player=" + displayName.replaceAll(" ", "+"));
 
+		ImmutableList<String> skillNames = table.getSkillNames();
+		ImmutableList<String> activityNames = table.getActivityNames();
+
+		if (records.size() != (skillNames.size() + activityNames.size())) {
+			return Optional.empty();
+		}
+
 		try {
 			ImmutableMap<String, Skill> skills = readSkills(records, table.getSkillNames());
 			ImmutableMap<String, Activity> activities = readActivities(records, table.getSkillNames(), table.getActivityNames());
 
 			return Optional.of(new Player(skills, activities));
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			/* ignore */
 		}
 
