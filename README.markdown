@@ -14,7 +14,7 @@ The implementation offers functionality to interact with the following three pub
 
 [CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable Java [`Object`][object]s.
 
-To start using `rs-api`, simply instantiate a [HTTP][http] based [RuneScapeAPI][rsapi] class as follows:
+To start using `rs-api`, simply instantiate a [HTTP][http] based [`RuneScapeAPI`][rsapi] class as follows:
 
 ```java
 RuneScapeAPI api = RuneScapeAPI.createHttp();
