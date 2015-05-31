@@ -36,7 +36,7 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 
 The [Bestiary API][bestiary-api] facilitates searching for a beast given a number of search filters (e.g. name, weakness, [Slayer][slayer] category).
 
-Numerous filters can be applied to the search by chaining them together, and are [lazily evaluated][lazy-evaluation] when calling the terminal `search` method.
+Numerous filters can be applied to the search by chaining them together, and are [lazily evaluated][lazy-evaluation] when calling the terminal `results` method.
 
 ```java
 ImmutableMap<Integer, String> beasts = bestiary.search()
