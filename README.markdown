@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`rs-api` is an open-source implementation of a web-service client that allows interaction with the various [RuneScape][rs] APIs, written in [Java][java].
+`rs-api` is an open-source implementation of a web-service client, written in [Java][java], that allows interaction with the various [APIs][api] available for the popular [MMORPG][mmorpg] [RuneScape][rs].
 
 ## Usage
 
@@ -12,15 +12,15 @@ The implementation offers functionality to interact with the following three pub
 * [Grand Exchange][ge]
 * [Hiscores][hiscores]
 
-[CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable [Java][java] objects.
+[CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable Java [Object][object]s.
 
-To start using `rs-api`, simply instantiate a HTTP based [RuneScapeAPI][rsapi] class as follows:
+To start using `rs-api`, simply instantiate a [HTTP][http] based [RuneScapeAPI][rsapi] class as follows:
 
 ```java
 RuneScapeAPI api = RuneScapeAPI.createHttp();
 ```
 
-**Note:** The API can run using a [HttpClient][httpclient] on the live RuneScape web-service, or a user supplied client (e.g. a fake client for mocked unit testing). The required structure of a client can be found [here][client].
+**Note:** The API can run using a [HttpClient][httpclient] on the live RuneScape web-service, or a user supplied client (e.g. a [FakeClient][fakeclient] for mocked unit testing). The required structure of a client can be found [here][client].
 
 At which point you may now access and query the Bestiary, Grand Exchange, and Hiscores APIs:
 
@@ -34,7 +34,9 @@ At which point you may now access and query the Bestiary, Grand Exchange, and Hi
 
 ### Search in Bestiary
 
-The [Bestiary API][bestiary-api] facilitates searching for a beast given a number of search filters (e.g. name, weakness, Slayer category). Numerous filters can be applied to the search by chaining them together, however the retrieval of the filters' results is not executed until the list of filters is constructed and the search is executed - at which point all of the filters will be applied sequentially.
+The [Bestiary API][bestiary-api] facilitates searching for a beast given a number of search filters (e.g. name, weakness, [Slayer][slayer] category).
+
+Numerous filters can be applied to the search by chaining them together, and are [lazily evaluated][lazy-evaluation] when calling the terminal `search` method.
 
 ```java
 ImmutableMap<Integer, String> beasts = bestiary.search()
@@ -78,7 +80,7 @@ Daily price on Christmas 2014: 117549
 
 ### Player Hiscore Rank
 
-Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including skill levels and activity ranks.
+Calling the `playerInformation` method with a player's name as a parameter (e.g. Drumgun) and a Hiscore [Table][table] as a parameter (e.g. `Table.DEFAULT`) in the [Hiscores API][hiscores-api] will return the hiscore information for the [Player][player], including [Skill][skill] levels and [Activity][activity] ranks.
 
 ```java
 Optional<Player> optional = hiscores.playerInformation("Drumgun", Table.DEFAULT);
@@ -137,20 +139,29 @@ The following Java libraries are used by the API:
 `rs-api` is available under the terms of the [ISC license][isc], which is similar to the 2-clause BSD license. See the `LICENSE` file for the copyright information and licensing terms.
 
 [java]: https://www.java.com/
+[mmorpg]: http://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game
+[api]: http://en.wikipedia.org/wiki/Application_programming_interface
 [rs]: http://runescape.com/
 [bestiary]: http://services.runescape.com/m=rswiki/en/Bestiary_APIs
 [ge]: http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs
 [hiscores]: http://services.runescape.com/m=rswiki/en/Hiscores_APIs
 [csv]: http://en.wikipedia.org/wiki/Comma-separated_values
 [json]: http://en.wikipedia.org/wiki/JSON
+[object]: https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
+[http]: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
 [rsapi]: /api/src/main/java/com/runescape/api/RuneScapeAPI.java
 [httpclient]: /shared/src/main/java/com/runescape/api/HttpClient.java
+[fakeclient]: /bestiary/src/test/java/com/runescape/api/Bestiary/TestBestiary.java#L162
 [client]: /shared/src/main/java/com/runescape/api/Client.java
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
+[slayer]: http://runescape.wikia.com/wiki/Slayer
+[lazy-evaluation]: http://en.wikipedia.org/wiki/Lazy_evaluation
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [hiscores-api]: /hiscores/src/main/java/com/runescape/api/hiscores/Hiscores.java
 [table]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Table.java
 [player]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Player.java
+[skill]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Skill.java
+[activity]: /hiscores/src/main/java/com/runescape/api/hiscores/model/Activity.java
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
 [clanmate]: /hiscores/src/main/java/com/runescape/api/hiscores/model/ClanMate.java
 [gradle]: http://www.gradle.org/
