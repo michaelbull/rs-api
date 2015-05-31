@@ -195,8 +195,8 @@ public final class Hiscores {
 		}
 
 		try {
-			ImmutableMap<String, Skill> skills = readSkills(records, table.getSkillNames());
-			ImmutableMap<String, Activity> activities = readActivities(records, table.getSkillNames(), table.getActivityNames());
+			ImmutableMap<String, Skill> skills = readSkills(records, skillNames);
+			ImmutableMap<String, Activity> activities = readActivities(records, skillNames, activityNames);
 
 			return Optional.of(new Player(skills, activities));
 		} catch (NumberFormatException e) {
