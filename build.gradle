@@ -1,5 +1,6 @@
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'idea'
+apply plugin: 'net.researchgate.release'
 
 idea {
     project.languageLevel = '1.8'
@@ -13,10 +14,13 @@ buildscript {
 
     dependencies {
         classpath group: 'com.github.ben-manes', name: 'gradle-versions-plugin', version: '0.10.1'
+        classpath group: 'net.researchgate', name: 'gradle-release', version: '2.1.0'
     }
 }
 
 allprojects {
+    version = '1.0'
+
     repositories {
         mavenCentral()
         jcenter()

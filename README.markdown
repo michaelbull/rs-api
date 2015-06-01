@@ -22,7 +22,7 @@ RuneScapeAPI api = RuneScapeAPI.createHttp();
 
 **Note:** The API can run using a [`HttpClient`][httpclient] on the live RuneScape web-service, or a user supplied [`Client`][client] (e.g. a [`FakeClient`][fakeclient] for mocked unit testing).
 
-At which point you may now access and query the [`Bestiary`][bestiary-api], [`Grand Exchange`][ge-api], and [`Hiscores`][hiscores-api] API objects:
+At which point you may now access and query the [`Bestiary`][bestiary-api], [`GrandExchange`][ge-api], and [`Hiscores`][hiscores-api] API objects:
 
 ```java
 	Bestiary bestiary = api.getBestiary();
