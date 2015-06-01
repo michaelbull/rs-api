@@ -1,6 +1,6 @@
 # RuneScape API
 
-![Build Status][build-status]
+[![Build Status][build-status-img]][build-status]
 
 ## Introduction
 
@@ -142,7 +142,8 @@ The following Java libraries are used by the API:
 
 `rs-api` is available under the terms of the [ISC license][isc], which is similar to the 2-clause BSD license. See the `LICENSE` file for the copyright information and licensing terms.
 
-[build-status]: https://travis-ci.org/MikeBull94/rs-api.svg?branch=master
+[build-status-img]: https://travis-ci.org/MikeBull94/rs-api.svg?branch=master
+[build-status]: https://travis-ci.org/MikeBull94/rs-api
 [java]: https://www.java.com/
 [mmorpg]: http://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game
 [api]: http://en.wikipedia.org/wiki/Application_programming_interface
