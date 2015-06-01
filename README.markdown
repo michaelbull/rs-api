@@ -1,6 +1,6 @@
 # RuneScape API
 
-[![Build Status][build-status]]
+![Build Status][build-status]
 
 ## Introduction
 
