@@ -144,7 +144,7 @@ The following Java libraries are used by the API:
 [mmorpg]: http://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game
 [api]: http://en.wikipedia.org/wiki/Application_programming_interface
 [rs]: http://runescape.com/
-[javadoc]: http://mikebull94.github.io/rs-api/javadoc/
+[javadoc]: http://mikebull94.github.io/rs-api/docs/javadoc/
 [bestiary]: http://services.runescape.com/m=rswiki/en/Bestiary_APIs
 [ge]: http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs
 [hiscores]: http://services.runescape.com/m=rswiki/en/Hiscores_APIs
