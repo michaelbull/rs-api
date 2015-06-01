@@ -23,6 +23,7 @@ public interface Client {
 	 * @param typeOfT The specific genericized type of src.
 	 * @param <T> The type of the desired object
 	 * @return An {@link Optional} of object of type T from the json, or {@code Optional.empty()} if the URL could not be deserialized.
+	 * @throws IOException If an I/O error occurs.
 	 */
 	<T> Optional<T> fromJson(String url, Type typeOfT) throws IOException;
 
@@ -32,6 +33,7 @@ public interface Client {
 	 * @param classOfT The class of T.
 	 * @param <T> The type of the desired object
 	 * @return An optional of object of type T from the json, or {@code Optional.empty()} if the URL could not be deserialized.
+	 * @throws IOException If an I/O error occurs.
 	 */
 	<T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException;
 
@@ -39,6 +41,7 @@ public interface Client {
 	 * Deserializes a CSV file from a specified URL into an {@link ImmutableList} of {@link CSVRecord}s.
 	 * @param url The URL to deserialize from.
 	 * @return An {@link ImmutableList} of {@link CSVRecord}s.
+	 * @throws IOException If an I/O error occurs.
 	 */
 	ImmutableList<CSVRecord> fromCSV(String url) throws IOException;
 }

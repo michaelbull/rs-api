@@ -43,6 +43,7 @@ public final class RuneScapeAPI {
 
 	/**
 	 * Creates a new {@link RuneScapeAPI}.
+	 * @param client The {@link Client} to use.
 	 */
 	private RuneScapeAPI(Client client) {
 		Preconditions.checkNotNull(client);

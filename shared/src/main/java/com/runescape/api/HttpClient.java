@@ -44,7 +44,7 @@ public final class HttpClient implements Client {
 	 * Creates an {@link InputStream} from a specified URL.
 	 * @param url The URL to open.
 	 * @return The {@link InputStream}.
-	 * @throws IOException
+	 * @throws IOException If an I/O error occurs.
 	 */
 	private InputStream streamFrom(String url) throws IOException {
 		Preconditions.checkNotNull(url);

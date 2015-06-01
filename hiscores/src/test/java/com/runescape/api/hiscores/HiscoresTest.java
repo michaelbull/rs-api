@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public final class TestHiscores {
+public final class HiscoresTest {
 	private static final String CSV_SEPARATOR = ",";
 	private static final String CSV_DELIMITER = "\n";
 

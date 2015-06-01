@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public final class TestGrandExchange {
+public final class GrandExchangeTest {
 	private static final int POTIONS_CATEGORY_ID = 26;
 
 	private static final Category POTIONS = new Category(new Object[0], new SearchResult[] {

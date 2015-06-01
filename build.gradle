@@ -41,6 +41,35 @@ subprojects {
     }
 }
 
+task aggregateJavadoc(type: Javadoc) {
+    group 'Documentation'
+    description 'Generates aggregated Javadoc API documentation for the main source code of all projects.'
+
+    source subprojects.collect { project ->
+        project.sourceSets.main.allJava
+    }
+    classpath = files(subprojects.collect { project ->
+        project.sourceSets.main.compileClasspath
+    })
+
+    destinationDir file("${rootDir}/docs/javadoc/")
+
+    options.showAll()
+
+    configure(options) {
+        windowTitle 'RuneScape API'
+        docTitle 'RuneScape API'
+
+        links 'http://docs.oracle.com/javase/8/docs/api/'
+        links 'https://commons.apache.org/proper/commons-csv/apidocs/'
+        links 'https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/'
+        links 'http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/'
+        links 'http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/'
+        links 'http://junit.org/javadoc/latest/'
+        links 'http://www.slf4j.org/api/'
+    }
+}
+
 project(':shared') {
     dependencies {
         compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'

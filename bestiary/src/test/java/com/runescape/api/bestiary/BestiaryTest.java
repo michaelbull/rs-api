@@ -21,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public final class TestBestiary {
+public final class BestiaryTest {
 	private static final Beast KING_BLACK_DRAGON = new Beast(
 		/* name */             "King Black Dragon",
 		/* id */               50,
