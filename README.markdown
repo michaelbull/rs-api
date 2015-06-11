@@ -158,7 +158,7 @@ The following Java libraries are used by the API:
 [http]: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
 [rsapi]: /api/src/main/java/com/runescape/api/RuneScapeAPI.java
 [httpclient]: /shared/src/main/java/com/runescape/api/HttpClient.java
-[fakeclient]: /bestiary/src/test/java/com/runescape/api/bestiary/TestBestiary.java#L162
+[fakeclient]: /bestiary/src/test/java/com/runescape/api/bestiary/BestiaryTest.java#L162
 [client]: /shared/src/main/java/com/runescape/api/Client.java
 [bestiary-api]: /bestiary/src/main/java/com/runescape/api/bestiary/Bestiary.java
 [ge-api]: /ge/src/main/java/com/runescape/api/ge/GrandExchange.java
