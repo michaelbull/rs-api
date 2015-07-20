@@ -123,9 +123,9 @@ ClanMate{name=Sauf, rank=Overseer, experience=346299506, kills=3}
 
 ## Building
 
-[Gradle][gradle] is used as the build system. Java 8 ([Oracle Java][oracle]) or [OpenJDK][openjdk] on Linux is required.
+[Gradle][gradle] is used as the build system.
 
-Run `gradle` to build the application.
+Run `gradle` to build the application and run the unit tests.
 
 ## Dependencies
 
@@ -176,8 +176,6 @@ The following Java libraries are used by the API:
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
 [clanmate]: /hiscores/src/main/java/com/runescape/api/hiscores/model/ClanMate.java
 [gradle]: http://www.gradle.org/
-[oracle]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-[openjdk]: http://openjdk.java.net/
 [commons]: https://commons.apache.org/
 [httpcomponents]: https://hc.apache.org/
 [gson]: https://code.google.com/p/google-gson/
