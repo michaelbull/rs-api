@@ -1,4 +1,7 @@
+# Hidden files
 .*
+
+# Temporary files
 *~
 
 # Git
