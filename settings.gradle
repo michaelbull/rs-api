@@ -1,7 +1,1 @@
 rootProject.name = 'rs-api'
-include 'shared'
-include 'bestiary'
-include 'ge'
-include 'hiscores'
-include 'api'
-

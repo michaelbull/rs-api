@@ -4,7 +4,7 @@
 
 ## Introduction
 
-`rs-api` is an open-source implementation of a web-service client, written in [Java][java], that allows interaction with the various [APIs][api] available for the popular [MMORPG][mmorpg] [RuneScape][rs].
+`rs-api` is an open-source implementation of a web-service client, written in [Java][java], that allows interaction with the various [APIs][api] available for the popular [MMORPG][mmorpg]; [RuneScape][rs].
 
 Javadoc is available [here][javadoc].
 
@@ -29,9 +29,9 @@ RuneScapeAPI api = RuneScapeAPI.createHttp();
 At which point you may now access and query the [`Bestiary`][bestiary-api], [`GrandExchange`][ge-api], and [`Hiscores`][hiscores-api] API objects:
 
 ```java
-	Bestiary bestiary = api.getBestiary();
-	GrandExchange grandExchange = api.getGrandExchange();
-	Hiscores hiscores = api.getHiscores();
+	Bestiary bestiary = api.bestiary();
+	GrandExchange grandExchange = api.grandExchange();
+	Hiscores hiscores = api.hiscores();
 ```
 
 ## Examples
@@ -43,7 +43,7 @@ The [`Bestiary`][bestiary-api] API facilitates searching for a beast given a num
 Numerous filters can be applied to the [`Search`][bestiary-search] by chaining them together, and are [lazily evaluated][lazy-evaluation] when calling the terminal `results` method.
 
 ```java
-ImmutableMap<Integer, String> beasts = bestiary.search()
+Map<Integer, String> beasts = bestiary.search()
 	.filterByNameTerms("dragon")
 	.filterByArea("Taverley Dungeon")
 	.filterByLevel(100, 140)
@@ -103,7 +103,7 @@ Overall rank: Skill{rank=1, level=2595, experience=5200000000}
 Calling the `clanInformation` method with a clan's name (e.g. Sapphite Knights) as the parameter in the [`Hiscores`][hiscores-api] API will return an [`ImmutableList`][immutablelist] of [`ClanMate`][clanmate]s.
 
 ```java
-ImmutableList<ClanMate> clanMates = hiscores.clanInformation("Sapphite Knights");
+List<ClanMate> clanMates = hiscores.clanInformation("Sapphite Knights");
 
 System.out.println("Clan Mates:");
 clanMates.forEach(System.out::println);
@@ -123,9 +123,9 @@ ClanMate{name=Sauf, rank=Overseer, experience=346299506, kills=3}
 
 ## Building
 
-[Gradle][gradle] is used as the build system.
+[Gradle][gradle] is used as the build system. The [Gradle Wrapper][gradle-wrapper] is included in the distribution and as such, installation of Gradle by the user is not required.
 
-Run `gradle` to build the application and run the unit tests.
+Run `gradlew` in the project's root directory to build the application and run the unit tests.
 
 ## Dependencies
 
@@ -176,6 +176,7 @@ The following Java libraries are used by the API:
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
 [clanmate]: /hiscores/src/main/java/com/runescape/api/hiscores/model/ClanMate.java
 [gradle]: http://www.gradle.org/
+[gradle-wrapper]: https://docs.gradle.org/current/userguide/gradle_wrapper.html
 [commons]: https://commons.apache.org/
 [httpcomponents]: https://hc.apache.org/
 [gson]: https://code.google.com/p/google-gson/
