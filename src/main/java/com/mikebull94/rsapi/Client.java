@@ -22,7 +22,7 @@ public interface Client {
 	 * @param url The URL to deserialize from.
 	 * @param typeOfT The specific genericized type of src.
 	 * @param <T> The type of the desired object
-	 * @return An {@link Optional} of object of type T from the json, or {@code Optional.empty()} if the URL could not be deserialized.
+	 * @return An {@link Optional} containing an object of type T from the json, or {@link Optional#empty()} if the URL could not be deserialized.
 	 * @throws IOException If an I/O error occurs.
 	 */
 	<T> Optional<T> fromJson(String url, Type typeOfT) throws IOException;
@@ -32,7 +32,7 @@ public interface Client {
 	 * @param url The URL to deserialize from.
 	 * @param classOfT The class of T.
 	 * @param <T> The type of the desired object
-	 * @return An optional of object of type T from the json, or {@code Optional.empty()} if the URL could not be deserialized.
+	 * @return An optional of object of type T from the json, or {@link Optional#empty()} if the URL could not be deserialized.
 	 * @throws IOException If an I/O error occurs.
 	 */
 	<T> Optional<T> fromJson(String url, Class<T> classOfT) throws IOException;

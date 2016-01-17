@@ -185,8 +185,8 @@ public final class GrandExchangeTest {
 		GraphingData data = ge.graphingData(ADAMANT_BRUTAL_ID).get();
 		assertFalse(data.getDailyPrices().isEmpty());
 		assertFalse(data.getAveragePrices().isEmpty());
-		assertEquals(90, (int) data.getDailyPrice(LocalDate.of(2014, Month.DECEMBER, 25)).get());
-		assertEquals(400, (int) data.getAveragePrice(LocalDate.of(2014, Month.DECEMBER, 29)).get());
+		assertEquals(90, data.getDailyPrice(LocalDate.of(2014, Month.DECEMBER, 25)).getAsInt());
+		assertEquals(400, data.getAveragePrice(LocalDate.of(2014, Month.DECEMBER, 29)).getAsInt());
 	}
 
 	@Test

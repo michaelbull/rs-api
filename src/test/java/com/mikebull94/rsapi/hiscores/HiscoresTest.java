@@ -134,8 +134,8 @@ public final class HiscoresTest {
 		assertEquals(99, player.getSkills().get("Attack").getLevel());
 
 		Skill thieving = player.getSkills().get("Thieving");
-		int rank = thieving.getRank().get();
-		long experience = thieving.getExperience().get();
+		int rank = thieving.getRank().getAsInt();
+		long experience = thieving.getExperience().getAsLong();
 
 		assertEquals(1, rank);
 		assertEquals(Skill.MAX_EXPERIENCE, experience);

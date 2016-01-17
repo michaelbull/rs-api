@@ -25,7 +25,7 @@ public final class SearchResult {
 	 * @param items The amount of items.
 	 */
 	public SearchResult(String letter, int items) {
-		Preconditions.checkArgument(items >= 0, "Total amount of items must be more than or equal to 0.");
+		Preconditions.checkArgument(items >= 0, "Total amount of items must be non-negative.");
 		this.letter = Preconditions.checkNotNull(letter);
 		this.items = items;
 	}

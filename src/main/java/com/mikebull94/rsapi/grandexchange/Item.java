@@ -335,16 +335,16 @@ public final class Item {
 	}
 
 	/**
-	 * Gets an {@link Optional} of the item's {@link PriceChange} over the last 30 days.
-	 * @return An {@link Optional} of the item's {@link PriceChange} over the last 30 days, or {@code Optional.empty()} if there is no {@link PriceChange} for the last 30 days.
+	 * Gets an {@link Optional} containing the item's {@link PriceChange} over the last 30 days.
+	 * @return An {@link Optional} containing the item's {@link PriceChange} over the last 30 days, or {@link Optional#empty()} if there is no {@link PriceChange} for the last 30 days.
 	 */
 	public Optional<PriceChange> getDay30() {
 		return Optional.ofNullable(day30);
 	}
 
 	/**
-	 * Gets an {@link Optional} of the item's {@link PriceChange} over the last 90 days.
-	 * @return An {@link Optional} of the item's {@link PriceChange} over the last 90 days, or {@code Optional.empty()} if there is no {@link PriceChange} for the last 90 days.
+	 * Gets an {@link Optional} containing the item's {@link PriceChange} over the last 90 days.
+	 * @return An {@link Optional} containing the item's {@link PriceChange} over the last 90 days, or {@link Optional#empty()} if there is no {@link PriceChange} for the last 90 days.
 	 */
 	public Optional<PriceChange> getDay90() {
 		return Optional.ofNullable(day90);
@@ -352,8 +352,8 @@ public final class Item {
 
 
 	/**
-	 * Gets an {@link Optional} of the item's {@link PriceChange} over the last 180 days.
-	 * @return An {@link Optional} of the item's {@link PriceChange} over the last 180 days, or {@code Optional.empty()} if there is no {@link PriceChange} for the last 180 days.
+	 * Gets an {@link Optional} containing the item's {@link PriceChange} over the last 180 days.
+	 * @return An {@link Optional} containing the item's {@link PriceChange} over the last 180 days, or {@link Optional#empty()} if there is no {@link PriceChange} for the last 180 days.
 	 */
 	public Optional<PriceChange> getDay180() {
 		return Optional.ofNullable(day180);

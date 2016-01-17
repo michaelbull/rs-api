@@ -57,7 +57,7 @@ public final class Category {
 	/**
 	 * Gets a {@link SearchResult} from its index in the alpha array.
 	 * @param index The index.
-	 * @return An {@link Optional} of the {@link SearchResult}, or {@code Optional.empty()} if no {@link SearchResult} was found at this index.
+	 * @return An {@link Optional} containing the {@link SearchResult}, or {@link Optional#empty()} if no {@link SearchResult} was found at this index.
 	 */
 	public Optional<SearchResult> getResult(int index) {
 		Preconditions.checkElementIndex(index, alpha.length);

@@ -10,6 +10,39 @@ import java.util.Objects;
  * Represents a player ranked on the RuneScape {@link Hiscores}.
  */
 public final class Player {
+	public static final class Builder {
+		private boolean built = false;
+
+		private final ImmutableMap.Builder<String, Skill> skills = ImmutableMap.builder();
+		private final ImmutableMap.Builder<String, HiscoreActivity> activities = ImmutableMap.builder();
+
+		private Builder() {
+			/* empty */
+		}
+
+		public Builder skill(String name, Skill skill) {
+			Preconditions.checkState(!built);
+			this.skills.put(name, skill);
+			return this;
+		}
+
+		public Builder activity(String name, HiscoreActivity activity) {
+			Preconditions.checkState(!built);
+			this.activities.put(name, activity);
+			return this;
+		}
+
+		public Player build() {
+			Preconditions.checkState(!built);
+			built = true;
+			return new Player(skills.build(), activities.build());
+		}
+	}
+
+	public static Builder builder() {
+		return new Builder();
+	}
+
 	/**
 	 * An {@link ImmutableMap} of {@link Skill} names to the player's {@link Skill} rankings.
 	 */

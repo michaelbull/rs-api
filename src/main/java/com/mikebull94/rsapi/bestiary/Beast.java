@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Set;
 
 /**
@@ -526,8 +527,8 @@ public final class Beast {
 	}
 
 	/**
-	 * Gets an {@link Optional} of the Slayer category this beast belongs to.
-	 * @return An {@link Optional} of the Slayer category this beast belongs to, or {@code Optional.empty()} if it does not belong to a Slayer category.
+	 * Gets an {@link Optional} containing the Slayer category this beast belongs to.
+	 * @return An {@link Optional} containing the Slayer category this beast belongs to, or {@link Optional#empty()} if it does not belong to a Slayer category.
 	 */
 	public Optional<String> getSlayerCategory() {
 		return Optional.ofNullable(slayerCategory);
@@ -550,12 +551,13 @@ public final class Beast {
 	}
 
 	/**
-	 * Gets an {@link Optional} of an animation's id by its name.
+	 * Gets an {@link Optional} containing an animation's id by its name.
 	 * @param name The name of the animation.
-	 * @return An {@link Optional} of an animation's id, or {@code Optional.empty()} if no animation of that name was found.
+	 * @return An {@link OptionalInt} containing an animation's id, or {@link OptionalInt#empty()} if no animation of that name was found.
 	 */
-	public Optional<Integer> getAnimation(String name) {
-		return Optional.ofNullable(animations.get(name));
+	public OptionalInt getAnimation(String name) {
+		Integer id = animations.get(name);
+		return id == null ? OptionalInt.empty() : OptionalInt.of(id);
 	}
 
 	@Override

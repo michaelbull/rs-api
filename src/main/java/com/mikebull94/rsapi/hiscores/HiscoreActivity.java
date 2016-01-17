@@ -5,7 +5,7 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.Objects;
-import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * Represents a player's rank in an activity on the {@link Hiscores}.
@@ -27,8 +27,8 @@ public final class HiscoreActivity {
 	 * @param score The score the player has in the activity.
 	 */
 	public HiscoreActivity(int rank, int score) {
-		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or a positive integer.");
-		Preconditions.checkArgument(score >= -1, "Score must be either -1 (unranked) or more than or equal to 0.");
+		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or positive.");
+		Preconditions.checkArgument(score >= -1, "Score must be either -1 (unranked) or non-negative.");
 		this.rank = rank;
 		this.score = score;
 	}
@@ -45,18 +45,18 @@ public final class HiscoreActivity {
 
 	/**
 	 * Gets the rank the player has in the activity.
-	 * @return An {@link Optional} of the player's rank, or {@code Optional.empty()} if the player is unranked for this activity.
+	 * @return An {@link OptionalInt} containing the player's rank, or {@link OptionalInt#empty()} if the player is unranked for this activity.
 	 */
-	public Optional<Integer> getRank() {
-		return rank == -1 ? Optional.empty() : Optional.of(rank);
+	public OptionalInt getRank() {
+		return rank == -1 ? OptionalInt.empty() : OptionalInt.of(rank);
 	}
 
 	/**
 	 * Gets the score the player has in the activity.
-	 * @return An {@link Optional} of the player's score, or {@code Optional.empty()} if the player is unranked for this activity.
+	 * @return An {@link OptionalInt} containing the player's score, or {@link OptionalInt#empty()} if the player is unranked for this activity.
 	 */
-	public Optional<Integer> getScore() {
-		return score == -1 ? Optional.empty() : Optional.of(score);
+	public OptionalInt getScore() {
+		return score == -1 ? OptionalInt.empty() : OptionalInt.of(score);
 	}
 
 	@Override

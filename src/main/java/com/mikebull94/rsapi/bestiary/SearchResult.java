@@ -39,8 +39,8 @@ public final class SearchResult {
 	}
 
 	/**
-	 * Gets an {@link Optional} of the result's label.
-	 * @return An {@link Optional} of the result's label, or {@code Optional.empty()} if no label was found.
+	 * Gets an {@link Optional} containing the result's label.
+	 * @return An {@link Optional} containing the result's label, or {@link Optional#empty()} if no label was found.
 	 */
 	public Optional<String> getLabel() {
 		return Optional.ofNullable(label);

@@ -185,7 +185,7 @@ public final class Hiscores {
 	 * Gets a {@link Player} based on their display name.
 	 * @param displayName The player's display name.
 	 * @param table The table of {@link Hiscores}.
-	 * @return An {@link Optional} of the {@link Player}, or {@code Optional.empty()} if no {@link Player} was found with that name.
+	 * @return An {@link Optional} containing the {@link Player}, or {@link Optional#empty()} if no {@link Player} was found with that name.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Top_Players">Top Players</a>
 	 */

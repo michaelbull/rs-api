@@ -130,7 +130,7 @@ public final class Bestiary {
 	/**
 	 * Gets the a {@link Beast} by its id.
 	 * @param beastId The id of the {@link Beast}.
-	 * @return An {@link Optional} of the {@link Beast}, or {@code Optional.empty()} if no {@link Beast} of that id was found.
+	 * @return An {@link Optional} containing the {@link Beast}, or {@link Optional#empty()} if no {@link Beast} of that id was found.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
 	 */

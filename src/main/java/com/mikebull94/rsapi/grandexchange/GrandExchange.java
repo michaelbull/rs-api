@@ -101,7 +101,7 @@ public final class GrandExchange {
 	/**
 	 * Gets a {@link Category} by its id.
 	 * @param categoryId The id of the {@link Category}.
-	 * @return An {@link Optional} of the {@link Category}, or {@code Optional.empty()} if there is no {@link Category} for the {@link Category} id.
+	 * @return An {@link Optional} containing the {@link Category}, or {@link Optional#empty()} if there is no {@link Category} for the {@link Category} id.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
 	 */
@@ -113,7 +113,7 @@ public final class GrandExchange {
 	/**
 	 * Gets a {@link Category} by its name.
 	 * @param categoryName The name of the {@link Category}.
-	 * @return An {@link Optional} of the {@link Category}, or {@code Optional.empty()} if there is no {@link Category} for the {@link Category} name.
+	 * @return An {@link Optional} containing the {@link Category}, or {@link Optional#empty()} if there is no {@link Category} for the {@link Category} name.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
 	 */
@@ -127,7 +127,7 @@ public final class GrandExchange {
 	 * @param categoryId The id of the {@link Category}.
 	 * @param prefix An item's prefix.
 	 * @param page The page.
-	 * @return An {@link Optional} of the {@link CategoryPrices}, or {@code Optional.empty()} if no {@link CategoryPrices} were found.
+	 * @return An {@link Optional} containing the {@link CategoryPrices}, or {@link Optional#empty()} if no {@link CategoryPrices} were found.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
 	 */
@@ -150,7 +150,7 @@ public final class GrandExchange {
 	 * @param categoryName The name of the {@link Category}.
 	 * @param prefix An item's prefix.
 	 * @param page The page.
-	 * @return An {@link Optional} of the {@link CategoryPrices}, or {@code Optional.empty()} if no {@link CategoryPrices} were found.
+	 * @return An {@link Optional} containing the {@link CategoryPrices}, or {@link Optional#empty()} if no {@link CategoryPrices} were found.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
 	 */
@@ -163,7 +163,7 @@ public final class GrandExchange {
 	/**
 	 * Gets the {@link GraphingData} of an {@link Item}.
 	 * @param itemId The id of the {@link Item}.
-	 * @return An {@link Optional} of the {@link GraphingData}, or {@code Optional.empty()} if no {@link GraphingData} was found for the {@link Item} id.
+	 * @return An {@link Optional} containing the {@link GraphingData}, or {@link Optional#empty()} if no {@link GraphingData} was found for the {@link Item} id.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
 	 */
@@ -174,7 +174,7 @@ public final class GrandExchange {
 	/**
 	 * Gets the {@link ItemPriceInformation} of an {@link Item}.
 	 * @param itemId The id of the {@link Item}.
-	 * @return An {@link Optional} of the {@link ItemPriceInformation}, or {code Optional.empty()} if no {@link ItemPriceInformation} was found for the {@link Item} id.
+	 * @return An {@link Optional} containing the {@link ItemPriceInformation}, or {code Optional.empty()} if no {@link ItemPriceInformation} was found for the {@link Item} id.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
 	 */

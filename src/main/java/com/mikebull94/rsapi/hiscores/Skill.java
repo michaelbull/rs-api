@@ -5,7 +5,8 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.Objects;
-import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
 
 /**
  * Represents a players skill ranking on the RuneScape {@link Hiscores}.
@@ -38,9 +39,9 @@ public final class Skill {
 	 * @param experience The amount of experience the player has earned in this skill.
 	 */
 	public Skill(int rank, int level, long experience) {
-		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or a positive integer.");
-		Preconditions.checkArgument(level > 0, "Level must be a positive integer.");
-		Preconditions.checkArgument(experience == -1 || experience > 0, "Experience must be either -1 (unranked) or a positive long.");
+		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or positive.");
+		Preconditions.checkArgument(level > 0, "Level must be positive.");
+		Preconditions.checkArgument(experience == -1 || experience > 0, "Experience must be either -1 (unranked) or positive.");
 		this.rank = rank;
 		this.level = level;
 		this.experience = experience;
@@ -59,10 +60,10 @@ public final class Skill {
 
 	/**
 	 * Gets the rank the player has on the {@link Hiscores} for this type of skill.
-	 * @return An {@link Optional} of the player's rank, or {@code Optional.empty()} if the player is unranked.
+	 * @return An {@link OptionalInt} containing the player's rank, or {@link OptionalInt#empty()} if the player is unranked.
 	 */
-	public Optional<Integer> getRank() {
-		return rank == -1 ? Optional.empty() : Optional.of(rank);
+	public OptionalInt getRank() {
+		return rank == -1 ? OptionalInt.empty() : OptionalInt.of(rank);
 	}
 
 	/**
@@ -75,10 +76,11 @@ public final class Skill {
 
 	/**
 	 * Gets the amount of experience the player has earned in this skill.
-	 * @return The amount of experience the player has earned in this skill.
+	 * @return An {@link OptionalLong} containing the amount of experience the player has earned in this skill, or
+	 * {@link OptionalLong#empty()} if the player is unranked.
 	 */
-	public Optional<Long> getExperience() {
-		return experience == -1 ? Optional.empty() : Optional.of(experience);
+	public OptionalLong getExperience() {
+		return experience == -1 ? OptionalLong.empty() : OptionalLong.of(experience);
 	}
 
 	@Override

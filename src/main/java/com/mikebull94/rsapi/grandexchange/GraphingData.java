@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * Represents the data used to graphically display an {@link Item}s price history on the RuneScape {@link GrandExchange}.
@@ -108,10 +108,11 @@ public final class GraphingData {
 	/**
 	 * Gets the daily price of an {@link Item} on a given a {@link LocalDate} on the UTC time-zone.
 	 * @param dateTime The {@link LocalDate}.
-	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no daily value was recorded on this date.
+	 * @return An {@link OptionalInt} containing the price, or {@link OptionalInt#empty()} if no daily value was recorded on this date.
 	 */
-	public Optional<Integer> getDailyPrice(LocalDate dateTime) {
-		return Optional.ofNullable(daily.get(String.valueOf(localDateToEpochMilli(dateTime))));
+	public OptionalInt getDailyPrice(LocalDate dateTime) {
+		Integer price = daily.get(String.valueOf(localDateToEpochMilli(dateTime)));
+		return price == null ? OptionalInt.empty() : OptionalInt.of(price);
 	}
 
 	/**
@@ -125,10 +126,11 @@ public final class GraphingData {
 	/**
 	 * Gets the average price of an {@link Item} given on a given {@link LocalDate}.
 	 * @param dateTime The {@link LocalDate}.
-	 * @return An {@link Optional} of the price, or {@code Optional.empty()} if no average value was recorded on this date.
+	 * @return An {@link OptionalInt} containing the price, or {@link OptionalInt#empty()} if no average value was recorded on this date.
 	 */
-	public Optional<Integer> getAveragePrice(LocalDate dateTime) {
-		return Optional.ofNullable(average.get(String.valueOf(localDateToEpochMilli(dateTime))));
+	public OptionalInt getAveragePrice(LocalDate dateTime) {
+		Integer price = average.get(String.valueOf(localDateToEpochMilli(dateTime)));
+		return price == null ? OptionalInt.empty() : OptionalInt.of(price);
 	}
 
 	@Override
