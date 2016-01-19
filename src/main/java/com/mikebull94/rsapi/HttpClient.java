@@ -12,15 +12,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -44,14 +41,14 @@ public final class HttpClient implements Client {
 	 * @return The {@link InputStream}.
 	 * @throws IOException If an I/O error occurs.
 	 */
-	private static InputStream streamFrom(String url) throws IOException {
+	private static String stringFrom(String url) throws IOException {
 		Preconditions.checkNotNull(url);
 		HttpUriRequest request = new HttpGet(url);
 		request.addHeader("accept", "application/json");
 
-		try (CloseableHttpClient client = HttpClientBuilder.create().build();
+		try (CloseableHttpClient client = HttpClients.createDefault();
 			 CloseableHttpResponse response = client.execute(request)) {
-			return response.getEntity().getContent();
+			return EntityUtils.toString(response.getEntity());
 		}
 	}
 
@@ -68,8 +65,8 @@ public final class HttpClient implements Client {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(typeOfT);
 
-		try (Reader reader = new InputStreamReader(streamFrom(url), StandardCharsets.UTF_8)) {
-			return Optional.ofNullable(gson.fromJson(reader, typeOfT));
+		try {
+			return Optional.ofNullable(gson.fromJson(stringFrom(url), typeOfT));
 		} catch (JsonSyntaxException | JsonIOException ignored) {
 			return Optional.empty();
 		}
@@ -88,8 +85,8 @@ public final class HttpClient implements Client {
 		Preconditions.checkNotNull(url);
 		Preconditions.checkNotNull(classOfT);
 
-		try (Reader reader = new InputStreamReader(streamFrom(url), StandardCharsets.UTF_8)) {
-			return Optional.ofNullable(gson.fromJson(reader, classOfT));
+		try {
+			return Optional.ofNullable(gson.fromJson(stringFrom(url), classOfT));
 		} catch (JsonSyntaxException | JsonIOException ignored) {
 			return Optional.empty();
 		}
@@ -105,13 +102,7 @@ public final class HttpClient implements Client {
 	public ImmutableList<CSVRecord> fromCSV(String url) throws IOException {
 		Preconditions.checkNotNull(url);
 
-		StringBuilder builder = new StringBuilder();
-
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(streamFrom(url), StandardCharsets.ISO_8859_1))) {
-			reader.lines().forEach(s -> builder.append(s).append("\n"));
-		}
-
-		try (CSVParser parser = CSVParser.parse(builder.toString(), CSV_FORMAT)) {
+		try (CSVParser parser = CSVParser.parse(stringFrom(url), CSV_FORMAT)) {
 			return ImmutableList.copyOf(parser.getRecords());
 		}
 	}
