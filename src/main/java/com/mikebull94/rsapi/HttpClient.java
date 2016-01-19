@@ -16,7 +16,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,15 +35,16 @@ public final class HttpClient implements Client {
 	private final Gson gson = new Gson();
 
 	/**
-	 * Creates an {@link InputStream} from a specified URL.
-	 * @param url The URL to open.
-	 * @return The {@link InputStream}.
+	 * Reads a {@link String} from a specified URL.
+	 * @param url The URL to request from.
+	 * @return The {@link String}.
 	 * @throws IOException If an I/O error occurs.
 	 */
 	private static String stringFrom(String url) throws IOException {
 		Preconditions.checkNotNull(url);
 		HttpUriRequest request = new HttpGet(url);
 		request.addHeader("accept", "application/json");
+		request.addHeader("accept", "text/csv");
 
 		try (CloseableHttpClient client = HttpClients.createDefault();
 			 CloseableHttpResponse response = client.execute(request)) {
