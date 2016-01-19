@@ -156,7 +156,7 @@ The following Java libraries are used by the API:
 [json]: http://en.wikipedia.org/wiki/JSON
 [object]: https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
 [http]: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
-[rsapi]: /src/main/java/com/mikebull94/rspi/RuneScapeAPI.java
+[rsapi]: /src/main/java/com/mikebull94/rsapi/RuneScapeAPI.java
 [httpclient]: /src/main/java/com/mikebull94/rsapi/HttpClient.java
 [fakeclient]: /src/test/java/com/mikebull94/rsapi/bestiary/BestiaryTest.java#L144
 [client]: /src/main/java/com/mikebull94/rsapi/Client.java
