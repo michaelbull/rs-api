@@ -172,7 +172,7 @@ The following Java libraries are used by the API:
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
 [table]: /src/main/java/com/mikebull94/rsapi/hiscores/Table.java
 [skill]: /src/main/java/com/mikebull94/rsapi/hiscores/Skill.java
-[activity]: /src/main/java/com/mikebull94/rsapi/hiscores/Activity.java
+[activity]: /src/main/java/com/mikebull94/rsapi/hiscores/HiscoreActivity.java
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
 [clanmate]: /src/main/java/com/mikebull94/rsapi/hiscores/ClanMate.java
 [gradle]: http://www.gradle.org/
