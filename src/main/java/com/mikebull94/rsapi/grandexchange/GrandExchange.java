@@ -174,7 +174,7 @@ public final class GrandExchange {
 	/**
 	 * Gets the {@link ItemPriceInformation} of an {@link Item}.
 	 * @param itemId The id of the {@link Item}.
-	 * @return An {@link Optional} containing the {@link ItemPriceInformation}, or {code Optional.empty()} if no {@link ItemPriceInformation} was found for the {@link Item} id.
+	 * @return An {@link Optional} containing the {@link ItemPriceInformation}, or {@link Optional#empty()} if no {@link ItemPriceInformation} was found for the {@link Item} id.
 	 * @throws IOException If an I/O error occurs.
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
 	 */
