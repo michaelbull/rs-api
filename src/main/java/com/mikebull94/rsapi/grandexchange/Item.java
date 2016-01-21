@@ -350,7 +350,6 @@ public final class Item {
 		return Optional.ofNullable(day90);
 	}
 
-
 	/**
 	 * Gets an {@link Optional} containing the item's {@link PriceChange} over the last 180 days.
 	 * @return An {@link Optional} containing the item's {@link PriceChange} over the last 180 days, or {@link Optional#empty()} if there is no {@link PriceChange} for the last 180 days.

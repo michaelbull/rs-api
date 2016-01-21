@@ -7,6 +7,9 @@
 # Git
 !.git*
 
+# EditorConfig
+!.editorconfig
+
 # Travis CI
 !.travis.yml
 
