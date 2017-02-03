@@ -29,9 +29,9 @@ RuneScapeAPI api = RuneScapeAPI.createHttp();
 At which point you may now access and query the [`Bestiary`][bestiary-api], [`GrandExchange`][ge-api], and [`Hiscores`][hiscores-api] API objects:
 
 ```java
-	Bestiary bestiary = api.bestiary();
-	GrandExchange grandExchange = api.grandExchange();
-	Hiscores hiscores = api.hiscores();
+Bestiary bestiary = api.bestiary();
+GrandExchange grandExchange = api.grandExchange();
+Hiscores hiscores = api.hiscores();
 ```
 
 ## Examples
@@ -156,25 +156,25 @@ The following Java libraries are used by the API:
 [json]: http://en.wikipedia.org/wiki/JSON
 [object]: https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
 [http]: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
-[rsapi]: /src/main/java/com/michaelbull/rsapi/RuneScapeAPI.java
-[httpclient]: /src/main/java/com/michaelbull/rsapi/HttpClient.java
-[fakeclient]: /src/test/java/com/michaelbull/rsapi/bestiary/BestiaryTest.java#L144
-[client]: /src/main/java/com/michaelbull/rsapi/Client.java
-[bestiary-api]: /src/main/java/com/michaelbull/rsapi/bestiary/Bestiary.java
-[ge-api]: /src/main/java/com/michaelbull/rsapi/grandexchange/GrandExchange.java
-[hiscores-api]: /src/main/java/com/michaelbull/rsapi/hiscores/Hiscores.java
+[rsapi]: /src/main/java/com/mikebull94/rsapi/RuneScapeAPI.java
+[httpclient]: /src/main/java/com/mikebull94/rsapi/HttpClient.java
+[fakeclient]: /src/test/java/com/mikebull94/rsapi/bestiary/BestiaryTest.java#L144
+[client]: /src/main/java/com/mikebull94/rsapi/Client.java
+[bestiary-api]: /src/main/java/com/mikebull94/rsapi/bestiary/Bestiary.java
+[ge-api]: /src/main/java/com/mikebull94/rsapi/grandexchange/GrandExchange.java
+[hiscores-api]: /src/main/java/com/mikebull94/rsapi/hiscores/Hiscores.java
 [slayer]: http://runescape.wikia.com/wiki/Slayer
-[bestiary-search]: /src/main/java/com/michaelbull/rsapi/bestiary/Search.java
+[bestiary-search]: /src/main/java/com/mikebull94/rsapi/bestiary/Search.java
 [lazy-evaluation]: http://en.wikipedia.org/wiki/Lazy_evaluation
 [abyssal-whip]: http://services.runescape.com/m=itemdb_rs/Abyssal_whip/viewitem.ws?obj=4151
-[item]: /src/main/java/com/michaelbull/rsapi/grandexchange/Item.java
-[player]: /src/main/java/com/michaelbull/rsapi/hiscores/Player.java
+[item]: /src/main/java/com/mikebull94/rsapi/grandexchange/Item.java
+[player]: /src/main/java/com/mikebull94/rsapi/hiscores/Player.java
 [immutablemap]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableMap.html
-[table]: /src/main/java/com/michaelbull/rsapi/hiscores/Table.java
-[skill]: /src/main/java/com/michaelbull/rsapi/hiscores/Skill.java
-[activity]: /src/main/java/com/michaelbull/rsapi/hiscores/HiscoreActivity.java
+[table]: /src/main/java/com/mikebull94/rsapi/hiscores/Table.java
+[skill]: /src/main/java/com/mikebull94/rsapi/hiscores/Skill.java
+[activity]: /src/main/java/com/mikebull94/rsapi/hiscores/HiscoreActivity.java
 [immutablelist]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/collect/ImmutableList.html
-[clanmate]: /src/main/java/com/michaelbull/rsapi/hiscores/ClanMate.java
+[clanmate]: /src/main/java/com/mikebull94/rsapi/hiscores/ClanMate.java
 [gradle]: http://www.gradle.org/
 [gradle-wrapper]: https://docs.gradle.org/current/userguide/gradle_wrapper.html
 [commons]: https://commons.apache.org/
