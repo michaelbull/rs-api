@@ -1,17 +1,15 @@
 package com.github.michaelbull.rs.bestiary;
 
+import com.github.michaelbull.rs.Client;
 import com.github.michaelbull.rs.HttpClient;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
-import com.github.michaelbull.rs.Client;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
@@ -24,8 +22,7 @@ public final class Bestiary {
 	/**
 	 * A {@link TypeToken} which represents a {@link Map} of {@link String}s to {@link Integer}s.
 	 */
-	private static final Type TYPE_TOKEN = new TypeToken<Map<String, Integer>>() {
-	}.getType();
+	private static final Type TYPE_TOKEN = new TypeToken<Map<String, Integer>>() { }.getType();
 
 	/**
 	 * The URL to the Bestiary web-service.
@@ -272,29 +269,5 @@ public final class Bestiary {
 	public ImmutableMap<Integer, String> beastsInLevelGroup(int lowerBound, int upperBound) throws IOException {
 		Preconditions.checkArgument(upperBound > lowerBound, "The upper combat level bound must be higher than the lower combat level bound.");
 		return resultsToImmutableMap(client.fromJson(LEVEL_GROUP_URL + "?identifier=" + lowerBound + "-" + upperBound, SearchResult[].class).orElse(null));
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Bestiary bestiary = (Bestiary) o;
-		return Objects.equals(client, bestiary.client);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(client);
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("client", client)
-			.toString();
 	}
 }

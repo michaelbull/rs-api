@@ -1,6 +1,5 @@
 package com.github.michaelbull.rs;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
@@ -17,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -105,28 +103,5 @@ public final class HttpClient implements Client {
 		try (CSVParser parser = CSVParser.parse(stringFrom(url), CSV_FORMAT)) {
 			return ImmutableList.copyOf(parser.getRecords());
 		}
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		HttpClient that = (HttpClient) o;
-		return Objects.equals(gson, that.gson);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(gson);
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.toString();
 	}
 }

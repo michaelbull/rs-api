@@ -1,16 +1,14 @@
 package com.github.michaelbull.rs.hiscores;
 
-import com.google.common.base.MoreObjects;
+import com.github.michaelbull.rs.Client;
+import com.github.michaelbull.rs.HttpClient;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.github.michaelbull.rs.Client;
-import com.github.michaelbull.rs.HttpClient;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -240,29 +238,5 @@ public final class Hiscores {
 		}
 
 		return builder.build();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Hiscores hiscores = (Hiscores) o;
-		return Objects.equals(client, hiscores.client);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(client);
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("client", client)
-			.toString();
 	}
 }

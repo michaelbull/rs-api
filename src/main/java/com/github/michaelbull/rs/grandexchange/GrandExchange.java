@@ -2,12 +2,10 @@ package com.github.michaelbull.rs.grandexchange;
 
 import com.github.michaelbull.rs.Client;
 import com.github.michaelbull.rs.HttpClient;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -180,29 +178,5 @@ public final class GrandExchange {
 	 */
 	public Optional<ItemPriceInformation> itemPriceInformation(int itemId) throws IOException {
 		return client.fromJson(DETAILS_URL + "?item=" + itemId, ItemPriceInformation.class);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		GrandExchange that = (GrandExchange) o;
-		return Objects.equals(client, that.client);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(client);
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("client", client)
-			.toString();
 	}
 }
