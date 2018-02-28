@@ -21,6 +21,3 @@ out/
 
 # Gradle
 build/
-
-# Generated Javadoc
-docs/

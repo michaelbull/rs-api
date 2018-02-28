@@ -5,9 +5,10 @@ plugins {
 
 apply plugin: 'java'
 
+defaultTasks 'clean', 'build'
+
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
@@ -21,31 +22,19 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
 }
 
-task aggregateJavadoc(type: Javadoc) {
-    group 'Documentation'
-    description 'Generates aggregated Javadoc API documentation for the main source code of all projects.'
+javadoc {
+    title = 'RuneScape API'
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+    failOnError = true
 
-    source allprojects.collect { project ->
-        project.sourceSets.main.allJava
-    }
-    classpath = files(allprojects.collect { project ->
-        project.sourceSets.main.compileClasspath
-    })
-
-    destinationDir file("${rootDir}/docs/javadoc/")
-
-    options.showAll()
-
-    configure(options) {
-        windowTitle 'RuneScape API'
-        docTitle 'RuneScape API'
-
+    options {
         links 'http://docs.oracle.com/javase/8/docs/api/'
-        links 'https://commons.apache.org/proper/commons-csv/apidocs/'
+        links "https://google.github.io/gson/apidocs/"
+        links "http://google.github.io/guava/releases/$guavaVersion/api/docs/"
+        links "https://commons.apache.org/proper/commons-csv/archives/$commonsCsvVersion/apidocs/"
         links 'https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/'
-        links 'http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/'
-        links 'http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/'
-        links 'http://junit.org/javadoc/latest/'
-        links 'http://www.slf4j.org/api/'
+        links "https://www.slf4j.org/api/"
+        links "https://junit.org/junit4/javadoc/$junitVersion/"
     }
 }

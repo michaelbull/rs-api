@@ -1,6 +1,6 @@
 # RuneScape API
 
-[![Build Status][build-status-img]][build-status]
+[![Build Status](https://travis-ci.org/michaelbull/rs-api.svg?branch=master)](https://travis-ci.org/michaelbull/rs-api)
 
 ## Introduction
 
@@ -16,7 +16,7 @@ The implementation offers functionality to interact with the following three pub
 * [Grand Exchange][ge]
 * [Hiscores][hiscores]
 
-[CSV][csv] and [JSON][json] results are parsed by the API and returned as interactable Java [`Object`][object]s.
+[CSV][csv] and [JSON][json] results are parsed by the API and returned as Java [`Object`][object]s.
 
 To start using `rs-api`, simply instantiate a [HTTP][http] based [`RuneScapeAPI`][rsapi] class as follows:
 
@@ -127,23 +127,15 @@ ClanMate{name=Sauf, rank=Overseer, experience=346299506, kills=3}
 
 Run `gradlew` in the project's root directory to build the application and run the unit tests.
 
-## Dependencies
+## Contributing
 
-The following Java libraries are used by the API:
-
-* [Apache Commons][commons]
-* [Apache HttpComponents][httpcomponents]
-* [Google Gson][gson]
-* [Google Guava][guava]
-* [JUnit][junit]
-* [SLF4J][slf4j]
+Bug reports and pull requests are welcome on [GitHub][github].
 
 ## License
 
-`rs-api` is available under the terms of the [ISC license][isc], which is similar to the 2-clause BSD license. See the `LICENSE` file for the copyright information and licensing terms.
+This project is available under the terms of the ISC license. See the
+[`LICENSE`](LICENSE) file for the copyright information and licensing terms.
 
-[build-status-img]: https://travis-ci.org/michaelbull/rs-api.svg?branch=master
-[build-status]: https://travis-ci.org/michaelbull/rs-api
 [java]: https://www.java.com/
 [mmorpg]: http://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game
 [api]: http://en.wikipedia.org/wiki/Application_programming_interface
@@ -177,10 +169,4 @@ The following Java libraries are used by the API:
 [clanmate]: /src/main/java/com/mikebull94/rsapi/hiscores/ClanMate.java
 [gradle]: http://www.gradle.org/
 [gradle-wrapper]: https://docs.gradle.org/current/userguide/gradle_wrapper.html
-[commons]: https://commons.apache.org/
-[httpcomponents]: https://hc.apache.org/
-[gson]: https://code.google.com/p/google-gson/
-[guava]: https://code.google.com/p/guava-libraries/
-[junit]: http://junit.org/
-[slf4j]: http://www.slf4j.org/
-[isc]: https://www.isc.org/downloads/software-support-policy/isc-license/
+[github]: https://github.com/michaelbull/rs-api
