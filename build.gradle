@@ -69,7 +69,9 @@ gitPublish {
     branch = 'gh-pages'
 
     contents {
-        from javadoc
+        from(javadoc) {
+            into "docs/$version"
+        }
     }
 }
 
