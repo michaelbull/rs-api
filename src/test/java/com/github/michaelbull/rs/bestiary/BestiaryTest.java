@@ -10,14 +10,11 @@ import org.junit.Test;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 public final class BestiaryTest {
 	private static final Beast KING_BLACK_DRAGON = Beast.builder(50)
@@ -257,12 +254,10 @@ public final class BestiaryTest {
 				int lowerBound = bounds[0];
 				int upperBound = bounds[1];
 
-				List<SearchResult> results = BEASTS.stream()
+				SearchResult[] resultsArray = BEASTS.stream()
 					.filter(beast -> beast.getCombatLevel() >= lowerBound && beast.getCombatLevel() <= upperBound)
 					.map(beast -> new SearchResult(beast.getId(), beast.getName() + " (" + beast.getCombatLevel() + ")"))
-					.collect(Collectors.toList());
-
-				SearchResult[] resultsArray = results.toArray(new SearchResult[results.size()]);
+					.toArray(SearchResult[]::new);
 
 				return Optional.of((T) resultsArray);
 			}
@@ -281,108 +276,108 @@ public final class BestiaryTest {
 	@Test
 	public void testBeastData() throws IOException {
 		Optional<Beast> optional = bestiary.beastData(-5);
-		assertFalse(optional.isPresent());
+		assertThat(optional.isPresent(), is(false));
 
 		Beast kbd = bestiary.beastData(50).get();
-		assertEquals("King Black Dragon", kbd.getName());
-		assertEquals(276, kbd.getCombatLevel());
-		assertEquals(45000, kbd.getLifePoints());
-		assertEquals("Black dragons", kbd.getSlayerCategory().get());
-		assertEquals(ImmutableList.of("Wilderness Dungeons"), kbd.getAreas());
+		assertThat(kbd.getName(), is("King Black Dragon"));
+		assertThat(kbd.getCombatLevel(), is(276));
+		assertThat(kbd.getLifePoints(), is(45000));
+		assertThat(kbd.getSlayerCategory().get(), is("Black dragons"));
+		assertThat(kbd.getAreas(), is(ImmutableList.of("Wilderness Dungeons")));
 
 		Beast hans = bestiary.beastData(0).get();
-		assertFalse(hans.getWeakness().isPresent());
-		assertFalse(hans.getSlayerCategory().isPresent());
+		assertThat(hans.getWeakness().isPresent(), is(false));
+		assertThat(hans.getSlayerCategory().isPresent(), is(false));
 
 		Beast hellhound = bestiary.beastData(49).get();
-		assertEquals("Hello, nice doggy...", hellhound.getDescription());
-		assertEquals(344.4, hellhound.getExperience(), 0);
-		assertEquals(92, hellhound.getCombatLevel());
-		assertEquals("Hellhounds", hellhound.getSlayerCategory().get());
+		assertThat(hellhound.getDescription(), is("Hello, nice doggy..."));
+		assertThat(hellhound.getExperience(), is(344.4));
+		assertThat(hellhound.getCombatLevel(), is(92));
+		assertThat(hellhound.getSlayerCategory().get(), is("Hellhounds"));
 	}
 
 	@Test
 	public void testSearchByTerms() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.searchByTerms("weirdterm");
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.searchByTerms("sheep");
-		assertNotNull(results.get(5163));
-		assertEquals("Golden sheep", results.get(1271));
+		assertThat(results.get(5163), notNullValue());
+		assertThat(results.get(1271), is("Golden sheep"));
 	}
 
 	@Test
 	public void testSearchByFirstLetter() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.searchByFirstLetter('Z');
-		assertEquals("Zeke", results.get(541));
+		assertThat(results.get(541), is("Zeke"));
 
 		results = bestiary.searchByFirstLetter('x');
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 	}
 
 	@Test
 	public void testAreaNames() throws IOException {
-		assertFalse(bestiary.areaNames().isEmpty());
+		assertThat(bestiary.areaNames().isEmpty(), is(false));
 	}
 
 	@Test
 	public void testBeastsInArea() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.beastsInArea("Nowhere");
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsInArea("Varrock");
-		assertTrue(results.containsValue("Zaff"));
+		assertThat(results.containsValue("Zaff"), is(true));
 	}
 
 	@Test
 	public void testSlayerCategories() throws IOException {
-		assertFalse(bestiary.slayerCategories().isEmpty());
-		assertTrue(bestiary.slayerCategories().containsKey("Zombies"));
-		assertEquals(101, (int) bestiary.slayerCategories().get("TzHaar"));
+		assertThat(bestiary.slayerCategories().isEmpty(), is(false));
+		assertThat(bestiary.slayerCategories().containsKey("Zombies"), is(true));
+		assertThat(bestiary.slayerCategories().get("TzHaar"), is(101));
 	}
 
 	@Test
 	public void testBeastsInSlayerCategory() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.beastsInSlayerCategory(-1);
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsInSlayerCategory("Unknown");
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsInSlayerCategory("Zombies");
-		assertTrue(results.containsKey(2056));
-		assertTrue(results.containsValue("Zombie (22)"));
-		assertFalse(results.containsValue("King Black Dragon (276)"));
+		assertThat(results.containsKey(2056), is(true));
+		assertThat(results.containsValue("Zombie (22)"), is(true));
+		assertThat(results.containsValue("King Black Dragon (276)"), is(false));
 	}
 
 	@Test
 	public void testWeaknesses() throws IOException {
-		assertFalse(bestiary.weaknesses().isEmpty());
+		assertThat(bestiary.weaknesses().isEmpty(), is(false));
 	}
 
 	@Test
 	public void testBeastsWeakTo() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.beastsWeakTo(-1);
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsWeakTo("Everything");
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsWeakTo("None");
-		assertTrue(results.containsValue("Stomp (77)"));
+		assertThat(results.containsValue("Stomp (77)"), is(true));
 
 		results = bestiary.beastsWeakTo("Thrown");
-		assertTrue(results.containsValue("Lord Iban"));
+		assertThat(results.containsValue("Lord Iban"), is(true));
 	}
 
 	@Test
 	public void testBeastsInLevelGroup() throws IOException {
 		ImmutableMap<Integer, String> results = bestiary.beastsInLevelGroup(301, 302);
-		assertTrue(results.isEmpty());
+		assertThat(results.isEmpty(), is(true));
 
 		results = bestiary.beastsInLevelGroup(200, 300);
-		assertTrue(results.containsKey(KING_BLACK_DRAGON.getId()));
-		assertTrue(results.containsValue("Giant mole (230)"));
+		assertThat(results.containsKey(KING_BLACK_DRAGON.getId()), is(true));
+		assertThat(results.containsValue("Giant mole (230)"), is(true));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

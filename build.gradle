@@ -18,6 +18,7 @@ dependencies {
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile "org.slf4j:slf4j-jdk14:$slf4jVersion"
     testCompile "junit:junit:$junitVersion"
+    testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
 }
 
 task aggregateJavadoc(type: Javadoc) {

@@ -12,9 +12,10 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 
 public final class HiscoresTest {
 	private static final String CSV_SEPARATOR = ",";
@@ -128,24 +129,24 @@ public final class HiscoresTest {
 
 	@Test
 	public void testPlayerInformation() throws IOException {
-		assertFalse(hiscores.playerInformation("Andrew", HiscoreTable.OLDSCHOOL).isPresent());
+		assertThat(hiscores.playerInformation("Andrew", HiscoreTable.OLDSCHOOL).isPresent(), is(false));
 
 		Player player = hiscores.playerInformation("Max", HiscoreTable.DEFAULT).get();
-		assertEquals(99, player.getSkills().get("Attack").getLevel());
+		assertThat(player.getSkills().get("Attack").getLevel(), is(99));
 
 		Skill thieving = player.getSkills().get("Thieving");
 		int rank = thieving.getRank().getAsInt();
 		long experience = thieving.getExperience().getAsLong();
 
-		assertEquals(1, rank);
-		assertEquals(Skill.MAX_EXPERIENCE, experience);
+		assertThat(rank, is(1));
+		assertThat(experience, is(Skill.MAX_EXPERIENCE));
 	}
 
 	@Test
 	public void testClanInformation() throws IOException {
 		ImmutableList<ClanMate> clan = hiscores.clanInformation("Maxs Clan");
-		assertTrue(clan.contains(MAX));
-		assertTrue(clan.contains(ZEZIMA));
-		assertFalse(clan.contains(DRUMGUN));
+		assertThat(clan, hasItem(MAX));
+		assertThat(clan, hasItem(ZEZIMA));
+		assertThat(clan, not(hasItem(DRUMGUN)));
 	}
 }

@@ -22,9 +22,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public final class GrandExchangeTest {
 	private static final int POTIONS_CATEGORY_ID = 26;
@@ -151,13 +151,13 @@ public final class GrandExchangeTest {
 	@Test
 	public void testCategory() throws IOException {
 		Category category = ge.category(0).get();
-		assertTrue(category.getTypes().isEmpty());
-		assertTrue(category.getAlpha().isEmpty());
+		assertThat(category.getTypes().isEmpty(), is(true));
+		assertThat(category.getAlpha().isEmpty(), is(true));
 
 		category = ge.category("Potions").get();
-		assertTrue(category.getTypes().isEmpty());
-		assertFalse(category.getAlpha().isEmpty());
-		assertEquals(44, category.getResult(0).get().getItems());
+		assertThat(category.getTypes().isEmpty(), is(true));
+		assertThat(category.getAlpha().isEmpty(), is(false));
+		assertThat(category.getResult(0).get().getItems(), is(44));
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -168,9 +168,9 @@ public final class GrandExchangeTest {
 	@Test
 	public void testCategoryPrices() throws IOException {
 		CategoryPrices prices = ge.categoryPrices("Ammo", "a", 1).get();
-		assertTrue(prices.getTotal() > 0);
-		assertFalse(prices.getItems().isEmpty());
-		assertEquals(ADAMANT_BRUTAL, prices.getItems().get(0));
+		assertThat(prices.getTotal(), greaterThan(0));
+		assertThat(prices.getItems().isEmpty(), is(false));
+		assertThat(prices.getItems().get(0), is(ADAMANT_BRUTAL));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -180,22 +180,23 @@ public final class GrandExchangeTest {
 
 	@Test
 	public void testGraphingData() throws IOException {
-		assertFalse(ge.graphingData(AZURE_SKILLCHOMPA_ID).isPresent());
+		assertThat(ge.graphingData(AZURE_SKILLCHOMPA_ID).isPresent(), is(false));
 
 		GraphingData data = ge.graphingData(ADAMANT_BRUTAL_ID).get();
-		assertFalse(data.getDailyPrices().isEmpty());
-		assertFalse(data.getAveragePrices().isEmpty());
-		assertEquals(90, data.getDailyPrice(LocalDate.of(2014, Month.DECEMBER, 25)).getAsInt());
-		assertEquals(400, data.getAveragePrice(LocalDate.of(2014, Month.DECEMBER, 29)).getAsInt());
+		assertThat(data.getDailyPrices().isEmpty(), is(false));
+		assertThat(data.getAveragePrices().isEmpty(), is(false));
+		assertThat(data.getDailyPrice(LocalDate.of(2014, Month.DECEMBER, 25)).getAsInt(), is(90));
+		assertThat(data.getAveragePrice(LocalDate.of(2014, Month.DECEMBER, 29)).getAsInt(), is(400));
 	}
 
 	@Test
 	public void testItemPriceInformation() throws IOException {
-		assertFalse(ge.itemPriceInformation(ADAMANT_BRUTAL_ID).isPresent());
+		assertThat(ge.itemPriceInformation(ADAMANT_BRUTAL_ID).isPresent(), is(false));
 
 		ItemPriceInformation information = ge.itemPriceInformation(AZURE_SKILLCHOMPA_ID).get();
-		assertEquals("+1.0%", information.getItem().getDay30().get().getChange());
-		assertEquals("+5.0%", information.getItem().getDay90().get().getChange());
-		assertEquals("-13.0%", information.getItem().getDay180().get().getChange());
+		Item item = information.getItem();
+		assertThat(item.getDay30().get().getChange(), is("+1.0%"));
+		assertThat(item.getDay90().get().getChange(), is("+5.0%"));
+		assertThat(item.getDay180().get().getChange(), is("-13.0%"));
 	}
 }
