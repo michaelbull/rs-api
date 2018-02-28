@@ -12,10 +12,7 @@ import java.util.Optional;
  */
 public final class Item {
 	public static final class Builder {
-		private boolean built = false;
-
 		private final int id;
-
 		private String icon = "";
 		private String iconLarge = "";
 		private String type = "";
@@ -34,104 +31,66 @@ public final class Item {
 		}
 
 		public Builder icon(String icon) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.icon.isEmpty(), "Icon already set.");
-			Preconditions.checkArgument(!icon.isEmpty(), "Icon must not be empty.");
-			this.icon = icon;
+			this.icon = Preconditions.checkNotNull(icon);
 			return this;
 		}
 
 		public Builder largeIcon(String iconLarge) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.iconLarge.isEmpty(), "Large icon already set.");
-			Preconditions.checkArgument(!iconLarge.isEmpty(), "Large i must not be empty.");
-			this.iconLarge = iconLarge;
+			this.iconLarge = Preconditions.checkNotNull(iconLarge);
 			return this;
 		}
 
 		public Builder type(String type) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.type.isEmpty(), "Type already set.");
-			Preconditions.checkArgument(!type.isEmpty(), "Type must not be empty.");
-			this.type = type;
+			this.type = Preconditions.checkNotNull(type);
 			return this;
 		}
 
 		public Builder typeIcon(String typeIcon) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.typeIcon.isEmpty(), "Type icon already set.");
-			Preconditions.checkArgument(!typeIcon.isEmpty(), "Type icon must not be empty.");
-			this.typeIcon = typeIcon;
+			this.typeIcon = Preconditions.checkNotNull(typeIcon);
 			return this;
 		}
 
 		public Builder name(String name) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.name.isEmpty(), "Name already set.");
-			Preconditions.checkArgument(!name.isEmpty(), "Name must not be empty.");
-			this.name = name;
+			this.name = Preconditions.checkNotNull(name);
 			return this;
 		}
 
 		public Builder description(String description) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.description.isEmpty(), "Description already set.");
-			Preconditions.checkArgument(!description.isEmpty(), "Description must not be empty.");
-			this.description = description;
+			this.description = Preconditions.checkNotNull(description);
 			return this;
 		}
 
 		public Builder currentPrice(PriceTrend current) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.current == null, "Current price trend already set.");
-			Preconditions.checkNotNull(current);
-			this.current = current;
+			this.current = Preconditions.checkNotNull(current);
 			return this;
 		}
 
 		public Builder todaysPrice(PriceTrend today) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.today == null, "Todays price trend already set.");
-			Preconditions.checkNotNull(today);
-			this.today = today;
+			this.today = Preconditions.checkNotNull(today);
 			return this;
 		}
 
 		public Builder membersOnly() {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(!membersOnly, "Members only already set to true.");
 			this.membersOnly = true;
 			return this;
 		}
 
 		public Builder priceChange30Days(PriceChange day30) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.day30 == null, "Price change for last 30 days already set.");
-			Preconditions.checkNotNull(day30);
-			this.day30 = day30;
+			this.day30 = Preconditions.checkNotNull(day30);
 			return this;
 		}
 
 		public Builder priceChange90Days(PriceChange day90) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.day90 == null, "Price change for last 90 days already set.");
-			Preconditions.checkNotNull(day90);
-			this.day90 = day90;
+			this.day90 = Preconditions.checkNotNull(day90);
 			return this;
 		}
 
 		public Builder priceChange180Days(PriceChange day180) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.day180 == null, "Price change for last 180 days already set.");
-			Preconditions.checkNotNull(day180);
-			this.day180 = day180;
+			this.day180 = Preconditions.checkNotNull(day180);
 			return this;
 		}
 
 		public Item build() {
-			Preconditions.checkState(!built);
-			built = true;
-
 			return new Item(
 				icon,
 				iconLarge,
@@ -238,9 +197,10 @@ public final class Item {
 	 * @param day180 The {@link PriceChange}s over the last 180 days
 	 */
 	private Item(String icon, String iconLarge, int id, String type, String typeIcon, String name, String description, PriceTrend current, PriceTrend today, boolean membersOnly, PriceChange day30, PriceChange day90, PriceChange day180) {
+		Preconditions.checkArgument(id >= 0, "Id must be non-negative.");
+
 		this.icon = Preconditions.checkNotNull(icon);
 		this.iconLarge = Preconditions.checkNotNull(iconLarge);
-		Preconditions.checkArgument(id >= 0, "Id must be non-negative.");
 		this.id = id;
 		this.type = Preconditions.checkNotNull(type);
 		this.typeIcon = Preconditions.checkNotNull(typeIcon);
@@ -266,7 +226,7 @@ public final class Item {
 	 * Gets the URL to the item's large sprite.
 	 * @return The URL to the item's large sprite.
 	 */
-	public String getIconlarge() {
+	public String getIconLarge() {
 		return iconLarge;
 	}
 

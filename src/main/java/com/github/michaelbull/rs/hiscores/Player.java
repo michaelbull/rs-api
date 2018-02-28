@@ -11,8 +11,6 @@ import java.util.Objects;
  */
 public final class Player {
 	public static final class Builder {
-		private boolean built = false;
-
 		private final ImmutableMap.Builder<String, Skill> skills = ImmutableMap.builder();
 		private final ImmutableMap.Builder<String, HiscoreActivity> activities = ImmutableMap.builder();
 
@@ -21,20 +19,16 @@ public final class Player {
 		}
 
 		public Builder skill(String name, Skill skill) {
-			Preconditions.checkState(!built);
-			this.skills.put(name, skill);
+			skills.put(name, skill);
 			return this;
 		}
 
 		public Builder activity(String name, HiscoreActivity activity) {
-			Preconditions.checkState(!built);
-			this.activities.put(name, activity);
+			activities.put(name, activity);
 			return this;
 		}
 
 		public Player build() {
-			Preconditions.checkState(!built);
-			built = true;
 			return new Player(skills.build(), activities.build());
 		}
 	}

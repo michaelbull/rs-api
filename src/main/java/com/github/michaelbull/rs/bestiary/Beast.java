@@ -21,10 +21,8 @@ import java.util.Set;
  */
 public final class Beast {
 	public static final class Builder {
-		private boolean built = false;
-
-		private String name = "";
 		private final int id;
+		private String name = "";
 		private String description = "";
 		private String weakness = "None";
 		private boolean attackable = false;
@@ -49,157 +47,112 @@ public final class Beast {
 		}
 
 		public Builder name(String name) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.name.isEmpty(), "Name already set.");
-			Preconditions.checkArgument(!name.isEmpty(), "Name must not be empty.");
-			this.name = name;
+			this.name = Preconditions.checkNotNull(name);
 			return this;
 		}
 
 		public Builder description(String description) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.description.isEmpty(), "Description already set.");
-			Preconditions.checkArgument(!description.isEmpty(), "Description must not be empty.");
-			this.description = description;
+			this.description = Preconditions.checkNotNull(description);
 			return this;
 		}
 
 		public Builder weakness(String weakness) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.weakness.equals("None"), "Weakness already set.");
-			Preconditions.checkArgument(!weakness.isEmpty(), "Weakness must not be empty.");
-			Preconditions.checkArgument(!weakness.equals("None"), "Weakness must not be \"None\".");
-			this.weakness = weakness;
+			this.weakness = Preconditions.checkNotNull(weakness);
 			return this;
 		}
 
 		public Builder attackable() {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(!attackable, "Attackable already set to true.");
 			this.attackable = true;
 			return this;
 		}
 
 		public Builder aggressive() {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(!aggressive, "Aggressive already set to true.");
 			this.aggressive = true;
 			return this;
 		}
 
 		public Builder poisonous() {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(!poisonous, "Poisonous already set to true.");
 			this.poisonous = true;
 			return this;
 		}
 
 		public Builder experience(double experience) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.experience == 0, "Experience already set.");
 			Preconditions.checkArgument(experience > 0, "Experience must be positive.");
 			this.experience = experience;
 			return this;
 		}
 
 		public Builder lifePoints(int lifePoints) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.lifePoints == 0, "Life points already set.");
 			Preconditions.checkArgument(lifePoints > 0, "Life points must be positive.");
 			this.lifePoints = lifePoints;
 			return this;
 		}
 
 		public Builder combatLevel(int combatLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.combatLevel == 0, "Combat level already set.");
 			Preconditions.checkArgument(combatLevel > 0, "Combat level must be positive.");
 			this.combatLevel = combatLevel;
 			return this;
 		}
 
 		public Builder defenceLevel(int defenceLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.defenceLevel == 0, "Defence level already set.");
 			Preconditions.checkArgument(defenceLevel > 0, "Defence level must be positive.");
 			this.defenceLevel = defenceLevel;
 			return this;
 		}
 
 		public Builder attackLevel(int attackLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.attackLevel == 0, "Attack level already set.");
 			Preconditions.checkArgument(attackLevel > 0, "Attack level must be positive.");
 			this.attackLevel = attackLevel;
 			return this;
 		}
 
 		public Builder magicLevel(int magicLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.magicLevel == 0, "Magic level already set.");
 			Preconditions.checkArgument(magicLevel > 0, "Magic level must be positive.");
 			this.magicLevel = magicLevel;
 			return this;
 		}
 
 		public Builder rangedLevel(int rangedLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.rangedLevel == 0, "Ranged level already set.");
 			Preconditions.checkArgument(rangedLevel > 0, "Ranged level must be positive.");
 			this.rangedLevel = rangedLevel;
 			return this;
 		}
 
 		public Builder requiredSlayerLevel(int requiredSlayerLevel) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.requiredSlayerLevel == 0, "Required Slayer level already set.");
 			Preconditions.checkArgument(requiredSlayerLevel > 0, "Required Slayer level must be positive.");
 			this.requiredSlayerLevel = requiredSlayerLevel;
 			return this;
 		}
 
 		public Builder size(int size) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.size == 1, "Size already set.");
 			Preconditions.checkArgument(size > 1, "Size must be positive.");
 			this.size = size;
 			return this;
 		}
 
 		public Builder membersOnly() {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(!membersOnly, "Members only already set to true.");
 			this.membersOnly = true;
 			return this;
 		}
 
 		public Builder slayerCategory(String slayerCategory) {
-			Preconditions.checkState(!built);
-			Preconditions.checkState(this.slayerCategory == null, "Slayer category already set.");
-			Preconditions.checkArgument(!slayerCategory.isEmpty(), "Slayer category must not be empty.");
-			this.slayerCategory = slayerCategory;
+			this.slayerCategory = Preconditions.checkNotNull(slayerCategory);
 			return this;
 		}
 
 		public Builder area(String area) {
-			Preconditions.checkState(!built);
-			Preconditions.checkArgument(!area.isEmpty(), "Area must not be empty.");
-			this.areas.add(area);
+			Preconditions.checkNotNull(area);
+			areas.add(area);
 			return this;
 		}
 
 		public Builder animation(String name, int id) {
-			Preconditions.checkState(!built);
-			Preconditions.checkArgument(!name.isEmpty(), "Animation name must not be empty.");
-			Preconditions.checkArgument(id > 0, "Animation id must be positive.");
-			this.animations.put(name, id);
+			Preconditions.checkNotNull(name);
+			animations.put(name, id);
 			return this;
 		}
 
 		public Beast build() {
-			Preconditions.checkState(!built);
-			built = true;
-
 			return new Beast(
 				name,
 				id,
@@ -416,10 +369,11 @@ public final class Beast {
 	 * @return The beast's weakness.
 	 */
 	public Optional<String> getWeakness() {
-		if (weakness != null && weakness.equals("None")) {
+		if (Objects.equals(weakness, "None")) {
 			return Optional.empty();
+		} else {
+			return Optional.ofNullable(weakness);
 		}
-		return Optional.ofNullable(weakness);
 	}
 
 	/**
