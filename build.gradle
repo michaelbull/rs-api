@@ -70,7 +70,7 @@ gitPublish {
 
     contents {
         from(javadoc) {
-            into "docs/$version"
+            into "$version/docs"
         }
     }
 }
