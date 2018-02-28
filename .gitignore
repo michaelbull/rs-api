@@ -10,16 +10,17 @@
 # EditorConfig
 !.editorconfig
 
+# IntelliJ Idea
+out/
+*.iml
+*.ipr
+*.iws
+
 # Travis CI
 !.travis.yml
 
 # Gradle
 build/
-
-# IntelliJ IDEA
-*.iml
-*.ipr
-*.iws
 
 # Generated Javadoc
 docs/
