@@ -15,7 +15,7 @@ public final class RuneScapeAPI {
 	 * @return The {@link RuneScapeAPI}.
 	 */
 	public static RuneScapeAPI create(Client client) {
-		return new RuneScapeAPI(Preconditions.checkNotNull(client));
+		return new RuneScapeAPI(client);
 	}
 
 	/**
@@ -46,7 +46,6 @@ public final class RuneScapeAPI {
 	 * @param client The {@link Client} to use.
 	 */
 	private RuneScapeAPI(Client client) {
-		Preconditions.checkNotNull(client);
 		this.bestiary = new Bestiary(client);
 		this.grandExchange = new GrandExchange(client);
 		this.hiscores = new Hiscores(client);
