@@ -1,6 +1,7 @@
 plugins {
     id 'com.github.ben-manes.versions' version '0.17.0'
     id 'net.researchgate.release' version '2.6.0'
+    id 'org.ajoberstar.git-publish' version '0.3.3'
 }
 
 apply plugin: 'java'
@@ -62,3 +63,14 @@ publishing {
         }
     }
 }
+
+gitPublish {
+    repoUri = 'git@github.com:michaelbull/rs-api.git'
+    branch = 'gh-pages'
+
+    contents {
+        from javadoc
+    }
+}
+
+gitPublishCommit.dependsOn javadoc
