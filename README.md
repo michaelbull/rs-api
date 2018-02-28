@@ -1,12 +1,22 @@
 # RuneScape API
 
-[![Build Status](https://travis-ci.org/michaelbull/rs-api.svg?branch=master)](https://travis-ci.org/michaelbull/rs-api)
-
-## Introduction
+[![Release](https://jitpack.io/v/michaelbull/rs-api.svg)](https://jitpack.io/#michaelbull/rs-api) [![Build Status](https://travis-ci.org/michaelbull/rs-api.svg?branch=master)](https://travis-ci.org/michaelbull/rs-api) [![License](https://img.shields.io/github/license/michaelbull/rs-api.svg)](https://github.com/michaelbull/rs-api/blob/master/LICENSE)
 
 `rs-api` is an open-source implementation of a web-service client, written in [Java][java], that allows interaction with the various [APIs][api] available for the popular [MMORPG][mmorpg]; [RuneScape][rs].
 
 Javadoc is available [here][javadoc].
+
+## Installation
+
+```groovy
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.michaelbull:rs-api:1.0.0'
+}
+```
 
 ## Usage
 

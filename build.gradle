@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 defaultTasks 'clean', 'build'
 
@@ -36,5 +37,28 @@ javadoc {
         links 'https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/'
         links "https://www.slf4j.org/api/"
         links "https://junit.org/junit4/javadoc/$junitVersion/"
+    }
+}
+
+task javadocJar(type: Jar) {
+    group = LifecycleBasePlugin.BUILD_GROUP
+    description = 'Assembles a jar archive containing the Javadoc API documentation.'
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    group = LifecycleBasePlugin.BUILD_GROUP
+    description = 'Assembles a jar archive containing the main classes with sources.'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact javadocJar
+            artifact sourcesJar
+        }
     }
 }
