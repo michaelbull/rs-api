@@ -10,7 +10,7 @@ Javadoc is available [here][javadoc].
 
 ```groovy
 repositories {
-    maven { url "https://jitpack.io" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
