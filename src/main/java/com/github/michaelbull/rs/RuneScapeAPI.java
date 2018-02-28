@@ -3,7 +3,7 @@ package com.github.michaelbull.rs;
 import com.github.michaelbull.rs.hiscores.Hiscores;
 import com.google.common.base.Preconditions;
 import com.github.michaelbull.rs.bestiary.Bestiary;
-import com.github.michaelbull.rs.grandexchange.GrandExchange;
+import com.github.michaelbull.rs.ge.GrandExchange;
 
 /**
  * Represents an instance of the RuneScape web-services API.

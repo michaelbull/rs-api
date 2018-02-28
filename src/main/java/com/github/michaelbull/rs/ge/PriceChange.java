@@ -1,4 +1,4 @@
-package com.github.michaelbull.rs.grandexchange;
+package com.github.michaelbull.rs.ge;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
@@ -6,36 +6,27 @@ import com.google.common.base.Preconditions;
 import java.util.Objects;
 
 /**
- * Represents the trend and price of an {@link Item}.
+ * Represents the change in price of an {@link Item} on the RuneScape {@link GrandExchange}.
  */
-public final class PriceTrend {
+public final class PriceChange {
 	/**
 	 * The trend.
 	 */
 	private final String trend;
 
 	/**
-	 * The price.
+	 * The amount of change.
 	 */
-	private final String price;
+	private final String change;
 
 	/**
-	 * Creates a new {@link PriceTrend}.
+	 * Creates a new {@link PriceChange}.
 	 * @param trend The trend.
-	 * @param price The price.
+	 * @param change The amount of change.
 	 */
-	public PriceTrend(String trend, String price) {
+	public PriceChange(String trend, String change) {
 		this.trend = Preconditions.checkNotNull(trend);
-		this.price = Preconditions.checkNotNull(price);
-	}
-
-	/**
-	 * Creates a new {@link PriceTrend}.
-	 * @param trend The trend.
-	 * @param price The price.
-	 */
-	public PriceTrend(String trend, Number price) {
-		this(trend, price.toString());
+		this.change = Preconditions.checkNotNull(change);
 	}
 
 	/**
@@ -47,11 +38,11 @@ public final class PriceTrend {
 	}
 
 	/**
-	 * Gets the price.
-	 * @return The price.
+	 * Gets the amount of change.
+	 * @return The amount of change.
 	 */
-	public String getPrice() {
-		return price;
+	public String getChange() {
+		return change;
 	}
 
 	@Override
@@ -62,21 +53,21 @@ public final class PriceTrend {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PriceTrend that = (PriceTrend) o;
+		PriceChange that = (PriceChange) o;
 		return Objects.equals(trend, that.trend)
-			&& Objects.equals(price, that.price);
+			&& Objects.equals(change, that.change);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(trend, price);
+		return Objects.hash(trend, change);
 	}
 
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this)
 			.add("trend", trend)
-			.add("price", price)
+			.add("change", change)
 			.toString();
 	}
 }

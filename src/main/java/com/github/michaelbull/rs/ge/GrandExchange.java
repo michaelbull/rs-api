@@ -1,4 +1,4 @@
-package com.github.michaelbull.rs.grandexchange;
+package com.github.michaelbull.rs.ge;
 
 import com.github.michaelbull.rs.Client;
 import com.github.michaelbull.rs.HttpClient;

@@ -1,9 +1,9 @@
 package com.github.michaelbull.rs;
 
 import com.github.michaelbull.rs.bestiary.Beast;
-import com.github.michaelbull.rs.grandexchange.GraphingData;
-import com.github.michaelbull.rs.grandexchange.Item;
-import com.github.michaelbull.rs.grandexchange.ItemPriceInformation;
+import com.github.michaelbull.rs.ge.GraphingData;
+import com.github.michaelbull.rs.ge.Item;
+import com.github.michaelbull.rs.ge.ItemPriceInformation;
 import com.github.michaelbull.rs.hiscores.ClanMate;
 import com.github.michaelbull.rs.hiscores.HiscoreActivity;
 import com.github.michaelbull.rs.hiscores.HiscoreTable;
@@ -11,9 +11,9 @@ import com.github.michaelbull.rs.hiscores.Hiscores;
 import com.github.michaelbull.rs.hiscores.Player;
 import com.github.michaelbull.rs.hiscores.Skill;
 import com.github.michaelbull.rs.bestiary.Bestiary;
-import com.github.michaelbull.rs.grandexchange.Category;
-import com.github.michaelbull.rs.grandexchange.CategoryPrices;
-import com.github.michaelbull.rs.grandexchange.GrandExchange;
+import com.github.michaelbull.rs.ge.Category;
+import com.github.michaelbull.rs.ge.CategoryPrices;
+import com.github.michaelbull.rs.ge.GrandExchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

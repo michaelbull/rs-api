@@ -1,4 +1,4 @@
-package com.github.michaelbull.rs.grandexchange;
+package com.github.michaelbull.rs.ge;
 
 import com.google.common.base.MoreObjects;
 

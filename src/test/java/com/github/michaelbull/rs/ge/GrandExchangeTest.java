@@ -1,15 +1,6 @@
 package com.github.michaelbull.rs.ge;
 
 import com.github.michaelbull.rs.Client;
-import com.github.michaelbull.rs.grandexchange.Category;
-import com.github.michaelbull.rs.grandexchange.CategoryPrices;
-import com.github.michaelbull.rs.grandexchange.GrandExchange;
-import com.github.michaelbull.rs.grandexchange.GraphingData;
-import com.github.michaelbull.rs.grandexchange.Item;
-import com.github.michaelbull.rs.grandexchange.ItemPriceInformation;
-import com.github.michaelbull.rs.grandexchange.PriceChange;
-import com.github.michaelbull.rs.grandexchange.PriceTrend;
-import com.github.michaelbull.rs.grandexchange.SearchResult;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
