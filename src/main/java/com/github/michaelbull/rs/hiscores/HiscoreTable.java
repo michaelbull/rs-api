@@ -54,7 +54,7 @@ public enum HiscoreTable {
 				return table;
 			}
 		}
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException("Unknown hiscore table: " + name);
 	}
 
 	/**
