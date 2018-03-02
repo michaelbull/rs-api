@@ -26,9 +26,6 @@ dependencies {
 
 javadoc {
     title = 'RuneScape API'
-    source = sourceSets.main.allJava
-    classpath = configurations.compile
-    failOnError = true
 
     options {
         links 'http://docs.oracle.com/javase/8/docs/api/'
