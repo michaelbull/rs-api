@@ -262,32 +262,37 @@ public final class Example {
 						String displayName = in.nextLine();
 
 						System.out.print("Enter hiscore table to use: ");
-						HiscoreTable table = HiscoreTable.from(in.nextLine());
+						String tableName = in.nextLine();
+
+						Optional<HiscoreTable> tableOptional = HiscoreTable.from(tableName);
+						if (!tableOptional.isPresent()) {
+							System.out.println("No hiscore table named \"" + tableName + ".");
+							break;
+						}
+						HiscoreTable table = tableOptional.get();
 
 						Optional<Player> playerOptional = hiscores.playerInformation(displayName, table);
-
 						if (!playerOptional.isPresent()) {
 							System.out.println("No player named \"" + displayName + "\" found on Table " + table.name() + ".");
 							break;
 						}
+						Player player = playerOptional.get();
 
-						playerOptional.ifPresent(player -> {
-							System.out.println();
-							System.out.println("Skills:");
-							for (Map.Entry<String, Skill> entry : player.getSkills().entrySet()) {
-								String skillName = entry.getKey();
-								Skill skill = entry.getValue();
-								System.out.println("\t[" + skillName + "] " + skill);
-							}
-							System.out.println();
-							System.out.println("Activities:");
-							for (Map.Entry<String, HiscoreActivity> entry : player.getActivities().entrySet()) {
-								String activityName = entry.getKey();
-								HiscoreActivity activity = entry.getValue();
-								System.out.println("\t[" + activityName + "] " + activity);
-							}
-							System.out.println();
-						});
+						System.out.println();
+						System.out.println("Skills:");
+						for (Map.Entry<String, Skill> entry : player.getSkills().entrySet()) {
+							String skillName = entry.getKey();
+							Skill skill = entry.getValue();
+							System.out.println("\t[" + skillName + "] " + skill);
+						}
+						System.out.println();
+						System.out.println("Activities:");
+						for (Map.Entry<String, HiscoreActivity> entry : player.getActivities().entrySet()) {
+							String activityName = entry.getKey();
+							HiscoreActivity activity = entry.getValue();
+							System.out.println("\t[" + activityName + "] " + activity);
+						}
+						System.out.println();
 						break;
 
 					case "clan":

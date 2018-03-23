@@ -4,6 +4,8 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
+import java.util.Optional;
+
 /**
  * Represents a type of hiscore table found on the RuneScape {@link Hiscores}.
  */
@@ -47,15 +49,15 @@ public enum HiscoreTable {
 	/**
 	 * Gets a {@link HiscoreTable} from its {@link #name}.
 	 * @param name The name of the {@link HiscoreTable}.
-	 * @return The {@link HiscoreTable}.
+	 * @return The {@link HiscoreTable} or {@link Optional#empty()} if no table was found.
 	 */
-	public static HiscoreTable from(String name) {
+	public static Optional<HiscoreTable> from(String name) {
 		for (HiscoreTable table : HiscoreTable.values()) {
 			if (table.name.equals(name)) {
-				return table;
+				return Optional.of(table);
 			}
 		}
-		throw new IllegalArgumentException("Unknown hiscore table: " + name);
+		return Optional.empty();
 	}
 
 	/**

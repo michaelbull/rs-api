@@ -98,7 +98,7 @@ public final class HiscoresTest {
 			} else if (url.startsWith("http://services.runescape.com/m=")) {
 				String module = url.substring(url.indexOf("m=") + "m=".length());
 				module = module.substring(0, module.indexOf('/'));
-				HiscoreTable table = HiscoreTable.from(module);
+				HiscoreTable table = HiscoreTable.from(module).get();
 
 				String player = url.substring(url.indexOf("player=") + "player=".length());
 
