@@ -113,7 +113,12 @@ public final class Hiscores {
 		"Heist Robber Level",
 		"CFP: 5 game average",
 		"AF15: Cow Tipping",
-		"AF15: Rats killed after the miniquest"
+		"AF15: Rats killed after the miniquest",
+		"Clue Scrolls (easy)",
+		"Clue Scrolls (medium)",
+		"Clue Scrolls (hard)",
+		"Clue Scrolls (elite)",
+		"Clue Scrolls (master)"
 	);
 
 	/**
@@ -138,12 +143,12 @@ public final class Hiscores {
 	 * @return An {@link ImmutableMap} of {@link HiscoreActivity} names to {@link HiscoreActivity}s.
 	 */
 	private static ImmutableMap<String, HiscoreActivity> readActivities(ImmutableList<CSVRecord> records, Collection<String> skills, ImmutableList<String> activities) {
-		Preconditions.checkArgument(records.size() >= (skills.size() + activities.size()));
-
 		ImmutableMap.Builder<String, HiscoreActivity> builder = ImmutableMap.builder();
 
-		for (int i = 0; i < activities.size(); i++) {
-			builder.put(activities.get(i), new HiscoreActivity(records.get(skills.size() + i)));
+		if (records.size() >= (skills.size() + activities.size())) {
+			for (int i = 0; i < activities.size(); i++) {
+				builder.put(activities.get(i), new HiscoreActivity(records.get(skills.size() + i)));
+			}
 		}
 
 		return builder.build();
@@ -156,12 +161,12 @@ public final class Hiscores {
 	 * @return An {@link ImmutableMap} of {@link Skill} names to {@link Skill}s.
 	 */
 	private static ImmutableMap<String, Skill> readSkills(ImmutableList<CSVRecord> records, ImmutableList<String> skills) {
-		Preconditions.checkArgument(records.size() >= skills.size());
-
 		ImmutableMap.Builder<String, Skill> builder = ImmutableMap.builder();
 
-		for (int i = 0; i < skills.size(); i++) {
-			builder.put(skills.get(i), new Skill(records.get(i)));
+		if (records.size() >= skills.size()) {
+			for (int i = 0; i < skills.size(); i++) {
+				builder.put(skills.get(i), new Skill(records.get(i)));
+			}
 		}
 
 		return builder.build();
@@ -197,7 +202,7 @@ public final class Hiscores {
 		ImmutableList<String> skillNames = table.getSkillNames();
 		ImmutableList<String> activityNames = table.getActivityNames();
 
-		if (records.size() != (skillNames.size() + activityNames.size())) {
+		if (records.size() < (skillNames.size() + activityNames.size())) {
 			return Optional.empty();
 		}
 
