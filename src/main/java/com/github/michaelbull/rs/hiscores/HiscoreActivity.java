@@ -2,15 +2,40 @@ package com.github.michaelbull.rs.hiscores;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
+import com.google.common.primitives.Ints;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 /**
  * Represents a player's rank in an activity on the {@link Hiscores}.
  */
 public final class HiscoreActivity {
+
+	/**
+	 * Creates a {@link HiscoreActivity} from a {@link CSVRecord}.
+	 * @param record The record.
+	 * @return The {@link HiscoreActivity} or {@link Optional#empty()} if the record was invalid.
+	 */
+	public static Optional<HiscoreActivity> fromCsv(CSVRecord record) {
+		if (record.size() < 2) {
+			return Optional.empty();
+		}
+
+		Integer rank = Ints.tryParse(record.get(0));
+		if (rank == null) {
+			return Optional.empty();
+		}
+
+		Integer score = Ints.tryParse(record.get(1));
+		if (score == null) {
+			return Optional.empty();
+		}
+
+		return Optional.of(new HiscoreActivity(rank, score));
+	}
 
 	/**
 	 * The rank the player has in the activity.
@@ -37,7 +62,9 @@ public final class HiscoreActivity {
 	/**
 	 * Creates a new {@link HiscoreActivity} from a {@link CSVRecord}.
 	 * @param record The {@link CSVRecord}.
+	 * @deprecated Use {@link #fromCsv(CSVRecord)}.
 	 */
+	@Deprecated
 	public HiscoreActivity(CSVRecord record) {
 		Preconditions.checkNotNull(record);
 		this.rank = Integer.parseInt(record.get(0));

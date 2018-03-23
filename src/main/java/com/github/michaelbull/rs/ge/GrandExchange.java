@@ -4,6 +4,7 @@ import com.github.michaelbull.rs.Client;
 import com.github.michaelbull.rs.HttpClient;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.primitives.Ints;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -136,11 +137,12 @@ public final class GrandExchange {
 		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
 		Preconditions.checkArgument(!prefix.isEmpty(), "Prefix must be at least 1 character long.");
 
-		String alpha = prefix;
-		try {
-			alpha = "%" + Integer.parseInt(prefix);
-		} catch (NumberFormatException ignored) {
-			/* ignore */
+		String alpha;
+		Integer prefixPercentage = Ints.tryParse(prefix);
+		if (prefixPercentage != null) {
+			alpha = "%" + prefixPercentage;
+		} else {
+			alpha = prefix;
 		}
 
 		String url = String.format(ITEMS_URL_FORMAT, categoryId, alpha, page);

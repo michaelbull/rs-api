@@ -10,7 +10,7 @@ import com.github.michaelbull.rs.hiscores.Hiscores;
 public final class RuneScapeAPI {
 
 	/**
-	 * Creates a new {@link RuneScapeAPI} backed by specific {@link Client} implementation.
+	 * Creates a new {@link RuneScapeAPI} backed by a specific {@link Client} implementation.
 	 * @param client The {@link Client} implementation.
 	 * @return The {@link RuneScapeAPI}.
 	 */

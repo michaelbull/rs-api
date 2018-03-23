@@ -45,7 +45,7 @@ public enum HiscoreTable {
 	OLDSCHOOL_ULTIMATE_IRONMAN("hiscore_oldschool_ultimate", Hiscores.OLDSCHOOL_SKILL_NAMES, Hiscores.OLDSCHOOL_ACTIVITY_NAMES);
 
 	/**
-	 * Gets a {@link HiscoreTable} from its name.
+	 * Gets a {@link HiscoreTable} from its {@link #name}.
 	 * @param name The name of the {@link HiscoreTable}.
 	 * @return The {@link HiscoreTable}.
 	 */

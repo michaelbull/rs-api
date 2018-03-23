@@ -2,9 +2,12 @@ package com.github.michaelbull.rs.hiscores;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
 
@@ -12,6 +15,34 @@ import java.util.OptionalLong;
  * Represents a players skill ranking on the RuneScape {@link Hiscores}.
  */
 public final class Skill {
+
+	/**
+	 * Creates a {@link Skill} from a {@link CSVRecord}.
+	 * @param record The record.
+	 * @return The {@link Skill} or {@link Optional#empty()} if the record was invalid.
+	 */
+	public static Optional<Skill> fromCsv(CSVRecord record) {
+		if (record.size() < 3) {
+			return Optional.empty();
+		}
+
+		Integer rank = Ints.tryParse(record.get(0));
+		if (rank == null) {
+			return Optional.empty();
+		}
+
+		Integer level = Ints.tryParse(record.get(1));
+		if (level == null) {
+			return Optional.empty();
+		}
+
+		Long experience = Longs.tryParse(record.get(2));
+		if (experience == null) {
+			return Optional.empty();
+		}
+
+		return Optional.of(new Skill(rank, level, experience));
+	}
 
 	/**
 	 * The maximum amount of experience achievable in a single skill.
@@ -51,7 +82,9 @@ public final class Skill {
 	/**
 	 * Creates a new {@link Skill} from a {@link CSVRecord}.
 	 * @param record The {@link CSVRecord}.
+	 * @deprecated Use {@link #fromCsv(CSVRecord)}.
 	 */
+	@Deprecated
 	public Skill(CSVRecord record) {
 		Preconditions.checkNotNull(record);
 		this.rank = Integer.parseInt(record.get(0));

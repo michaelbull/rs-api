@@ -153,7 +153,9 @@ public final class Hiscores {
 
 		if (records.size() >= (skills.size() + activities.size())) {
 			for (int i = 0; i < activities.size(); i++) {
-				builder.put(activities.get(i), new HiscoreActivity(records.get(skills.size() + i)));
+				CSVRecord record = records.get(skills.size() + i);
+				String activityName = activities.get(i);
+				HiscoreActivity.fromCsv(record).ifPresent(activity -> builder.put(activityName, activity));
 			}
 		}
 
@@ -171,7 +173,9 @@ public final class Hiscores {
 
 		if (records.size() >= skills.size()) {
 			for (int i = 0; i < skills.size(); i++) {
-				builder.put(skills.get(i), new Skill(records.get(i)));
+				CSVRecord record = records.get(i);
+				String skillName = skills.get(i);
+				Skill.fromCsv(record).ifPresent(skill -> builder.put(skillName, skill));
 			}
 		}
 
@@ -210,20 +214,13 @@ public final class Hiscores {
 		ImmutableList<String> skillNames = table.getSkillNames();
 		ImmutableList<String> activityNames = table.getActivityNames();
 
-		if (records.size() < (skillNames.size() + activityNames.size())) {
-			return Optional.empty();
-		}
-
-		try {
+		if (records.size() >= (skillNames.size() + activityNames.size())) {
 			ImmutableMap<String, Skill> skills = readSkills(records, skillNames);
 			ImmutableMap<String, HiscoreActivity> activities = readActivities(records, skillNames, activityNames);
-
 			return Optional.of(new Player(skills, activities));
-		} catch (NumberFormatException ignored) {
-			/* ignore */
+		} else {
+			return Optional.empty();
 		}
-
-		return Optional.empty();
 	}
 
 	/**
@@ -243,14 +240,7 @@ public final class Hiscores {
 		ImmutableList.Builder<ClanMate> builder = ImmutableList.builder();
 		for (int i = 1; i < records.size(); i++) {
 			CSVRecord record = records.get(i);
-
-			if (record.size() == 4) {
-				try {
-					builder.add(new ClanMate(records.get(i)));
-				} catch (NumberFormatException ignored) {
-					/* ignore */
-				}
-			}
+			ClanMate.fromCsv(record).ifPresent(builder::add);
 		}
 
 		return builder.build();

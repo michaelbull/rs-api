@@ -2,14 +2,43 @@ package com.github.michaelbull.rs.hiscores;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents a member of a clan.
  */
 public final class ClanMate {
+
+	/**
+	 * Creates a {@link ClanMate} from a {@link CSVRecord}.
+	 * @param record The record.
+	 * @return The {@link ClanMate} or {@link Optional#empty()} if the record was invalid.
+	 */
+	public static Optional<ClanMate> fromCsv(CSVRecord record) {
+		if (record.size() < 4) {
+			return Optional.empty();
+		}
+
+		String name = record.get(0);
+		String rank = record.get(1);
+
+		Long experience = Longs.tryParse(record.get(2));
+		if (experience == null) {
+			return Optional.empty();
+		}
+
+		Integer kills = Ints.tryParse(record.get(3));
+		if (kills == null) {
+			return Optional.empty();
+		}
+
+		return Optional.of(new ClanMate(name, rank, experience, kills));
+	}
 
 	/**
 	 * The name of the clan mate.
@@ -50,7 +79,9 @@ public final class ClanMate {
 	/**
 	 * Creates a new {@link ClanMate} from a {@link CSVRecord}.
 	 * @param record The {@link CSVRecord}.
+	 * @deprecated Use {@link #fromCsv(CSVRecord)}.
 	 */
+	@Deprecated
 	public ClanMate(CSVRecord record) {
 		this(record.get(0), record.get(1), Long.parseLong(record.get(2)), Integer.parseInt(record.get(3)));
 	}
