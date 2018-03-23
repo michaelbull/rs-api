@@ -1,6 +1,10 @@
 package com.github.michaelbull.rs;
 
 import com.github.michaelbull.rs.bestiary.Beast;
+import com.github.michaelbull.rs.bestiary.Bestiary;
+import com.github.michaelbull.rs.ge.Category;
+import com.github.michaelbull.rs.ge.CategoryPrices;
+import com.github.michaelbull.rs.ge.GrandExchange;
 import com.github.michaelbull.rs.ge.GraphingData;
 import com.github.michaelbull.rs.ge.Item;
 import com.github.michaelbull.rs.ge.ItemPriceInformation;
@@ -10,10 +14,6 @@ import com.github.michaelbull.rs.hiscores.HiscoreTable;
 import com.github.michaelbull.rs.hiscores.Hiscores;
 import com.github.michaelbull.rs.hiscores.Player;
 import com.github.michaelbull.rs.hiscores.Skill;
-import com.github.michaelbull.rs.bestiary.Bestiary;
-import com.github.michaelbull.rs.ge.Category;
-import com.github.michaelbull.rs.ge.CategoryPrices;
-import com.github.michaelbull.rs.ge.GrandExchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +28,7 @@ import java.util.Scanner;
  * An example program that interacts with the various RuneScape {@link RuneScapeAPI}s.
  */
 public final class Example {
+
 	/**
 	 * The logger for this class.
 	 */

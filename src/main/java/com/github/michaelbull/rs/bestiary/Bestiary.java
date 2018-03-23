@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs">Bestiary APIs</a>
  */
 public final class Bestiary {
+
 	/**
 	 * A {@link TypeToken} which represents a {@link Map} of {@link String}s to {@link Integer}s.
 	 */
@@ -30,54 +31,54 @@ public final class Bestiary {
 	private static final String BESTIARY_URL = HttpClient.WEB_SERVICES_URL + "/m=itemdb_rs/bestiary";
 
 	/**
-	 * The URL to the results of the {@link Beast} data function.
+	 * The format of the URL to fetch a {@link Beast}.
 	 */
-	private static final String BEAST_DATA_URL = BESTIARY_URL + "/beastData.json";
+	private static final String BEAST_DATA_URL_FORMAT = BESTIARY_URL + "/beastData.json?beastid=%d";
 
 	/**
-	 * The URL to the results of the {@link Beast} search function.
+	 * The format of the URL to search for a {@link Beast}.
 	 */
-	private static final String BEAST_SEARCH_URL = BESTIARY_URL + "/beastSearch.json";
+	private static final String BEAST_SEARCH_URL_FORMAT = BESTIARY_URL + "/beastSearch.json?term=%s";
 
 	/**
-	 * The URL to the list of bestiary names.
+	 * The format of the URL to search for a bestiary name.
 	 */
-	private static final String BESTIARY_NAMES_URL = BESTIARY_URL + "/bestiaryNames.json";
+	private static final String BESTIARY_NAMES_URL_FORMAT = BESTIARY_URL + "/bestiaryNames.json?letter=%c";
 
 	/**
-	 * The URL to the list of area names.
+	 * The URL to fetch the list of area names.
 	 */
 	private static final String AREA_NAMES_URL = BESTIARY_URL + "/areaNames.json";
 
 	/**
-	 * The URL to the results of the beasts in area function.
+	 * The format of the URL to the search for {@link Beast}s in an area.
 	 */
-	private static final String AREA_BEASTS_URL = BESTIARY_URL + "/areaBeasts.json";
+	private static final String AREA_BEASTS_URL_FORMAT = BESTIARY_URL + "/areaBeasts.json?identifier=%s";
 
 	/**
-	 * The URL to the list of Slayer category names.
+	 * The URL to fetch the list of Slayer category names.
 	 */
 	private static final String SLAYER_CATEGORY_NAMES_URL = BESTIARY_URL + "/slayerCatNames.json";
 
 	/**
-	 * The URL to the results of the beasts by Slayer category function.
+	 * The format of the URL to search for a {@link Beast} in a given Slayer category.
 	 */
-	private static final String SLAYER_BEASTS_URL = BESTIARY_URL + "/slayerBeasts.json";
+	private static final String SLAYER_BEASTS_URL_FORMAT = BESTIARY_URL + "/slayerBeasts.json?identifier=%d";
 
 	/**
-	 * The URL to the list of weakness names.
+	 * The URL to fetch the list of weakness names.
 	 */
 	private static final String WEAKNESS_NAMES_URL = BESTIARY_URL + "/weaknessNames.json";
 
 	/**
-	 * The URL to the results of the {@link Beast} by weakness function.
+	 * The format of the URL to search for a {@link Beast} weak to a given weakness.
 	 */
-	private static final String WEAKNESS_BEASTS_URL = BESTIARY_URL + "/weaknessBeasts.json";
+	private static final String WEAKNESS_BEASTS_URL_FORMAT = BESTIARY_URL + "/weaknessBeasts.json?identifier=%d";
 
 	/**
-	 * The URL to the results of the {@link Beast} by level group function.
+	 * The format of the URL to search for a {@link Beast} in a combat level range.
 	 */
-	private static final String LEVEL_GROUP_URL = BESTIARY_URL + "/levelGroup.json";
+	private static final String LEVEL_GROUP_URL_FORMAT = BESTIARY_URL + "/levelGroup.json?identifier=%d-%d";
 
 	/**
 	 * The {@link Pattern} that is replaced with '+' symbols when parsing a beast's name.
@@ -132,7 +133,8 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
 	 */
 	public Optional<Beast> beastData(int beastId) throws IOException {
-		return client.fromJson(BEAST_DATA_URL + "?beastid=" + beastId, Beast.class);
+		String url = String.format(BEAST_DATA_URL_FORMAT, beastId);
+		return client.fromJson(url, Beast.class);
 	}
 
 	/**
@@ -146,12 +148,12 @@ public final class Bestiary {
 		Preconditions.checkNotNull(terms);
 
 		StringJoiner joiner = new StringJoiner("+");
-
 		for (String term : terms) {
 			joiner.add(term);
 		}
 
-		return resultsToImmutableMap(client.fromJson(BEAST_SEARCH_URL + "?term=" + joiner, SearchResult[].class).orElse(null));
+		String url = String.format(BEAST_SEARCH_URL_FORMAT, joiner.toString());
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 
 	/**
@@ -162,7 +164,8 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beasts_A_to_Z">Beasts A to Z</a>
 	 */
 	public ImmutableMap<Integer, String> searchByFirstLetter(char letter) throws IOException {
-		return resultsToImmutableMap(client.fromJson(BESTIARY_NAMES_URL + "?letter=" + letter, SearchResult[].class).orElse(null));
+		String url = String.format(BESTIARY_NAMES_URL_FORMAT, letter);
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 
 	/**
@@ -185,7 +188,8 @@ public final class Bestiary {
 	 */
 	public ImmutableMap<Integer, String> beastsInArea(String area) throws IOException {
 		Preconditions.checkNotNull(area);
-		return resultsToImmutableMap(client.fromJson(AREA_BEASTS_URL + "?identifier=" + NAME_SPACER.matcher(area).replaceAll("+"), SearchResult[].class).orElse(null));
+		String url = String.format(AREA_BEASTS_URL_FORMAT, NAME_SPACER.matcher(area).replaceAll("+"));
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 
 	/**
@@ -207,7 +211,8 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInSlayerCategory(int categoryId) throws IOException {
-		return resultsToImmutableMap(client.fromJson(SLAYER_BEASTS_URL + "?identifier=" + categoryId, SearchResult[].class).orElse(null));
+		String url = String.format(SLAYER_BEASTS_URL_FORMAT, categoryId);
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 
 	/**
@@ -242,7 +247,8 @@ public final class Bestiary {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsWeakTo(int weaknessId) throws IOException {
-		return resultsToImmutableMap(client.fromJson(WEAKNESS_BEASTS_URL + "?identifier=" + weaknessId, SearchResult[].class).orElse(null));
+		String url = String.format(WEAKNESS_BEASTS_URL_FORMAT, weaknessId);
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 
 	/**
@@ -268,6 +274,7 @@ public final class Bestiary {
 	 */
 	public ImmutableMap<Integer, String> beastsInLevelGroup(int lowerBound, int upperBound) throws IOException {
 		Preconditions.checkArgument(upperBound > lowerBound, "The upper combat level bound must be higher than the lower combat level bound.");
-		return resultsToImmutableMap(client.fromJson(LEVEL_GROUP_URL + "?identifier=" + lowerBound + "-" + upperBound, SearchResult[].class).orElse(null));
+		String url = String.format(LEVEL_GROUP_URL_FORMAT, lowerBound, upperBound);
+		return resultsToImmutableMap(client.fromJson(url, SearchResult[].class).orElse(null));
 	}
 }

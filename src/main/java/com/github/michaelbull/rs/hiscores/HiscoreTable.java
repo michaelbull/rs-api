@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableList;
  * Represents a type of hiscore table found on the RuneScape {@link Hiscores}.
  */
 public enum HiscoreTable {
+
 	/**
 	 * The default RuneScape {@link Hiscores}.
 	 */

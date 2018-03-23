@@ -11,6 +11,7 @@ import java.util.OptionalInt;
  * Represents a player's rank in an activity on the {@link Hiscores}.
  */
 public final class HiscoreActivity {
+
 	/**
 	 * The rank the player has in the activity.
 	 */

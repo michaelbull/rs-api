@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public final class HiscoresTest {
+
 	private static final String CSV_SEPARATOR = ",";
 	private static final String CSV_DELIMITER = "\n";
 

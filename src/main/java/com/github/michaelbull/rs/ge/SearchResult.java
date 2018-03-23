@@ -9,6 +9,7 @@ import java.util.Objects;
  * Represents a result returned by searching within the RuneScape {@link GrandExchange}.
  */
 public final class SearchResult {
+
 	/**
 	 * The first letter of the result.
 	 */

@@ -9,6 +9,7 @@ import java.util.Objects;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
  */
 public final class ItemPriceInformation {
+
 	/**
 	 * The item.
 	 */

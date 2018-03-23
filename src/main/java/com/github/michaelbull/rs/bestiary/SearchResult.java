@@ -10,6 +10,7 @@ import java.util.Optional;
  * Represents a result returned by searching within the RuneScape {@link Bestiary}.
  */
 public final class SearchResult {
+
 	/**
 	 * The value of the result.
 	 */

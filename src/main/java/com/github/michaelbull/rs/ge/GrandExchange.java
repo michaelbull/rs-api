@@ -13,30 +13,31 @@ import java.util.Optional;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs">Grand Exchange APIs</a>
  */
 public final class GrandExchange {
+
 	/**
 	 * The URL to the Grand Exchange web-service.
 	 */
 	private static final String GRAND_EXCHANGE_URL = HttpClient.WEB_SERVICES_URL + "/m=itemdb_rs/api";
 
 	/**
-	 * The URL to the results of the {@link Category} information function.
+	 * The format of the URL to fetch a {@link Category}.
 	 */
-	private static final String CATEGORY_URL = GRAND_EXCHANGE_URL + "/catalogue/category.json";
+	private static final String CATEGORY_URL_FORMAT = GRAND_EXCHANGE_URL + "/catalogue/category.json?category=%d";
 
 	/**
-	 * The URL to the results of the {@link Item} information function.
+	 * The format of the URL to fetch an {@link Item}.
 	 */
-	private static final String ITEMS_URL = GRAND_EXCHANGE_URL + "/catalogue/items.json";
+	private static final String ITEMS_URL_FORMAT = GRAND_EXCHANGE_URL + "/catalogue/items.json?category=%d&alpha=%s&page=%d";
 
 	/**
-	 * The URL to the results of the graphing data function.
+	 * The format of the URL to fetch {@link GraphingData}.
 	 */
-	private static final String GRAPH_URL = GRAND_EXCHANGE_URL + "/graph";
+	private static final String GRAPH_URL_FORMAT = GRAND_EXCHANGE_URL + "/graph/%d.json";
 
 	/**
-	 * The URL to the results of the {@link Item} price information function.
+	 * The format of the URL to fetch {@link ItemPriceInformation}.
 	 */
-	private static final String DETAILS_URL = GRAND_EXCHANGE_URL + "/catalogue/detail.json";
+	private static final String DETAILS_URL_FORMAT = GRAND_EXCHANGE_URL + "/catalogue/detail.json?item=%d";
 
 	/**
 	 * The categories of {@link Item}s on the Grand Exchange.
@@ -105,7 +106,8 @@ public final class GrandExchange {
 	 */
 	public Optional<Category> category(int categoryId) throws IOException {
 		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
-		return client.fromJson(CATEGORY_URL + "?category=" + categoryId, Category.class);
+		String url = String.format(CATEGORY_URL_FORMAT, categoryId);
+		return client.fromJson(url, Category.class);
 	}
 
 	/**
@@ -117,7 +119,8 @@ public final class GrandExchange {
 	 */
 	public Optional<Category> category(String categoryName) throws IOException {
 		Preconditions.checkNotNull(categoryName);
-		return category(CATEGORIES.indexOf(categoryName));
+		int id = CATEGORIES.indexOf(categoryName);
+		return category(id);
 	}
 
 	/**
@@ -140,7 +143,8 @@ public final class GrandExchange {
 			/* ignore */
 		}
 
-		return client.fromJson(ITEMS_URL + "?category=" + categoryId + "&alpha=" + alpha + "&page=" + page, CategoryPrices.class);
+		String url = String.format(ITEMS_URL_FORMAT, categoryId, alpha, page);
+		return client.fromJson(url, CategoryPrices.class);
 	}
 
 	/**
@@ -166,7 +170,8 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
 	 */
 	public Optional<GraphingData> graphingData(int itemId) throws IOException {
-		return client.fromJson(GRAPH_URL + "/" + itemId + ".json", GraphingData.class);
+		String url = String.format(GRAPH_URL_FORMAT, itemId);
+		return client.fromJson(url, GraphingData.class);
 	}
 
 	/**
@@ -177,6 +182,7 @@ public final class GrandExchange {
 	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
 	 */
 	public Optional<ItemPriceInformation> itemPriceInformation(int itemId) throws IOException {
-		return client.fromJson(DETAILS_URL + "?item=" + itemId, ItemPriceInformation.class);
+		String url = String.format(DETAILS_URL_FORMAT, itemId);
+		return client.fromJson(url, ItemPriceInformation.class);
 	}
 }

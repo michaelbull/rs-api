@@ -11,6 +11,7 @@ import java.util.Optional;
  * Represents an item found on the RuneScape {@link GrandExchange}.
  */
 public final class Item {
+
 	public static final class Builder {
 		private final int id;
 		private String icon = "";

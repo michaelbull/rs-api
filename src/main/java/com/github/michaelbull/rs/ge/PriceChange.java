@@ -9,6 +9,7 @@ import java.util.Objects;
  * Represents the change in price of an {@link Item} on the RuneScape {@link GrandExchange}.
  */
 public final class PriceChange {
+
 	/**
 	 * The trend.
 	 */

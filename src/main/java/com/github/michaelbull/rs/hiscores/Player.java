@@ -10,6 +10,7 @@ import java.util.Objects;
  * Represents a player ranked on the RuneScape {@link Hiscores}.
  */
 public final class Player {
+
 	public static final class Builder {
 		private final ImmutableMap.Builder<String, Skill> skills = ImmutableMap.builder();
 		private final ImmutableMap.Builder<String, HiscoreActivity> activities = ImmutableMap.builder();

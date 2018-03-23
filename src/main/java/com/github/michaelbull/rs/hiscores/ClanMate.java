@@ -10,6 +10,7 @@ import java.util.Objects;
  * Represents a member of a clan.
  */
 public final class ClanMate {
+
 	/**
 	 * The name of the clan mate.
 	 */

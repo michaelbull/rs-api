@@ -12,6 +12,7 @@ import java.util.OptionalLong;
  * Represents a players skill ranking on the RuneScape {@link Hiscores}.
  */
 public final class Skill {
+
 	/**
 	 * The maximum amount of experience achievable in a single skill.
 	 */

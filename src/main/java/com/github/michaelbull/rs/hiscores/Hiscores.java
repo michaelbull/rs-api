@@ -17,10 +17,16 @@ import java.util.regex.Pattern;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs">Hiscores APIs</a>
  */
 public final class Hiscores {
+
 	/**
-	 * The URL to the clan hiscores web-service.
+	 * The format of the URL to fetch a {@link Player}.
 	 */
-	private static final String CLAN_HISCORES_URL = HttpClient.WEB_SERVICES_URL + "/m=clan-hiscores/members_lite.ws";
+	private static final String PLAYER_INFORMATION_URL_FORMAT = HttpClient.WEB_SERVICES_URL + "/m=%s/index_lite.ws?player=%s";
+
+	/**
+	 * The format of the URL to fetch a list of {@link ClanMate}s.
+	 */
+	private static final String CLAN_INFORMATION_URL_FORMAT = HttpClient.WEB_SERVICES_URL + "/m=clan-hiscores/members_lite.ws?clanName=%s";
 
 	/**
 	 * The RuneScape skill names.
@@ -197,7 +203,9 @@ public final class Hiscores {
 		Preconditions.checkNotNull(displayName);
 		Preconditions.checkNotNull(table);
 
-		ImmutableList<CSVRecord> records = client.fromCSV(HttpClient.WEB_SERVICES_URL + "/m=" + table.getName() + "/index_lite.ws?player=" + NAME_SPACER.matcher(displayName).replaceAll("+"));
+		String escapedName = NAME_SPACER.matcher(displayName).replaceAll("+");
+		String url = String.format(PLAYER_INFORMATION_URL_FORMAT, table.getName(), escapedName);
+		ImmutableList<CSVRecord> records = client.fromCSV(url);
 
 		ImmutableList<String> skillNames = table.getSkillNames();
 		ImmutableList<String> activityNames = table.getActivityNames();
@@ -228,9 +236,11 @@ public final class Hiscores {
 	public ImmutableList<ClanMate> clanInformation(String clanName) throws IOException {
 		Preconditions.checkNotNull(clanName);
 
-		ImmutableList<CSVRecord> records = client.fromCSV(CLAN_HISCORES_URL + "?clanName=" + NAME_SPACER.matcher(clanName).replaceAll("+"));
-		ImmutableList.Builder<ClanMate> builder = ImmutableList.builder();
+		String escapedName = NAME_SPACER.matcher(clanName).replaceAll("+");
+		String url = String.format(CLAN_INFORMATION_URL_FORMAT, escapedName);
+		ImmutableList<CSVRecord> records = client.fromCSV(url);
 
+		ImmutableList.Builder<ClanMate> builder = ImmutableList.builder();
 		for (int i = 1; i < records.size(); i++) {
 			CSVRecord record = records.get(i);
 

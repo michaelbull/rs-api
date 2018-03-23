@@ -1,14 +1,14 @@
 package com.github.michaelbull.rs;
 
-import com.github.michaelbull.rs.hiscores.Hiscores;
-import com.google.common.base.Preconditions;
 import com.github.michaelbull.rs.bestiary.Bestiary;
 import com.github.michaelbull.rs.ge.GrandExchange;
+import com.github.michaelbull.rs.hiscores.Hiscores;
 
 /**
  * Represents an instance of the RuneScape web-services API.
  */
 public final class RuneScapeAPI {
+
 	/**
 	 * Creates a new {@link RuneScapeAPI} backed by specific {@link Client} implementation.
 	 * @param client The {@link Client} implementation.

@@ -12,6 +12,7 @@ import java.util.Optional;
  * Represents a client that can deserialize JSON and CSV resources into Java {@link Object}s.
  */
 public interface Client {
+
 	/**
 	 * The comma-separated CSV format.
 	 */

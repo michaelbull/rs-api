@@ -17,6 +17,7 @@ import java.util.OptionalInt;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
  */
 public final class GraphingData {
+
 	/**
 	 * Converts a {@link LocalDate} to the number of milliseconds from the epoch of 1970-01-01T00:00:00Z.
 	 * @param date The {@link LocalDate}.

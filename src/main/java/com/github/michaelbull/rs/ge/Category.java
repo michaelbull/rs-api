@@ -13,6 +13,7 @@ import java.util.Optional;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
  */
 public final class Category {
+
 	/**
 	 * The amount of items on each {@link Category} page.
 	 */

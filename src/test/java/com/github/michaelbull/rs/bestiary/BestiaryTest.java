@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public final class BestiaryTest {
+
 	private static final Beast KING_BLACK_DRAGON = Beast.builder(50)
 		.name("King Black Dragon")
 		.description("Was the biggest, meanest dragon around.")

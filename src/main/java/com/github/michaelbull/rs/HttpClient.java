@@ -22,6 +22,7 @@ import java.util.Optional;
  * A {@link Client} that wraps a {@link org.apache.http.client.HttpClient} to interact with the RuneScape web-services API.
  */
 public final class HttpClient implements Client {
+
 	/**
 	 * The URL to the RuneScape public web-services.
 	 */

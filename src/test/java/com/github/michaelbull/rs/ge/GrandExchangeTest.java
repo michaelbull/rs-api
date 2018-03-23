@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public final class GrandExchangeTest {
+
 	private static final int POTIONS_CATEGORY_ID = 26;
 
 	private static final Category POTIONS = new Category(

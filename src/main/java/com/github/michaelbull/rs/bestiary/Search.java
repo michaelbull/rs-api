@@ -16,6 +16,7 @@ import java.util.Objects;
  * Facilitates searching of the RuneScape {@link Bestiary} by applying various {@link Filter}s to the search.
  */
 public final class Search {
+
 	/**
 	 * Represents a filter that may be applied to a {@link Search}.
 	 */

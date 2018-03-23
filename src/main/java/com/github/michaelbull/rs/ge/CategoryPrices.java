@@ -12,6 +12,7 @@ import java.util.Objects;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
  */
 public final class CategoryPrices {
+
 	/**
 	 * The total amount of items on this page of the {@link Category}.
 	 */

@@ -20,6 +20,7 @@ import java.util.Set;
  * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
  */
 public final class Beast {
+
 	public static final class Builder {
 		private final int id;
 		private String name = "";

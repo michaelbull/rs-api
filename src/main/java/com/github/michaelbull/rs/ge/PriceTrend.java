@@ -9,6 +9,7 @@ import java.util.Objects;
  * Represents the trend and price of an {@link Item}.
  */
 public final class PriceTrend {
+
 	/**
 	 * The trend.
 	 */
