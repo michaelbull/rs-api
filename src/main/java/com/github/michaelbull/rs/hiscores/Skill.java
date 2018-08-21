@@ -72,7 +72,7 @@ public final class Skill {
 	 */
 	public Skill(int rank, int level, long experience) {
 		Preconditions.checkArgument(rank == -1 || rank > 0, "Rank must be either -1 (unranked) or positive.");
-		Preconditions.checkArgument(level > 0, "Level must be positive.");
+		Preconditions.checkArgument(level >= 0, "Level must be either 0 (unranked) or positive.");
 		Preconditions.checkArgument(experience == -1 || experience > 0, "Experience must be either -1 (unranked) or positive.");
 		this.rank = rank;
 		this.level = level;
