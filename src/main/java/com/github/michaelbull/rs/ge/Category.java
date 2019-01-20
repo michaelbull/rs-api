@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * Represents the information of an item category on the RuneScape {@link GrandExchange}.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#category">Category information details</a>
  */
 public final class Category {
 

@@ -18,31 +18,31 @@ public enum HiscoreTable {
 
 	/**
 	 * The {@link Hiscores} for ironman players.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Ironman_modes">Ironman modes</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Ironman_Lite">Ironman Lite</a>
 	 */
 	IRONMAN("hiscore_ironman", Hiscores.SKILL_NAMES, Hiscores.ACTIVITY_NAMES),
 
 	/**
 	 * The {@link Hiscores} for hardcore ironman players.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Ironman_modes">Ironman modes</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Hardcore_Ironman_Lite">Hardcore Ironman Lite</a>
 	 */
 	HARDCORE_IRONMAN("hiscore_hardcore_ironman", Hiscores.SKILL_NAMES, Hiscores.ACTIVITY_NAMES),
 
 	/**
 	 * The oldschool RuneScape {@link Hiscores}.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Old_School_RuneScape">Old School RuneScape</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Old_School_Hiscores">Old School Hiscores</a>
 	 */
 	OLDSCHOOL("hiscore_oldschool", Hiscores.OLDSCHOOL_SKILL_NAMES, Hiscores.OLDSCHOOL_ACTIVITY_NAMES),
 
 	/**
 	 * The {@link Hiscores} for oldschool RuneScape ironman players.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Old_School_RuneScape">Old School RuneScape</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Ironman_Lite_2">Old School Ironman Hiscores</a>
 	 */
 	OLDSCHOOL_IRONMAN("hiscore_oldschool_ironman", Hiscores.OLDSCHOOL_SKILL_NAMES, Hiscores.OLDSCHOOL_ACTIVITY_NAMES),
 
 	/**
 	 * The {@link Hiscores} for oldschool RuneScape ultimate ironman players.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Old_School_RuneScape">Old School RuneScape</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Ultimate_Ironman_Lite">Old School Ultimate Ironman Hiscores</a>
 	 */
 	OLDSCHOOL_ULTIMATE_IRONMAN("hiscore_oldschool_ultimate", Hiscores.OLDSCHOOL_SKILL_NAMES, Hiscores.OLDSCHOOL_ACTIVITY_NAMES);
 

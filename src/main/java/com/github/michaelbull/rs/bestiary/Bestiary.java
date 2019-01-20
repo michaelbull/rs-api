@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 /**
  * Represents the RuneScape Bestiary API.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs">Bestiary APIs</a>
+ * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#API">Bestiary APIs</a>
  */
 public final class Bestiary {
 
@@ -130,7 +130,7 @@ public final class Bestiary {
 	 * @param beastId The id of the {@link Beast}.
 	 * @return An {@link Optional} containing the {@link Beast}, or {@link Optional#empty()} if no {@link Beast} of that id was found.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#beastData">Beast Data</a>
 	 */
 	public Optional<Beast> beastData(int beastId) throws IOException {
 		String url = String.format(BEAST_DATA_URL_FORMAT, beastId);
@@ -142,7 +142,7 @@ public final class Bestiary {
 	 * @param terms The terms to search by.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Searching_Names">Searching Names</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#beastSearch">Searching Names</a>
 	 */
 	public ImmutableMap<Integer, String> searchByTerms(String... terms) throws IOException {
 		Preconditions.checkNotNull(terms);
@@ -161,7 +161,7 @@ public final class Bestiary {
 	 * @param letter The letter to search by.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beasts_A_to_Z">Beasts A to Z</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#bestiaryNames">Beasts A to Z</a>
 	 */
 	public ImmutableMap<Integer, String> searchByFirstLetter(char letter) throws IOException {
 		String url = String.format(BESTIARY_NAMES_URL_FORMAT, letter);
@@ -172,7 +172,7 @@ public final class Bestiary {
 	 * Gets an {@link ImmutableList} of area names.
 	 * @return An {@link ImmutableList} of area names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#areaNames">Beasts by Area - areaNames</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#areaNames">Beasts by Area - areaNames</a>
 	 */
 	public ImmutableList<String> areaNames() throws IOException {
 		Optional<String[]> optional = client.fromJson(AREA_NAMES_URL, String[].class);
@@ -184,7 +184,7 @@ public final class Bestiary {
 	 * @param area The name of the area to search for.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#areaBeasts">Beasts by Area - areaBeasts</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#areaBeasts">Beasts by Area - areaBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInArea(String area) throws IOException {
 		Preconditions.checkNotNull(area);
@@ -196,7 +196,7 @@ public final class Bestiary {
 	 * Gets an {@link ImmutableMap} of Slayer category names to their corresponding ids.
 	 * @return An {@link ImmutableMap} of Slayer category names to their corresponding ids.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#slayerCatNames">Beasts by Slayer Category - slayerCatNames</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#slayerCatNames">Beasts by Slayer Category - slayerCatNames</a>
 	 */
 	public ImmutableMap<String, Integer> slayerCategories() throws IOException {
 		Optional<Map<String, Integer>> optional = client.fromJson(SLAYER_CATEGORY_NAMES_URL, TYPE_TOKEN);
@@ -208,7 +208,7 @@ public final class Bestiary {
 	 * @param categoryId The id of the Slayer category.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInSlayerCategory(int categoryId) throws IOException {
 		String url = String.format(SLAYER_BEASTS_URL_FORMAT, categoryId);
@@ -220,7 +220,7 @@ public final class Bestiary {
 	 * @param categoryName The name of the Slayer category.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#slayerBeasts">Beasts by Slayer Category - slayerBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInSlayerCategory(String categoryName) throws IOException {
 		Preconditions.checkNotNull(categoryName);
@@ -232,7 +232,7 @@ public final class Bestiary {
 	 * Gets an {@link ImmutableMap} of weakness category names to their corresponding ids.
 	 * @return An {@link ImmutableMap} of weakness category names to their corresponding ids.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#weaknessNames">Beasts by Weakness - weaknessNames</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#weaknessNames">Beasts by Weakness - weaknessNames</a>
 	 */
 	public ImmutableMap<String, Integer> weaknesses() throws IOException {
 		Optional<Map<String, Integer>> optional = client.fromJson(WEAKNESS_NAMES_URL, TYPE_TOKEN);
@@ -244,7 +244,7 @@ public final class Bestiary {
 	 * @param weaknessId The id of the weakness.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsWeakTo(int weaknessId) throws IOException {
 		String url = String.format(WEAKNESS_BEASTS_URL_FORMAT, weaknessId);
@@ -256,7 +256,7 @@ public final class Bestiary {
 	 * @param weaknessName The name of the weakness.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#weaknessBeasts">Beasts by Weakness - weaknessBeasts</a>
 	 */
 	public ImmutableMap<Integer, String> beastsWeakTo(String weaknessName) throws IOException {
 		Preconditions.checkNotNull(weaknessName);
@@ -270,7 +270,7 @@ public final class Bestiary {
 	 * @param upperBound The highest combat level.
 	 * @return An {@link ImmutableMap} of {@link Beast} ids to {@link Beast} names.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beasts_by_Level">Beasts by Level</a>
+	 * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#levelGroup">Beasts by Level</a>
 	 */
 	public ImmutableMap<Integer, String> beastsInLevelGroup(int lowerBound, int upperBound) throws IOException {
 		Preconditions.checkArgument(upperBound > lowerBound, "The upper combat level bound must be higher than the lower combat level bound.");

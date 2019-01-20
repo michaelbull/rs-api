@@ -151,9 +151,9 @@ This project is available under the terms of the ISC license. See the
 [api]: http://en.wikipedia.org/wiki/Application_programming_interface
 [rs]: http://runescape.com/
 [javadoc]: http://michaelbull.github.io/rs-api/1.1.0/docs/index.html
-[bestiary]: http://services.runescape.com/m=rswiki/en/Bestiary_APIs
-[ge]: http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs
-[hiscores]: http://services.runescape.com/m=rswiki/en/Hiscores_APIs
+[bestiary]: https://runescape.wiki/w/RuneScape_Bestiary#API
+[ge]: https://runescape.wiki/w/Application_programming_interface#Grand_Exchange_Database_API
+[hiscores]: https://runescape.wiki/w/Application_programming_interface#Hiscores
 [csv]: http://en.wikipedia.org/wiki/Comma-separated_values
 [json]: http://en.wikipedia.org/wiki/JSON
 [object]: https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html

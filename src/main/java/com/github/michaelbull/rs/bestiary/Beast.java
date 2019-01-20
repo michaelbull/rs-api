@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * Represents a beast in the RuneScape {@link Bestiary}.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Bestiary_APIs#Beast_Data">Beast Data</a>
+ * @see <a href="https://runescape.wiki/w/RuneScape_Bestiary#beastData">Beast Data</a>
  */
 public final class Beast {
 
@@ -210,13 +210,13 @@ public final class Beast {
 
 	/**
 	 * A flag indicating if this beast is aggressive or not.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Aggressive">Aggressive</a>
+	 * @see <a href="https://runescape.wiki/w/Aggressiveness">Aggressiveness</a>
 	 */
 	private final boolean aggressive;
 
 	/**
 	 * A flag indicating if this beast is poisonous or not.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Poison">Poison</a>
+	 * @see <a href="https://runescape.wiki/w/Poison">Poison</a>
 	 */
 	private final boolean poisonous;
 

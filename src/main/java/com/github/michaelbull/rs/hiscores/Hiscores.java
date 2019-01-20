@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * Represents the RuneScape Hiscores API.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs">Hiscores APIs</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#Hiscores">Hiscores APIs</a>
  */
 public final class Hiscores {
 
@@ -201,7 +201,9 @@ public final class Hiscores {
 	 * @param table The table of {@link Hiscores}.
 	 * @return An {@link Optional} containing the {@link Player}, or {@link Optional#empty()} if no {@link Player} was found with that name.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Top_Players">Top Players</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Hiscores_Lite">Hiscores Lite</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Ironman_Lite">Ironman Hiscores Lite</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Hardcore_Ironman_Lite">Hardcore Ironman Hiscores Lite</a>
 	 */
 	public Optional<Player> playerInformation(String displayName, HiscoreTable table) throws IOException {
 		Preconditions.checkNotNull(displayName);
@@ -228,7 +230,7 @@ public final class Hiscores {
 	 * @param clanName The clan's name.
 	 * @return An {@link ImmutableList} of {@link ClanMate}s in the clan.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Hiscores_APIs#Clans">Clans</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Clan_Members_Lite">Clan Members Lite</a>
 	 */
 	public ImmutableList<ClanMate> clanInformation(String clanName) throws IOException {
 		Preconditions.checkNotNull(clanName);

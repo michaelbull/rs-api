@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * Represents the prices of a collection of {@link Item}s within a {@link Category} on the {@link GrandExchange}.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#items">Category price details</a>
  */
 public final class CategoryPrices {
 
