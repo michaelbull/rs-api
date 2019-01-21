@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.michaelbull:rs-api:1.1.0'
+    compile 'com.github.michaelbull:rs-api:1.1.1'
 }
 ```
 
@@ -150,7 +150,7 @@ This project is available under the terms of the ISC license. See the
 [mmorpg]: http://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game
 [api]: http://en.wikipedia.org/wiki/Application_programming_interface
 [rs]: http://runescape.com/
-[javadoc]: http://michaelbull.github.io/rs-api/1.1.0/docs/index.html
+[javadoc]: http://michaelbull.github.io/rs-api/1.1.1/docs/index.html
 [bestiary]: https://runescape.wiki/w/RuneScape_Bestiary#API
 [ge]: https://runescape.wiki/w/Application_programming_interface#Grand_Exchange_Database_API
 [hiscores]: https://runescape.wiki/w/Application_programming_interface#Hiscores
