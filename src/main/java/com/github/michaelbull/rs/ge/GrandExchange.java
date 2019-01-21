@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * Represents the RuneScape Grand Exchange API.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs">Grand Exchange APIs</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#Grand_Exchange_Database_API">Grand Exchange APIs</a>
  */
 public final class GrandExchange {
 
@@ -42,7 +42,7 @@ public final class GrandExchange {
 
 	/**
 	 * The categories of {@link Item}s on the Grand Exchange.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_IDs">Category IDs</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#items">Category IDs</a>
 	 */
 	public static final ImmutableList<String> CATEGORIES = ImmutableList.of(
 		/* 00 */ "Miscellaneous",
@@ -82,7 +82,9 @@ public final class GrandExchange {
 		/* 34 */ "Summoning scrolls",
 		/* 35 */ "Tools and containers",
 		/* 36 */ "Woodcutting product",
-		/* 37 */ "Pocket items"
+		/* 37 */ "Pocket items",
+		/* 38 */ "Stone spirits",
+		/* 39 */ "Salvage"
 	);
 
 	/**
@@ -103,7 +105,7 @@ public final class GrandExchange {
 	 * @param categoryId The id of the {@link Category}.
 	 * @return An {@link Optional} containing the {@link Category}, or {@link Optional#empty()} if there is no {@link Category} for the {@link Category} id.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#category">Category information details</a>
 	 */
 	public Optional<Category> category(int categoryId) throws IOException {
 		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
@@ -116,7 +118,7 @@ public final class GrandExchange {
 	 * @param categoryName The name of the {@link Category}.
 	 * @return An {@link Optional} containing the {@link Category}, or {@link Optional#empty()} if there is no {@link Category} for the {@link Category} name.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_information_details">Category information details</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#category">Category information details</a>
 	 */
 	public Optional<Category> category(String categoryName) throws IOException {
 		Preconditions.checkNotNull(categoryName);
@@ -131,7 +133,7 @@ public final class GrandExchange {
 	 * @param page The page.
 	 * @return An {@link Optional} containing the {@link CategoryPrices}, or {@link Optional#empty()} if no {@link CategoryPrices} were found.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#items">Category price details</a>
 	 */
 	public Optional<CategoryPrices> categoryPrices(int categoryId, String prefix, int page) throws IOException {
 		Preconditions.checkElementIndex(categoryId, CATEGORIES.size(), "Category id must be between 0 and " + (CATEGORIES.size() - 1) + " inclusive.");
@@ -156,7 +158,7 @@ public final class GrandExchange {
 	 * @param page The page.
 	 * @return An {@link Optional} containing the {@link CategoryPrices}, or {@link Optional#empty()} if no {@link CategoryPrices} were found.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Category_price_details">Category price details</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#items">Category price details</a>
 	 */
 	public Optional<CategoryPrices> categoryPrices(String categoryName, String prefix, int page) throws IOException {
 		Preconditions.checkNotNull(categoryName);
@@ -169,7 +171,7 @@ public final class GrandExchange {
 	 * @param itemId The id of the {@link Item}.
 	 * @return An {@link Optional} containing the {@link GraphingData}, or {@link Optional#empty()} if no {@link GraphingData} was found for the {@link Item} id.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#Graph">Graphing Data</a>
 	 */
 	public Optional<GraphingData> graphingData(int itemId) throws IOException {
 		String url = String.format(GRAPH_URL_FORMAT, itemId);
@@ -181,7 +183,7 @@ public final class GrandExchange {
 	 * @param itemId The id of the {@link Item}.
 	 * @return An {@link Optional} containing the {@link ItemPriceInformation}, or {@link Optional#empty()} if no {@link ItemPriceInformation} was found for the {@link Item} id.
 	 * @throws IOException If an I/O error occurs.
-	 * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
+	 * @see <a href="https://runescape.wiki/w/Application_programming_interface#detail">GE Item price information</a>
 	 */
 	public Optional<ItemPriceInformation> itemPriceInformation(int itemId) throws IOException {
 		String url = String.format(DETAILS_URL_FORMAT, itemId);

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Represents the {@link Item} price information for an {@link Item} on the RuneScape {@link GrandExchange}.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#GE_Item_price_information">GE Item price information</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#detail">GE Item price information</a>
  */
 public final class ItemPriceInformation {
 

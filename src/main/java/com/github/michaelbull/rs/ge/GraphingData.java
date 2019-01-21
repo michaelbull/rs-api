@@ -14,7 +14,7 @@ import java.util.OptionalInt;
 
 /**
  * Represents the data used to graphically display an {@link Item}s price history on the RuneScape {@link GrandExchange}.
- * @see <a href="http://services.runescape.com/m=rswiki/en/Grand_Exchange_APIs#Graphing_Data">Graphing Data</a>
+ * @see <a href="https://runescape.wiki/w/Application_programming_interface#Graph">Graphing Data</a>
  */
 public final class GraphingData {
 
