@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.michaelbull:rs-api:1.1.1'
+    compile 'com.github.michaelbull:rs-api:1.1.3'
 }
 ```
 
